@@ -1,14 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  id: 1
+merch_one:
   uid: 1
   provider: MyString
   name: MyString
   email: MyString
 
-two:
-  id: 1
+merch_two:
   uid: 1
   provider: MyString
   name: MyString

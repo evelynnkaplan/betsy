@@ -1,20 +1,26 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# product fixtures
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-gov_secret1:
-  name: "Area 51"
-  description: "Top Secret alien autopsy files. "
+product_one:
+  name: Queen Elizabeth
+  description: What does she store in all 752 rooms at Buckingham palace?
   price: 10000
-  img_url: 'images/img.jpg'
-  stock: 10
-
-celeb_secret2: 
-  name: "Mark Zuckerberg"
-  description: "Facebook's next big feature release"
-  price: 10000
-  img_url: 'images/img.jpg'
-  stock: 5
-  merchant_id: 
+  stock: 100
+  img_url: 'images/testimg.jpg'
+  merchant: merch_one
+  # products_categories: Celebrities, Government 
+product_two:
+  name: Julian Assange
+  description: How to evade the CIA. 
+  price: 6000000
+  stock: 2
+  img_url: 'images/testimg.jpg'
+  merchant: merch_one
+  # products_categories: Celebrities, Government
+product_three:
+  name: Ariana Grande
+  description: Why did Ariana Grande and Pete Davidson broke up
+  price: 20000
+  stock: 6
+  img_url: 'images/testimg.jpg'
+  merchant: merch_two
+  # products_categories: Celebrities, Gossip
