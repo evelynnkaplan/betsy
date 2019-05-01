@@ -15,3 +15,8 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+#logo {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
