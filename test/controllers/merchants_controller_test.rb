@@ -17,24 +17,23 @@ describe MerchantsController do
     it "responds with OK for logged in merchant" do
       # to revise when OAuth implemented
       merchant = perform_login
-      
+
       get edit_merchant_path(merchant)
       must_respond_with :ok
     end
 
     it "rejects access to another merchant's dashboard" do
-       merchant = merchants(:mickey)
+      merchant = merchants(:mickey)
 
-       perform_login(merchant)
-       another_merchant = merchants(:minnie)
+      perform_login(merchant)
+      another_merchant = merchants(:minnie)
 
-       get edit_merchant_path(another_merchant)
+      get edit_merchant_path(another_merchant)
 
-       check_flash(expected_status = :error)
+      check_flash(expected_status = :error)
 
-       must_redirect_to root_path 
-
-    end 
+      must_redirect_to root_path
+    end
 
     it "requests login for merchant not logged in" do
       get edit_merchant_path(@merchant)
@@ -42,6 +41,35 @@ describe MerchantsController do
       check_flash(expected_status = :error)
       must_respond_with :redirect
       # redirect to login page
+    end
+  end
+
+  describe "update" do
+    let(:merchant_data) {
+      {
+        merchant: {
+          email: "updatedemail@disney.com",
+        },
+      }
+    }
+
+    it "changes the data on the model" do
+      perform_login(@merchant)
+
+      @merchant.assign_attributes(merchant_data[:merchant])
+      expect(@merchant).must_be :valid?
+      @merchant.reload
+
+      patch merchant_path(@merchant), params: merchant_data
+      @merchant.reload
+      
+      must_respond_with :redirect
+      must_redirect_to merchant_path(@merchant)
+
+      check_flash
+
+      
+      expect(@merchant.username).must_equal(merchant_data[:merchant][:username])
     end
   end
 end
