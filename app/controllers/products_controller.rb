@@ -13,20 +13,30 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    if session[:merchant_id]
+      @product = Product.new
+    else
+      flash[:error] = "You don't have permission to create a new product. Please log in."
+      redirect_to github_login_path
+    end
   end
 
   def create
-    product = Product.new(product_params)
+    if session[:merchant_id]
+      product = Product.new(product_params)
 
-    successful = product.save
+      successful = product.save
 
-    if successful
-      flash[:success] = "Product named #{product.name} successfully created with ID number #{product.id}."
-      redirect_to products_path
+      if successful
+        flash[:success] = "Product named #{product.name} successfully created with ID number #{product.id}."
+        redirect_to products_path
+      else
+        flash[:error] = "Error saving product: #{product.errors.messages}"
+        redirect_to products_path
+      end
     else
-      flash[:error] = "Error saving product: #{product.errors.messages}"
-      redirect_to products_path
+      flash[:error] = "You don't have permission to create a new product. Please log in."
+      redirect_to github_login_path
     end
   end
 
@@ -34,6 +44,9 @@ class ProductsController < ApplicationController
     if !@product
       flash[:error] = "No product with that ID found."
       redirect_to products_path
+    elsif !session[:merchant_id]
+      flash[:error] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to github_login_path
     end
   end
 
@@ -52,13 +65,18 @@ class ProductsController < ApplicationController
     if !@product
       flash[:error] = "No product with that ID found."
       redirect_to products_path
-    else
+    elsif session[:merchant_id]
       successful = @product.destroy
       if successful
         flash[:success] = "Product #{@product.name} with ID number #{@product.id} deleted."
+        redirect_to products_path
       else
         flash[:error] = "There was an error: #{@product.errors.messages}."
+        redirect_to products_path
       end
+    else
+      flash[:error] = "You don't have permission to delete product #{@product.id}. Please log in."
+      redirect_to github_login_path
     end
   end
 
