@@ -21,4 +21,30 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   # Add more helper methods to be used by all tests here...
+
+  def check_flash(expected_status = :success)
+    expect(flash[:status]).must_equal(expected_status)
+    expect(flash[:message]).wont_be_nil
+  end
+
+  def perform_login(user = nil)
+    user ||= User.first
+
+    # Create mock data for this user as though it had come from github
+    mock_auth_hash = {
+      uid: user.uid,
+      provider: user.provider,
+      info: {
+        name: user.name,
+        email: user.email,
+      },
+    }
+
+    # Tell OmniAuth to use this data for the next request
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
+
+    get auth_callback_path("github")
+
+    return user
+  end
 end
