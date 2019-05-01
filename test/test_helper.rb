@@ -21,4 +21,9 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   # Add more helper methods to be used by all tests here...
+
+  def product_attribute_array
+    return ["price", "stock", "merchant_id", "description", "img_url", "name"] 
+    # add products_categories after we create the join table...
+  end
 end
