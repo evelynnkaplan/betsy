@@ -69,6 +69,11 @@ group :development, :test do
 end
 
 group :development do
+  # Adding this for a readline issue that prevents rails console from opening
+  gem 'rb-readline'
+end
+
+group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard'
