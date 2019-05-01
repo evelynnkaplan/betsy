@@ -15,6 +15,12 @@
         <li> <%= link_to("Login with GitHub", github_login_path) %> </li>
       </ul>
     </nav>
+
+      <% alert_type = flash[:status] == :error ? :danger : flash[:status] %>
+      <section class="flash alert alert-<%= alert_type %>">
+        <%= flash[:message] %>
+      </section>
+
     <%= yield %>
   </body>
 </html>

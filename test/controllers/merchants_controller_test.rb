@@ -16,17 +16,25 @@ describe MerchantsController do
   describe "edit" do
     it "responds with OK for logged in merchant" do
       # to revise when OAuth implemented
-      session[:user_id] = 123
-      get edit_merchant_path(@merchant)
+      merchant = perform_login
+      
+      get edit_merchant_path(merchant)
       must_respond_with :ok
     end
 
-    it "responds with NOT FOUND for a fake merchant" do
-      session[:user_id] = 123
-      merchant_id = -1
-      get edit_merchant_path(merchant_id)
-      must_respond_with :not_found
-    end
+    it "rejects access to another merchant's dashboard" do
+       merchant = merchants(:mickey)
+
+       perform_login(merchant)
+       another_merchant = merchants(:minnie)
+
+       get edit_merchant_path(another_merchant)
+
+       check_flash(expected_status = :error)
+
+       must_redirect_to root_path 
+
+    end 
 
     it "requests login for merchant not logged in" do
       get edit_merchant_path(@merchant)

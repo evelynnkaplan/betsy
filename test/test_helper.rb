@@ -27,16 +27,24 @@ class ActiveSupport::TestCase
     expect(flash[:message]).wont_be_nil
   end
 
-  def perform_login(user = nil)
-    user ||= User.first
 
-    # Create mock data for this user as though it had come from github
+  def setup
+    # Once you have enabled test mode, all requests
+    # to OmniAuth will be short circuited to use the mock authentication hash.
+    # A request to /auth/provider will redirect immediately to /auth/provider/callback.
+    OmniAuth.config.test_mode = true
+  end
+  
+  def perform_login(merchant = nil)
+    merchant ||= Merchant.first
+
+    # Create mock data for this merchant as though it had come from github
     mock_auth_hash = {
-      uid: user.uid,
-      provider: user.provider,
+      uid: merchant.uid,
+      provider: merchant.provider,
       info: {
-        name: user.name,
-        email: user.email,
+        name: merchant.name,
+        email: merchant.email,
       },
     }
 
@@ -45,6 +53,6 @@ class ActiveSupport::TestCase
 
     get auth_callback_path("github")
 
-    return user
+    return merchant
   end
 end

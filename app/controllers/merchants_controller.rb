@@ -1,3 +1,4 @@
+require 'pry'
 class MerchantsController < ApplicationController
   # before_action :find_merchant, only: [:edit]
   
@@ -6,48 +7,62 @@ class MerchantsController < ApplicationController
   end
 
   def edit 
-    if session[:user_id]
-      @merchant = Merchant.find_by(id: params[:id])
+    # determines whether merchant is loggied in
+    if session[:merchant_id]
 
-      unless @merchant
-        head :not_found
-        return
-      end
+      # tries to find merchant 
+      if params[:id].to_i != session[:merchant_id]
+        flash[:status] = :error 
+        flash[:message] = "You ain't got permission to look at other's business"
+        redirect_to root_path
+        return 
+      else 
+        @merchant = Merchant.find_by(id: params[:id])
+        unless @merchant
+          head :not_found
+          return
+        end
+      end 
     else 
-      flash[:error] = "You must login to do that"
+      flash[:status] = :error 
+      flash[:message] = "You must login to do that"
       redirect_to github_login_path 
     # flash success message
     # flash error message 
     end 
+
+
   end 
   
   def create
     auth_hash = request.env["omniauth.auth"]
 
-    user = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
-    if user
-      # User was found in the database
-      flash[:success] = "Logged in as returning user #{user.name}"
+    merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
+    if merchant
+      # merchant was found in the database
+      flash[:status] = :success
+      flash[:message] = "Logged in as returning merchant #{merchant.name}"
     else
-      # User doesn't match anything in the DB
-      # Attempt to create a new user
-      user = Merchant.build_from_github(auth_hash)
+      # merchant doesn't match anything in the DB
+      # Attempt to create a new merchant
+      merchant = Merchant.build_from_github(auth_hash)
 
-      if user.save
-        flash[:success] = "Logged in as new user #{user.name}"
+      if merchant.save
+        flash[:status] = :success
+        flash[:message] = "Logged in as new merchant #{merchant.name}"
       else
-        # Couldn't save the user for some reason. If we
+        # Couldn't save the merchant for some reason. If we
         # hit this it probably means there's a bug with the
         # way we've configured GitHub. Our strategy will
         # be to display error messages to make future
         # debugging easier.
-        flash[:error] = "Could not create new user account: #{user.errors.messages}"
+        flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
         return redirect_to root_path
       end
     end
 
-    # If we get here, we have a valid user instance
-    session[:user_id] = user.id
+    # If we get here, we have a valid merchant instance
+    session[:merchant_id] = merchant.id
     return redirect_to root_path
   end
 
