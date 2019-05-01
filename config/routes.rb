@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create"
   # delete "/logout", to: "merchants#logout", as: "logout"
 
-    resources :proudcts 
+  resources :products 
 end
