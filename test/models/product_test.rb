@@ -74,11 +74,15 @@ describe Product do
     end
 
     it "has one or many categories" do 
-      # save for later
+      # save for once join table is created...
+    end
+
+    it "has orders" do 
+      # save for after order model is created
     end
   end
 
   describe "custom methods" do 
-    # if any
+    # if any, add tests here
   end
 end
