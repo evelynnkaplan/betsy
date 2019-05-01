@@ -4,8 +4,17 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+gov_secret1:
+  name: "Area 51"
+  description: "Top Secret alien autopsy files. "
+  price: 10000
+  img_url: 'images/img.jpg'
+  stock: 10
+
+celeb_secret2: 
+  name: "Mark Zuckerberg"
+  description: "Facebook's next big feature release"
+  price: 10000
+  img_url: 'images/img.jpg'
+  stock: 5
+  merchant_id: 
