@@ -4,12 +4,9 @@
     <header>  
       <h3>Add New Product</h3>
     </header>
-
-    <% unless Product.count == 0%>
       <section>
         <%= render partial: "form", locals: { submit_title: "Add New Product", submit_url: products_path, submit_method: "post" } %>
       </section>
-    <% end %>
   </main>
 
 </body>
