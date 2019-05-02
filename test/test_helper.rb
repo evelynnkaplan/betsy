@@ -22,6 +22,12 @@ class ActiveSupport::TestCase
   fixtures :all
   # Add more helper methods to be used by all tests here...
 
+  def product_attribute_array
+    return ["price", "stock", "merchant_id", "description", "img_url", "name"] 
+   # add products_categories after we create the join table...
+  end
+  
+  
   def check_flash(expected_status = :success)
     expect(flash[:status]).must_equal(expected_status)
     expect(flash[:message]).wont_be_nil
