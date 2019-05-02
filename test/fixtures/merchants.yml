@@ -1,13 +1,28 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 merch_one:
+  uid: 11
+  provider: github
+  name: Donald Duck
+  email: dd@gmail.com
+  username: donduck
+
+mickey:
   uid: 1
-  provider: MyString
-  name: MyString
-  email: MyString
+  provider: :github
+  name: mickey
+  email: mickey@disney.com
+  username: mickeythemouse
 
 merch_two:
   uid: 1
   provider: MyString
   name: MyString
   email: MyString
+
+minnie:
+  uid: 2
+  provider: :github
+  name: minnie
+  email: minnie@disney.com
+  username: minniethegirlmouse

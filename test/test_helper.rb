@@ -24,6 +24,41 @@ class ActiveSupport::TestCase
 
   def product_attribute_array
     return ["price", "stock", "merchant_id", "description", "img_url", "name"] 
-    # add products_categories after we create the join table...
+   # add products_categories after we create the join table...
+  end
+  
+  
+  def check_flash(expected_status = :success)
+    expect(flash[:status]).must_equal(expected_status)
+    expect(flash[:message]).wont_be_nil
+  end
+
+
+  def setup
+    # Once you have enabled test mode, all requests
+    # to OmniAuth will be short circuited to use the mock authentication hash.
+    # A request to /auth/provider will redirect immediately to /auth/provider/callback.
+    OmniAuth.config.test_mode = true
+  end
+  
+  def perform_login(merchant = nil)
+    merchant ||= Merchant.first
+
+    # Create mock data for this merchant as though it had come from github
+    mock_auth_hash = {
+      uid: merchant.uid,
+      provider: merchant.provider,
+      info: {
+        name: merchant.name,
+        email: merchant.email,
+      },
+    }
+
+    # Tell OmniAuth to use this data for the next request
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
+
+    get auth_callback_path("github")
+
+    return merchant
   end
 end

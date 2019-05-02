@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>SecrEtsy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,22 @@
   </head>
 
   <body>
+    
+    <nav>
+      <ul>
+        <li><h1>SecrEtsy</h1></li>
+        <li><%= link_to "Login with GitHub", github_login_path %></li>
+        <li><%= link_to "View all products", products_path %></li>
+      </ul>
+    </nav>
+
+      <% alert_type = flash[:status] == :error ? :danger : flash[:status] %>
+      <section class="flash alert alert-<%= alert_type %>">
+        <%= flash[:message] %>
+      </section>
+
+    
     <%= yield %>
+  
   </body>
 </html>
