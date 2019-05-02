@@ -5,8 +5,6 @@ require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
 #  For colorful output!
 
-require "pry"
-
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV,
@@ -59,8 +57,6 @@ class ActiveSupport::TestCase
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
 
     get auth_callback_path("github")
-
-    binding.pry
 
     return merchant
   end
