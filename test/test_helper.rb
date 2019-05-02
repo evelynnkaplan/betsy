@@ -4,6 +4,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
 #  For colorful output!
+
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV,
@@ -23,11 +24,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def product_attribute_array
-    return ["price", "stock", "merchant_id", "description", "img_url", "name"] 
-   # add products_categories after we create the join table...
+    return ["price", "stock", "merchant_id", "description", "img_url", "name"]
+    # add products_categories after we create the join table...
   end
-  
-  
+
   def check_flash(expected_status = :success)
     if flash[:status]
       expect(flash[:status]).must_equal(expected_status)
@@ -38,14 +38,13 @@ class ActiveSupport::TestCase
     end 
   end
 
-
   def setup
     # Once you have enabled test mode, all requests
     # to OmniAuth will be short circuited to use the mock authentication hash.
     # A request to /auth/provider will redirect immediately to /auth/provider/callback.
     OmniAuth.config.test_mode = true
   end
-  
+
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
 

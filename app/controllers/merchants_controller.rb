@@ -1,7 +1,3 @@
-require "pry"
-
-require 'pry'
-
 class MerchantsController < ApplicationController
   # before_action :find_merchant, only: [:edit]
 
@@ -26,18 +22,19 @@ class MerchantsController < ApplicationController
 
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
     if merchant
-      # merchant was found in the database
       flash[:status] = :success
       flash[:message] = "Logged in as returning merchant #{merchant.name}"
     else
       merchant = Merchant.build_from_github(auth_hash)
+      success = merchant.save
 
-      if merchant.save
+      if success
         flash[:status] = :success
         flash[:message] = "Logged in as new merchant #{merchant.name}"
       else
-        flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
-        return redirect_to root_path
+        flash[:status] = :error
+        flash[:message] = "Could not create new merchant account: #{merchant.errors.messages}"
+        return redirect_to github_login_path
       end
     end
 
@@ -62,6 +59,14 @@ class MerchantsController < ApplicationController
       flash.now[:message] = "Could not save merchant #{@merchant.id}"
       render :edit, status: :bad_request
     end
+  end
+
+  def destroy
+    session[:merchant_id] = nil
+    flash[:status] = :success
+    flash[:message] = "Successfully logged out!"
+
+    redirect_to root_path
   end
 
   private
