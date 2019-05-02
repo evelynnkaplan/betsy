@@ -15,3 +15,14 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+nav ul li {
+  list-style: none;
+}
+
+#logo {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+
