@@ -5,11 +5,9 @@
       <h3>Edit <%= @product.name %></h3>
     <header>
 
-    <% unless Product.count == 0%>
       <section>
         <%= render partial: "form", locals: { submit_title: "Edit #{@product.name}", submit_url: product_path(@product.id), submit_method: "patch" } %>
       </section>
-    <% end %>
   </main>
 
 </body>
