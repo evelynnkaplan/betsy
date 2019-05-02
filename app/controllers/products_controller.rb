@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
       flash[:error] = "No product with that ID found."
       redirect_to products_path
     else
-      @product.update!(product_hash)
+      @product.update!(product_params)
       flash[:success] = "Successfully edited product #{@product.id}."
       redirect_to product_path(@product.id)
     end
