@@ -62,14 +62,13 @@ describe MerchantsController do
 
       patch merchant_path(@merchant), params: merchant_data
       @merchant.reload
-      
+
       must_respond_with :redirect
       must_redirect_to merchant_path(@merchant)
 
       check_flash
 
-      
-      expect(@merchant.username).must_equal(merchant_data[:merchant][:username])
+      expect(@merchant.email).must_equal(merchant_data[:merchant][:email])
     end
   end
 end
