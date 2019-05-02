@@ -39,14 +39,14 @@ describe ProductsController do
 
     describe "create" do
       it "can create a new product" do
-        product_params = {
-          description: "Wow", 
-          name: "You'll never believe it", 
-          price: 100, 
-          stock: 3, 
-          img_url: "wow.com/wow_wow_wow", 
-          merchant_id: Merchant.first.id
-        }
+        product_params = {product: {
+          description: "Wow",
+          name: "You'll never believe it",
+          price: 100,
+          stock: 3,
+          img_url: "wow.com/wow_wow_wow",
+          merchant_id: Merchant.first.id,
+        }}
 
         expect {
           post products_path, params: product_params
@@ -55,9 +55,6 @@ describe ProductsController do
         must_respond_with :redirect
         must_redirect_to products_path
       end
-
-      
     end
-  
   end
 end
