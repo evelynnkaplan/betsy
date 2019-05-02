@@ -78,7 +78,7 @@ describe MerchantsController do
         must_respond_with :redirect
         # redirect to login page
       end
-      
+    end 
   end
 
   describe "auth_callback" do
