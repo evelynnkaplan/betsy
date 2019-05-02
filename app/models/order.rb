@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  # has_many :orderitems
+  has_many :order_items
 
   # a merchant has many orders through products
   # a product 
