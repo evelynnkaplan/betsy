@@ -72,20 +72,18 @@ describe MerchantsController do
         }
       }
 
-      it "changes the data on the model" do
+      it "changes the data on merchant details" do
         perform_login(@merchant)
 
         @merchant.assign_attributes(merchant_data[:merchant])
         expect(@merchant).must_be :valid?
         @merchant.reload
 
-        # binding.pry 
-
-        patch dashboard_path, params: merchant_data
+        patch merchant_path(@merchant), params: merchant_data
         @merchant.reload
 
         must_respond_with :redirect
-        must_redirect_to dashboard_path
+        must_redirect_to merchant_path(@merchant)
 
         check_flash
 
@@ -102,14 +100,14 @@ describe MerchantsController do
       it "responds with BAD REQUEST for bad data" do
         # Arrange
         merchant_data[:merchant][:email] = ""
-
+        perform_login 
         # Assumptions
         @merchant.assign_attributes(merchant_data[:merchant])
         expect(@merchant).wont_be :valid?
         @merchant.reload
 
         # Act
-        patch dashboard_path, params: merchant_data
+        patch merchant_path(@merchant), params: merchant_data
 
         # Assert
         must_respond_with :bad_request
@@ -123,11 +121,11 @@ describe MerchantsController do
   describe "guest users" do
     describe "edit" do
       it "requests login for merchant not logged in" do
-        get edit_dashboard_path
+        get edit_merchant_path(@merchant)
 
         check_flash(expected_status = :error)
         must_respond_with :redirect
-        # redirect to login page
+        must_redirect_to github_login_path
       end
     end 
   end

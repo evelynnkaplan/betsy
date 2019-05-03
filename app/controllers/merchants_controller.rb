@@ -13,10 +13,9 @@ class MerchantsController < ApplicationController
   end
 
   def edit
-    require_login
-    merchant_authorization
-
-    find_merchant
+    return unless require_login
+    return unless merchant_authorization
+    return unless find_merchant
   end
 
   def create
@@ -48,12 +47,12 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    find_merchant
-    require_login
-    merchant_authorization
+    @merchant = find_merchant
+    return unless find_merchant
+    return unless require_login
 
-    # binding.pry
-
+    return unless merchant_authorization
+    
     if @merchant.update(merchant_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated merchant #{@merchant.id}"
@@ -84,7 +83,8 @@ class MerchantsController < ApplicationController
 
     unless @merchant
       head :not_found
-      return
+      return false 
     end
+    return @merchant 
   end
 end
