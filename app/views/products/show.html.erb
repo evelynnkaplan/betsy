@@ -1,20 +1,17 @@
-<body>
+<header>
+  <h2><%= @product.name %></h2>
+</header>
 
-  <header>
-    <h2><%= @product.name %></h2>
-  </header>
+<main>
+  <img src="<%= @product.img_url %>">
 
-  <main>
-    <img src="<%= @product.img_url %>">
+  <section>
+    <ul>
+      <li>Sold by <%= link_to @product.merchant.username, merchant_path(@product.merchant) %></li>
+      <li>$ <%= @product.price %></li>
+    </ul>
+  </section>
 
-    <section>
-      <ul>
-        <li>Sold by <%= link_to @product.merchant.username, merchant_path(@product.merchant) %></li>
-        <li>$ <%= @product.price %></li>
-      </ul>
-    </section>
+  <p><%= @product.description %></p>
+</main>
 
-    <p><%= @product.description %></p>
-  </main>
-
-</body>
