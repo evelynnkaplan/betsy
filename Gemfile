@@ -89,3 +89,5 @@ end
 # OmniAuth stuff 
 gem "omniauth"
 gem "omniauth-github"
+
+gem "faker", "~> 1.9"
