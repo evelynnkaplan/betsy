@@ -20,7 +20,7 @@ describe MerchantsController do
       it 'responds with OK' do
         perform_login(@merchant)
 
-        get merchant_path(@merchant)
+        get dashboard_path
         must_respond_with :ok
       end 
 
@@ -35,7 +35,7 @@ describe MerchantsController do
 
         check_flash(expected_status = :error)
 
-        must_redirect_to merchant_path(merchant)
+        must_redirect_to dashboard_path
       end
     end 
 
@@ -59,7 +59,7 @@ describe MerchantsController do
 
         check_flash(expected_status = :error)
 
-        must_redirect_to merchant_path(merchant)
+        must_redirect_to dashboard_path 
       end
     end
 
@@ -81,11 +81,11 @@ describe MerchantsController do
 
         # binding.pry 
 
-        patch merchant_path(@merchant), params: merchant_data
+        patch dashboard_path, params: merchant_data
         @merchant.reload
 
         must_respond_with :redirect
-        must_redirect_to merchant_path(@merchant)
+        must_redirect_to dashboard_path
 
         check_flash
 
@@ -109,7 +109,7 @@ describe MerchantsController do
         @merchant.reload
 
         # Act
-        patch merchant_path(@merchant), params: merchant_data
+        patch dashboard_path, params: merchant_data
 
         # Assert
         must_respond_with :bad_request
@@ -123,7 +123,7 @@ describe MerchantsController do
   describe "guest users" do
     describe "edit" do
       it "requests login for merchant not logged in" do
-        get edit_merchant_path(@merchant)
+        get edit_dashboard_path
 
         check_flash(expected_status = :error)
         must_respond_with :redirect

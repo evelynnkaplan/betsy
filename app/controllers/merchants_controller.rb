@@ -5,16 +5,18 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  def show 
+  def show
+    @merchant = current_merchant 
+
     require_login
     merchant_authorization
-    find_merchant
-  end 
+  end
 
   def edit
     require_login
-    merchant_authorization    
-    find_merchant 
+    merchant_authorization
+
+    find_merchant
   end
 
   def create
@@ -46,7 +48,7 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    find_merchant 
+    find_merchant
     require_login
     merchant_authorization
 

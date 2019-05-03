@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
   def create
     if session[:merchant_id]
       product = Product.new(product_params)
+      product.merchant_id = session[:merchant_id]
 
       successful = product.save
 
