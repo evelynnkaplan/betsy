@@ -5,15 +5,18 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  def show 
-    find_merchant
-  end 
+  def show
+    @merchant = Merchant.find_by(id: session[:merchant_id])
+
+    require_login
+    merchant_authorization
+  end
 
   def edit
     require_login
     merchant_authorization
-    
-    find_merchant 
+
+    find_merchant
   end
 
   def create
@@ -43,7 +46,7 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    find_merchant 
+    find_merchant
     require_login
     merchant_authorization
 
