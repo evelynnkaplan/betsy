@@ -115,6 +115,16 @@ describe MerchantsController do
         check_flash(:error)
       end
 
+      describe "logout" do
+        it "logs out a user" do
+          perform_login
+          delete merchant_path(@merchant)
+          must_respond_with :redirect
+          check_flash
+          expect(session[:merchant_id]).must_be_nil
+          must_redirect_to root_path
+        end
+      end 
     end
   end
 
@@ -128,7 +138,44 @@ describe MerchantsController do
         must_redirect_to github_login_path
       end
     end 
+
+    describe 'show' do
+      it "requests login for merchant not logged in" do
+        get dashboard_path
+
+        check_flash(expected_status = :error)
+        must_respond_with :redirect
+        must_redirect_to github_login_path
+      end
+    end 
+
+    describe 'update' do
+      it "requests login for merchant not logged in" do
+        merchant_data = {
+          merchant: {
+            email: "updatedemail@disney.com",
+          }
+        }
+
+        patch merchant_path(@merchant, merchant_data)
+
+        check_flash(expected_status = :error)
+        must_respond_with :redirect
+        must_redirect_to github_login_path
+      end
+    end 
+
+    describe "logout" do
+      it "resets session_id to nil" do
+        delete merchant_path(@merchant)
+        must_respond_with :redirect
+        check_flash
+        expect(session[:merchant_id]).must_be_nil
+        must_redirect_to root_path
+      end
+    end 
   end
+
 
   describe "auth_callback" do
     it "logs in an existing merchant and redirects to root route" do

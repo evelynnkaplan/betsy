@@ -47,11 +47,11 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = find_merchant
-    return unless find_merchant
+    return unless find_merchant    
     return unless require_login
 
     return unless merchant_authorization
+    @merchant = find_merchant
     
     if @merchant.update(merchant_params)
       flash[:status] = :success
