@@ -13,7 +13,6 @@ class MerchantsController < ApplicationController
     require_login
     merchant_authorization
     
-    # binding.pry 
     find_merchant 
   end
 
