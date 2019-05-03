@@ -1,5 +1,3 @@
-require "pry"
-
 class MerchantsController < ApplicationController
   # before_action :find_merchant, only: [:edit]
 
@@ -34,25 +32,19 @@ class MerchantsController < ApplicationController
 
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
     if merchant
-      # merchant was found in the database
       flash[:status] = :success
       flash[:message] = "Logged in as returning merchant #{merchant.name}"
     else
-      # merchant doesn't match anything in the DB
-      # Attempt to create a new merchant
       merchant = Merchant.build_from_github(auth_hash)
+      success = merchant.save
 
-      if merchant.save
+      if success
         flash[:status] = :success
         flash[:message] = "Logged in as new merchant #{merchant.name}"
       else
-        # Couldn't save the merchant for some reason. If we
-        # hit this it probably means there's a bug with the
-        # way we've configured GitHub. Our strategy will
-        # be to display error messages to make future
-        # debugging easier.
-        flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
-        return redirect_to root_path
+        flash[:status] = :error
+        flash[:message] = "Could not create new merchant account: #{merchant.errors.messages}"
+        return redirect_to github_login_path
       end
     end
 
@@ -83,6 +75,14 @@ class MerchantsController < ApplicationController
         end
       end
     end
+  end
+
+  def destroy
+    session[:merchant_id] = nil
+    flash[:status] = :success
+    flash[:message] = "Successfully logged out!"
+
+    redirect_to root_path
   end
 
   private

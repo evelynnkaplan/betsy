@@ -14,8 +14,12 @@
     <nav>
       <ul>
         <li><h1 id="logo">SecrEtsy</h1></li>
-        <li><%= link_to "Login with GitHub", github_login_path %></li>
         <li><%= link_to "View all products", products_path %></li>
+        <% if session[:merchant_id] %>
+          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+        <% else %>
+          <li><%= link_to "Login with Github", github_login_path %></li>
+        <% end %>
       </ul>
     </nav>
 

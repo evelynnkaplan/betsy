@@ -4,6 +4,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
 #  For colorful output!
+
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV,
@@ -23,16 +24,18 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def product_attribute_array
-    return ["price", "stock", "merchant_id", "description", "img_url", "name"] 
-   # add products_categories after we create the join table...
+    return ["price", "stock", "merchant_id", "description", "img_url", "name"]
+    # add products_categories after we create the join table...
   end
-  
-  
+
+  def merchant_attribute_array
+    return ["uid", "provider", "name", "email", "username"]
+  end
+
   def check_flash(expected_status = :success)
     expect(flash[:status]).must_equal(expected_status)
     expect(flash[:message]).wont_be_nil
   end
-
 
   def setup
     # Once you have enabled test mode, all requests
@@ -40,7 +43,7 @@ class ActiveSupport::TestCase
     # A request to /auth/provider will redirect immediately to /auth/provider/callback.
     OmniAuth.config.test_mode = true
   end
-  
+
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
 
@@ -49,7 +52,7 @@ class ActiveSupport::TestCase
       uid: merchant.uid,
       provider: merchant.provider,
       info: {
-        name: merchant.name,
+        username: merchant.username,
         email: merchant.email,
       },
     }

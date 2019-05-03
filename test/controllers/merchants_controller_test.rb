@@ -62,14 +62,51 @@ describe MerchantsController do
 
       patch merchant_path(@merchant), params: merchant_data
       @merchant.reload
-      
+
       must_respond_with :redirect
       must_redirect_to merchant_path(@merchant)
 
       check_flash
 
-      
-      expect(@merchant.username).must_equal(merchant_data[:merchant][:username])
+      expect(@merchant.email).must_equal(merchant_data[:merchant][:email])
+    end
+  end
+
+  describe "auth_callback" do
+    it "logs in an existing merchant and redirects to root route" do
+      expect {
+        perform_login(@merchant)
+      }.wont_change "Merchant.count"
+
+      expect(session[:merchant_id]).must_equal @merchant.id
+      must_redirect_to root_path
+    end
+
+    it "creates an account for a new merchant and redirects to the root route" do
+      Merchant.destroy_all
+      start_count = Merchant.count
+      new_merchant = Merchant.new(provider: "github", uid: 99999, username: "random_user", email: "test@user.com")
+
+      perform_login(new_merchant)
+
+      must_redirect_to root_path
+
+      Merchant.count.must_equal start_count + 1
+
+      session[:merchant_id].must_equal Merchant.last.id
+    end
+
+    it "redirects to the login route if given invalid merchant data" do
+      Merchant.destroy_all
+      start_count = Merchant.count
+      new_merchant = Merchant.new(provider: "github", uid: 99999, username: "", email: "test@user.com")
+
+      perform_login(new_merchant)
+
+      must_redirect_to github_login_path
+
+      check_flash(:error)
+      Merchant.count.must_equal start_count
     end
   end
 end
