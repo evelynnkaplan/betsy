@@ -15,10 +15,35 @@ describe MerchantsController do
   end
 
   describe "logged-in merchant" do
+    
+    describe 'show' do
+      it 'responds with OK' do
+        perform_login(@merchant)
+
+        get merchant_path(@merchant)
+        must_respond_with :ok
+      end 
+
+     
+      it "rejects access to another merchant's dashboard" do
+        merchant = merchants(:mickey)
+
+        perform_login(merchant)
+        another_merchant = merchants(:minnie)
+
+        get merchant_path(another_merchant)
+
+        check_flash(expected_status = :error)
+
+        must_redirect_to merchant_path(merchant)
+      end
+    end 
+
+
     describe "edit" do
       it "responds with OK for logged in merchant" do
         # to revise when OAuth implemented
-        merchant = perform_login
+        merchant = perform_login(@merchant)
 
         get edit_merchant_path(merchant)
         must_respond_with :ok
@@ -32,9 +57,9 @@ describe MerchantsController do
 
         get edit_merchant_path(another_merchant)
 
-        # check_flash(expected_status = :error)
+        check_flash(expected_status = :error)
 
-        must_redirect_to root_path
+        must_redirect_to merchant_path(merchant)
       end
     end
 
@@ -66,6 +91,32 @@ describe MerchantsController do
 
         expect(@merchant.email).must_equal(merchant_data[:merchant][:email])
       end
+
+
+      it "responds with NOT FOUND for a fake merchant" do
+        merchant_id = Merchant.last.id + 1
+        patch merchant_path(merchant_id), params: merchant_data
+        must_respond_with :not_found
+      end
+
+      it "responds with BAD REQUEST for bad data" do
+        # Arrange
+        merchant_data[:merchant][:email] = ""
+
+        # Assumptions
+        @merchant.assign_attributes(merchant_data[:merchant])
+        expect(@merchant).wont_be :valid?
+        @merchant.reload
+
+        # Act
+        patch merchant_path(@merchant), params: merchant_data
+
+        # Assert
+        must_respond_with :bad_request
+
+        check_flash(:error)
+      end
+
     end
   end
 

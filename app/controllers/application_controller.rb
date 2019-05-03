@@ -2,7 +2,7 @@ require "pry"
 
 class ApplicationController < ActionController::Base
   def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+   return Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
   def require_login
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if current_merchant && (current_merchant.id != params[:id].to_i)
       flash[:status] = :error
       flash[:message] = "You ain't got permission to look at other's business"
-      redirect_to root_path
+      return redirect_to merchant_path(current_merchant)
     end
   end
 end

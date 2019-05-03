@@ -6,13 +6,14 @@ class MerchantsController < ApplicationController
   end
 
   def show 
+    require_login
+    merchant_authorization
     find_merchant
   end 
 
   def edit
     require_login
-    merchant_authorization
-    
+    merchant_authorization    
     find_merchant 
   end
 
@@ -33,13 +34,15 @@ class MerchantsController < ApplicationController
       else
         flash[:status] = :error
         flash[:message] = "Could not create new merchant account: #{merchant.errors.messages}"
-        return redirect_to github_login_path
+        redirect_to github_login_path
+        return merchant
       end
     end
 
     # If we get here, we have a valid merchant instance
     session[:merchant_id] = merchant.id
-    return redirect_to root_path
+    redirect_to root_path
+    return merchant 
   end
 
   def update
