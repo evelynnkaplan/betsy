@@ -3,9 +3,9 @@
 one:
   rating: 1
   comment: MyString
-  products: one
+  product_id: product_three
 
 two:
   rating: 1
   comment: MyString
-  products: two
+  product_id: product_two
