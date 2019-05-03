@@ -6,11 +6,11 @@ require 'faker'
 
 # 10.times do 
 #   merchant = Merchant.new
-#   merchant.uid: rand(1000..9999)
-#   merchant.provider: "github"
-#   merchant.name: Faker::Company.name
-#   merchant.email: Faker::Email.email
-#   merchant.username: Faker::Twitter.screen_name
+#   merchant.uid = nil
+#   merchant.provider = "github"
+#   merchant.name = Faker::Company.name
+#   merchant.email = Faker::Internet.email
+#   merchant.username = Faker::Twitter.screen_name
 
 #   merchant.save
 #   puts "#{merchant.uid} #{merchant.name} saved successfully."
@@ -27,7 +27,7 @@ require 'faker'
 #   product.img_url = Faker::LoremFlickr.image
 
 #   product.save
-#   puts "#{product.category}, #{product.name} saved successfully."
+#   puts "#{product.name}, #{product.price} saved successfully."
 # end
 
 

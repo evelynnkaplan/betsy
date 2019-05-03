@@ -2,7 +2,7 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
-  <%= f.label :name %>
+  <%= f.label :description %>
   <%= f.text_area :description %>
 
   <%= f.label :price %>
@@ -16,7 +16,7 @@
 
   <!-- put category field here -->
 
-  <%= f.submit submit_title, submit_url, submit_method %>
+  <%= f.submit "#{submit_title}", url: submit_url, method: submit_method %>
 <% end %>
 
   

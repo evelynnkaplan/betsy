@@ -28,6 +28,10 @@ class ActiveSupport::TestCase
     # add products_categories after we create the join table...
   end
 
+  def merchant_attribute_array
+    return ["uid", "provider", "name", "email", "username"]
+  end
+
   def check_flash(expected_status = :success)
     if flash[:status]
       expect(flash[:status]).must_equal(expected_status)

@@ -5,9 +5,9 @@
       <h3>Edit <%= @product.name %></h3>
     <header>
 
-    <section>
-      <%= render partial: "form", locals: { submit_title: "Edit #{@product.name}", submit_url: product_path(@product.id), submit_method: "patch" } %>
-    </section>
+      <section>
+        <%= render partial: "form", locals: { submit_title: "Edit #{@product.name}", submit_url: product_path(@product.id), submit_method: "patch" } %>
+      </section>
   </main>
 
 </body>
