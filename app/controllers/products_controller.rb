@@ -5,6 +5,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def merchant_product_index
+    @merchant = Merchant.find_by(id: params[:id])
+    @products = Product.where(merchant_id: @merchant.id)
+  end
+
+  def category_product_index
+    @products = Product.where(category_id: params[:id])
+  end
+
   def show
     if !@product
       flash[:error] = "No product with that ID found."
