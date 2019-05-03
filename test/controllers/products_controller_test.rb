@@ -45,7 +45,6 @@ describe ProductsController do
           price: 100,
           stock: 3,
           img_url: "wow.com/wow_wow_wow",
-          merchant_id: Merchant.first.id,
         }}
 
         expect {
@@ -58,9 +57,7 @@ describe ProductsController do
 
       it "won't create a new product with bad data and will redirect" do
         product_params = {product: {
-          name: "You'll never believe it",
           price: 100,
-          stock: 3,
           img_url: "wow.com/wow_wow_wow",
         }}
 
