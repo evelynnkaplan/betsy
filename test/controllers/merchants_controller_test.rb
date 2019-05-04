@@ -32,7 +32,7 @@ describe MerchantsController do
 
         get edit_merchant_path(another_merchant)
 
-        # check_flash(expected_status = :error)
+        check_flash(expected_status = :error)
 
         must_redirect_to root_path
       end
@@ -54,8 +54,6 @@ describe MerchantsController do
         expect(@merchant).must_be :valid?
         @merchant.reload
 
-        # binding.pry 
-
         patch merchant_path(@merchant), params: merchant_data
         @merchant.reload
 
@@ -76,7 +74,7 @@ describe MerchantsController do
 
         check_flash(expected_status = :error)
         must_respond_with :redirect
-        # redirect to login page
+        must_redirect_to root_path
       end
     end 
   end
