@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :error
       flash[:message] = "You don't have permission to create a new product. Please log in."
-      redirect_to github_login_path
+      redirect_to root_path
     end
   end
 
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :error
       flash[:message] = "You don't have permission to create a new product. Please log in."
-      redirect_to github_login_path
+      redirect_to root_path
     end
   end
 
@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
     elsif !session[:merchant_id]
       flash[:status] = :error
       flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
-      redirect_to github_login_path
+      redirect_to root_path
     end
   end
 
@@ -100,7 +100,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :error
       flash[:message] = "You don't have permission to delete product #{@product.id}. Please log in."
-      redirect_to github_login_path
+      redirect_to root_path
     end
   end
 
