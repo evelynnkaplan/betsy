@@ -7,9 +7,8 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_merchant.nil?
-      flash[:status] = :error
-      flash[:message] = "You must be logged in to view this section"
-      redirect_to github_login_path
+      flash[:error] = "You must be logged in to view this section"
+      redirect_back(fallback_location: root_path)
       return false
     end
     return true 
@@ -23,5 +22,14 @@ class ApplicationController < ActionController::Base
       false 
     end
     return true 
+  end
+
+  # helper method for shopping cart functionality
+  def current_order
+    if session[:order_id]
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
   end
 end
