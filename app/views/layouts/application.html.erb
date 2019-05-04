@@ -7,14 +7,17 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/beon" type="text/css"/>
   </head>
 
   <body>
     
     <nav>
       <ul>
-        <li><h1 id="logo">SecrEtsy</h1></li>
         <li><%= link_to "View all products", products_path %></li>
+        <li class = 'logo'>
+          <h1 id="neon-tubing"><span>S</span>ecr<span>E</span>t<span>s</span>y</h1>
+        </li>
         <% if session[:merchant_id] %>
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
         <% else %>
