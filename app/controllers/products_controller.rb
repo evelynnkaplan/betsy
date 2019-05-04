@@ -58,8 +58,6 @@ class ProductsController < ApplicationController
     elsif !session[:merchant_id]
       flash[:error] = "You don't have permission to edit product #{@product.id}. Please log in."
       redirect_to github_login_path
-    else
-      categories = Category.all
     end
   end
 
