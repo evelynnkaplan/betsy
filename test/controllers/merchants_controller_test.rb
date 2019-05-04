@@ -116,7 +116,7 @@ describe MerchantsController do
       end
 
       describe "logout" do
-        it "logs out a user" do
+        it "logs out merchant" do
           perform_login
           delete merchant_path(@merchant)
           must_respond_with :redirect
