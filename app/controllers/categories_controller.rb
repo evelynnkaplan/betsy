@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
       flash[:message] = "Unable to add your category to the site."
     end
     
-    redirect_to #change to merchant show page later
+    # redirect_to #change to merchant show page later
   end
 
   def show
