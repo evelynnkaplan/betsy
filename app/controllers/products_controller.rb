@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
   def new
     if session[:merchant_id]
       @product = Product.new
-      @categories = Category.all
     else
       flash[:error] = "You don't have permission to create a new product. Please log in."
       redirect_to github_login_path
