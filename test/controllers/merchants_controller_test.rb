@@ -33,7 +33,7 @@ describe MerchantsController do
 
         get merchant_path(another_merchant)
 
-        check_flash(expected_status = :error)
+        check_flash(:error)
 
         must_redirect_to dashboard_path
       end
@@ -57,7 +57,7 @@ describe MerchantsController do
 
         get edit_merchant_path(another_merchant)
 
-        check_flash(expected_status = :error)
+        check_flash(:error)
 
         must_redirect_to dashboard_path 
       end
@@ -133,9 +133,9 @@ describe MerchantsController do
       it "requests login for merchant not logged in" do
         get edit_merchant_path(@merchant)
 
-        check_flash(expected_status = :error)
+        check_flash(:error)
         must_respond_with :redirect
-        must_redirect_to github_login_path
+        must_redirect_to root_path
       end
     end 
 
@@ -143,9 +143,9 @@ describe MerchantsController do
       it "requests login for merchant not logged in" do
         get dashboard_path
 
-        check_flash(expected_status = :error)
+        check_flash(:error)
         must_respond_with :redirect
-        must_redirect_to github_login_path
+        must_redirect_to root_path
       end
     end 
 
@@ -159,9 +159,9 @@ describe MerchantsController do
 
         patch merchant_path(@merchant, merchant_data)
 
-        check_flash(expected_status = :error)
+        check_flash(:error)
         must_respond_with :redirect
-        must_redirect_to github_login_path
+        must_redirect_to root_path
       end
     end 
 

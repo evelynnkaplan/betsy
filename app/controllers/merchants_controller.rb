@@ -56,7 +56,7 @@ class MerchantsController < ApplicationController
     if @merchant.update(merchant_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated merchant #{@merchant.id}"
-      redirect_to merchant_path(@merchant)
+      return redirect_to merchant_path(@merchant)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save merchant #{@merchant.id}"
