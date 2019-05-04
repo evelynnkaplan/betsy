@@ -14,6 +14,11 @@
   <%= f.label :stock %>
   <%= f.text_field :stock %>
 
+  <%= f.label "Categories" %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+    <%= b.check_box %>
+    <%= b.label %>
+  <% end %>
   <!-- put category field here -->
 
   <%= f.submit "#{submit_title}", url: submit_url, method: submit_method %>
