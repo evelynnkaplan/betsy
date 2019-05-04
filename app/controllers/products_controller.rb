@@ -5,6 +5,16 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def merchant_product_index
+    @merchant = Merchant.find_by(id: params[:id])
+    @products = Product.where(merchant_id: @merchant.id)
+  end
+
+  def category_product_index
+    @category = Category.find_by(id: params[:id])
+    @products = Product.where(category_id: @category.id)
+  end
+
   def show
     if !@product
       flash[:error] = "No product with that ID found."
@@ -15,6 +25,7 @@ class ProductsController < ApplicationController
   def new
     if session[:merchant_id]
       @product = Product.new
+      @categories = Category.all
     else
       flash[:error] = "You don't have permission to create a new product. Please log in."
       redirect_to github_login_path
@@ -48,6 +59,8 @@ class ProductsController < ApplicationController
     elsif !session[:merchant_id]
       flash[:error] = "You don't have permission to edit product #{@product.id}. Please log in."
       redirect_to github_login_path
+    else
+      categories = Category.all
     end
   end
 
@@ -88,6 +101,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:description, :name, :price, :stock, :img_url, :merchant_id)
+    return params.require(:product).permit(:description, :name, :price, :stock, :img_url, :merchant_id, category_ids: [])
   end
 end
