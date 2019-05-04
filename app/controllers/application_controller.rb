@@ -7,9 +7,8 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_merchant.nil?
-      flash[:status] = :error
-      flash[:message] = "You must be logged in to view this section"
-      redirect_to github_login_path
+      flash[:error] = "You must be logged in to view this section"
+      redirect_back(fallback_location: root_path)
       return false
     end
     return true 

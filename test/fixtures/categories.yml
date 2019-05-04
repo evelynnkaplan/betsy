@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+celebrities:
+  name: Celebrity
+  products: [product_three, product_one]
 
-two:
-  name: MyString
+government:
+  name: Russian Politics
+  products: [product_one, product_two]
+
+musicians:
+  name: 
+  products: [product_three]
