@@ -2,7 +2,8 @@ require "pry"
 
 class ApplicationController < ActionController::Base
   def current_merchant
-   return Merchant.find(session[:merchant_id]) if session[:merchant_id]
+   @current_merchant = Merchant.find(session[:merchant_id]) if session[:merchant_id]
+   return @current_merchant
   end
 
   def require_login
