@@ -10,7 +10,8 @@ describe Category do
 
     it "doesn't allow repeat names" do 
       category.save
-      new_categ = Category.new(name: "Taco Cat")
+      used_name = category.name
+      new_categ = Category.new(name: used_name)
 
       expect(new_categ.valid?).must_equal false
     end
