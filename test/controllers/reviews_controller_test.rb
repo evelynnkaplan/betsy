@@ -13,6 +13,9 @@ describe ReviewsController do
 
   describe "create" do 
     it "creates a new review successfully" do 
+      perform_login
+      current_merchant
+
       
     end
 

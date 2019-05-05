@@ -22,9 +22,9 @@ class CategoriesController < ApplicationController
       flash[:message] = "Unable to add your category to the site."
     end
     
-    # redirect_to #change to merchant show page later
+    redirect_to categories_path
   end
-
+  
   def show
     @category = Category.find_by(id: params[:id])
 

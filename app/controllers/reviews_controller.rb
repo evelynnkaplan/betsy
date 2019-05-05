@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
-  
+  before_action :find_product
+
   def new
     @review = Review.new
   end
       
   def create
     if current_merchant
-      product = Product.find_by(product_id: session[:product_id])
-      if product.merchant_id == current_merchant.id
+      if @product.merchant_id == current_merchant.id
         flash[:status] = :error
         flash[:message] = "You cannot review your own products"
         return redirect_back(fallback_location: root_path)
@@ -31,5 +31,9 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:comment)
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:product_id])
   end
 end
