@@ -26,9 +26,7 @@ describe ProductsController do
     end
 
     it "can get the page of products by category" do
-      category = Category.create!(name: "test")
-
-      get category_products_path(category.id)
+      get category_products_path(Category.first.id)
 
       must_respond_with :ok
     end
@@ -55,6 +53,45 @@ describe ProductsController do
         must_redirect_to products_path
         check_flash(:error)
       end
+    end
+  end
+
+  describe "guest users" do
+    it "will not allow a guest user to get the new product form" do
+      get new_product_path
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      check_flash(:error)
+    end
+
+    it "will not allow a guest user to create a new product" do
+      expect {
+        post products_path,
+             params: {product: {name: "test", price: 2}}
+      }.wont_change "Product.count"
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      check_flash(:error)
+    end
+
+    it "will not allow a guest user to edit an existing product" do
+      patch product_path(Product.first.id), params: {product: {name: "test", price: 3}}
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      expect(Product.first.name).wont_equal "test"
+    end
+
+    it "will not allow a guest user to destroy an existing product" do
+      expect {
+        delete product_path(Product.first.id)
+      }.wont_change "Product.count"
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      check_flash(:error)
     end
   end
 
@@ -175,8 +212,5 @@ describe ProductsController do
         check_flash(:error)
       end
     end
-  end
-
-  describe "guest users" do
   end
 end
