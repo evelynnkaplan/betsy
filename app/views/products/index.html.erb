@@ -1,9 +1,30 @@
-<main>
-  
+<main class="products">
+  <div class="sidenav">
+    <h4>Categories</h4>
     <ul>
-    <% @products.each do |product| %>
-      <li><%= link_to product.name, product_path(product.id) %></li>
-    <% end %>
+      <% Category.all.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
     </ul>
-  
+    <h4>Informants</h4>
+    <ul>
+      <% Merchant.all.each do |merchant| %>
+        <li><%= merchant.name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="product-cards">
+    <% @products.each do |product| %>
+      <div class="card">
+        <img src="<%= product.img_url%>" class="card-img-top" alt="<%= product.description%>">
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text"><%= product.merchant.name %></p>
+          <p class="card-text">$<%= product.price %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </main>
+
+ <%= will_paginate @products %>
