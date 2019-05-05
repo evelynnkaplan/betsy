@@ -1,0 +1,4 @@
+homepage image: https://photos.app.goo.gl/EmmocCWBNodB31meA
+teal shade: #8ECEB8 
+yellow: #fdeb1f
+background color: #333

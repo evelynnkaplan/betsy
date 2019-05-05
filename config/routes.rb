@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "merchants#index"
+  root "homepages#home"
 
   get "merchants/:id/products", to: "products#merchant_product_index", as: "merchant_products"
 

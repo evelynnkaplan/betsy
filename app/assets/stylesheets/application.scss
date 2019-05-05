@@ -20,9 +20,112 @@ nav ul li {
   list-style: none;
 }
 
-#logo {
-  font-family: "Courier New", Courier, monospace;
-  font-weight: bold;
+a, a:hover, a:visited {
+  color: inherit;
+  text-decoration: none
 }
 
+body {
+  background-color: black; 
+  color: white 
+}
 
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end
+}
+
+.btn {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.25em;
+}
+
+.log-button:hover {
+  background-color: #8ECEB8; 
+  opacity: 0.9;
+  color: #fdeb1f
+}
+
+.btn,.log-button {
+  border-color: #8ECEB8;
+}
+
+// dropdown menu styling
+
+.dropdown-menu, .show {
+  opacity: 0.9;
+  z-index: 3
+}
+
+// dropdown button
+.btn.dropdown-toggle {
+  background-color: inherit;
+  border: 0px 
+}
+
+.btn.dropdown-toggle:hover {
+  color: #8ECEB8 
+}
+
+// end dropdown menu styling
+
+// logo styling// 
+
+.logo #neon-tubing {
+	text-align: center;
+	color: #8ECEB8;
+	font-family: 'BeonRegular', sans-serif;
+	font-size: 6rem;
+	letter-spacing: .5rem;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #fdeb1f, 0 0 0.5em #fdeb1f, 0 0 0.1em #fdeb1f, 0 10px 3px #000;
+}
+
+@keyframes neonspark  {
+    78% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      79%{
+         color: #333;
+      }
+      80% {
+        
+        text-shadow: none;
+      }
+      81% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      82% {
+        color: #333;
+        text-shadow: none;
+      }
+      83% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      92% {
+        color: #333;
+        text-shadow: none;
+      }
+      92.5% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+}
+
+.logo #neon-tubing {
+	animation: neonspark 1s 3s forwards;
+	}
+
+  .logo #neon-tubing span {
+		animation: neonspark 4s 3s infinite;
+  }
+
+  .logo a {
+    color: #333
+  }
+
+
+// end logo styling 
