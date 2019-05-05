@@ -20,11 +20,57 @@ nav ul li {
   list-style: none;
 }
 
-body {
-  background-color: black
+a, a:hover, a:visited {
+  color: inherit;
+  text-decoration: none
 }
 
+body {
+  background-color: black; 
+  color: white 
+}
 
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end
+}
+
+.btn {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.25em;
+}
+
+.log-button:hover {
+  background-color: #8ECEB8; 
+  opacity: 0.9;
+  color: #fdeb1f
+}
+
+.btn,.log-button {
+  border-color: #8ECEB8;
+}
+
+// dropdown menu styling
+
+.dropdown-menu, .show {
+  opacity: 0.9;
+  z-index: 3
+}
+
+// dropdown button
+.btn.dropdown-toggle {
+  background-color: inherit;
+  border: 0px 
+}
+
+.btn.dropdown-toggle:hover {
+  color: #8ECEB8 
+}
+
+// end dropdown menu styling
+
+// logo styling// 
 
 .logo #neon-tubing {
 	text-align: center;
@@ -72,7 +118,14 @@ body {
 .logo #neon-tubing {
 	animation: neonspark 1s 3s forwards;
 	}
-	.logo #neon-tubing span {
-		animation: neonspark 4s 3s infinite;
-	}
 
+  .logo #neon-tubing span {
+		animation: neonspark 4s 3s infinite;
+  }
+
+  .logo a {
+    color: #333
+  }
+
+
+// end logo styling 
