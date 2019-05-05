@@ -87,6 +87,10 @@ class ProductsController < ApplicationController
       flash[:status] = :error
       flash[:message] = "No product with that ID found."
       redirect_to products_path
+    elsif !session[:merchant_id]
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to root_path
     else
       @product.update!(product_params)
       flash[:status] = :success
