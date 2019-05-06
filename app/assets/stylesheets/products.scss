@@ -16,21 +16,26 @@
 .product-cards {
     display: flex;
     flex-wrap: wrap;
-    width: 85%;
     vertical-align: top;
+    margin: auto;
 }
 
 .card {
-    width: 25%;
     justify-content: center;
     align-content: center;
     text-align: center;
-    padding: 1em;
-    border: none;
     color: black;
+    padding: 1em;
+    margin: 0.5em;
 }
 
 .card-img-top {
     justify-content: center;
     align-content: center;
+    border: #8ECEB8;
+}
+
+.pages {
+    margin: 0 auto;
+    max-width: 700px;
 }
