@@ -1,5 +1,4 @@
 require "test_helper"
-# require 'pry'
 
 describe ReviewsController do
   let(:product_id) {Product.all.sample}
@@ -28,7 +27,7 @@ describe ReviewsController do
 
       get new_product_review_path(product_id)
 
-      # check_flash(:error)
+      check_flash(:error)
       must_respond_with :redirect
     end 
   end

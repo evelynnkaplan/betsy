@@ -12,21 +12,21 @@ describe OrderItemsController do
   describe "guest user" do
     describe "create" do
       it "adds order item to cart and creates new order" do
-        # session id = order.id
-        # order.count +1
-        # order contains order item
-        # redirects to product path 
-        # status should be pending 
+      #   # session id = order.id
+      #   # order.count +1
+      #   # order contains order item
+      #   # redirects to product path 
+      #   # status should be pending 
+  
 
+      #   # Arrange
+      #   order_item = OrderItem.new(product_id: order_items(:one))
 
-        # Arrange
-        order_item = OrderItem.new(product_id:)
-
-        # Act 
-          expect {
-            post order_items_path 
-      }.must_change "Order.count" +1
-        # Assert 
+      #   # Act 
+      #     expect {
+      #       post order_items_path, params: order_item_data
+      # }.must_change "Order.count", +1
+      #   # Assert 
       end
 
       it 'adds item to existing order' do

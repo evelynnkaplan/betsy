@@ -14,16 +14,15 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save
 
-    if @category
+    if @category.save
       flash[:status] = :success
       flash[:message] = "Successfully added your category to the site."
       redirect_to categories_path
     else
       flash[:status] = :error
       flash[:message] = "Unable to add your category to the site."
-      render:edit, status: :bad_request
+      render :new, status: :bad_request
     end
     
     
