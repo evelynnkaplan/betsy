@@ -1,17 +1,49 @@
-<header>
-  <h2><%= @product.name %></h2>
-</header>
+<main class="show">
+  <%= link_to '← Back', :back %>
 
-<main>
-  <img src="<%= @product.img_url %>">
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="<%= @product.img_url %>">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= @product.name %></h5>
+          <p class="card-text">$ <%= @product.price %></p>
+          <p class="card-text">Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></p>
+          <p class="card-text">Description: <%= @product.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <section>
-    <ul>
-      <li>Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
-      <li>$ <%= @product.price %></li>
-    </ul>
-  </section>
+  <div class="related-products">
+    <h3>Other buyers liked:</h3>
+    <% @product.related_products.each do |product| %>
+      <div class="card">
+        <a href="<%= product_path(product) %>">
+          <img src="<%= product.img_url%>" class="card-img-top" alt="<%= product.description%>">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+          </div>
+        </a>
 
-  <p><%= @product.description %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="reviews">
+    <h3>Reviews:</h3>
+    <% if @product.reviews.length == 0 %>
+      <p>There are no reviews yet.  <%= link_to "Be the first to review.", new_product_review_path(@product.id) %></p>
+    <% else %>
+      <ul>
+        <% @product.reviews.each do |review| %>
+          <li><%= review.rating %><li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </main>
+
 
