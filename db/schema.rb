@@ -36,8 +36,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_190526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_merchants_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -59,9 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_190526) do
     t.integer "credit_card"
     t.date "card_exp"
     t.string "status"
-    t.bigint "merchant_id"
     t.integer "total_price"
-    t.index ["merchant_id"], name: "index_orders_on_merchant_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -85,9 +81,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_190526) do
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
-  add_foreign_key "merchants", "orders"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "merchants"
   add_foreign_key "reviews", "products"
 end
