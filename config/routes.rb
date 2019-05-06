@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :orders, except: [:new, :destroy]
   get 'orders/view_cart', to: 'orders#view_cart', as: 'view_cart'
+  resources :orders, except: [:new, :destroy]
 
   resources :order_items, only: [:create, :update, :destroy]
 end
