@@ -5,20 +5,41 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+ 
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/beon" type="text/css"/>
   </head>
 
+
   <body>
-    
     <nav>
       <ul>
-        <li><h1 id="logo">SecrEtsy</h1></li>
-        <li><%= link_to "View all products", products_path %></li>
+        <li class='secrets-dropdown'>
+              <a class="btn btn-secondary dropdown-toggle secrets-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Secrets
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to "All Secrets", products_path, class: "dropdown-item"%>
+                <%= link_to "Secrets by Categories", categories_path, class: "dropdown-item"%>
+              </div>
+        </li>
+
+         <li class='merchants-dropdown'>
+            <a class="btn btn-secondary dropdown-toggle secrets-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Informants 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <%= link_to "Informants", merchants_path, class: "dropdown-item"%>
+            </div>
+        </li>
+        <li class = 'logo'>
+          <%= link_to raw('<h1 id="neon-tubing"><span>S</span>ecr<span>E</span>t<span>s</span>y</h1>'), root_path %>
+        </li>
         <% if session[:merchant_id] %>
-          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+          <li><%= link_to "Log out", logout_path, method: "delete", class: "btn btn-outline-warning log-button" %></li>
         <% else %>
-          <li><%= link_to "Login with Github", github_login_path %></li>
+          <li><%= link_to "Login with Github", github_login_path, class: "btn btn-outline-warning log-button" %></li>
         <% end %>
       </ul>
     </nav>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "merchants#index"
+  root "homepages#home"
 
   get "merchants/:id/products", to: "products#merchant_product_index", as: "merchant_products"
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "merchants#destroy", as: "logout"
 
   resources :categories, only: [:index, :new, :create, :show] 
-  get "categories/:id/products", to: "products#show", as: "category_products"
+  get "categories/:id/products", to: "products#category_product_index", as: "category_products"
  
   resources :products
 end

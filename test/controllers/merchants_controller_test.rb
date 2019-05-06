@@ -114,18 +114,19 @@ describe MerchantsController do
 
         check_flash(:error)
       end
-
-      describe "logout" do
-        it "logs out merchant" do
-          perform_login
-          delete merchant_path(@merchant)
-          must_respond_with :redirect
-          check_flash
-          expect(session[:merchant_id]).must_be_nil
-          must_redirect_to root_path
-        end
-      end 
     end
+
+    describe "logout" do
+      it "logs out merchant" do
+        perform_login
+        delete merchant_path(@merchant)
+        must_respond_with :redirect
+        check_flash
+        expect(session[:merchant_id]).must_be_nil
+        must_redirect_to root_path
+      end
+    end 
+    
   end
 
   describe "guest users" do

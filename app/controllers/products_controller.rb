@@ -2,22 +2,37 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.paginate(page: params[:page], per_page: 12)
   end
 
   def merchant_product_index
     @merchant = Merchant.find_by(id: params[:id])
-    @products = Product.where(merchant_id: @merchant.id)
+
+    if !@merchant
+      flash[:status] = :error
+      flash[:message] = "No merchant with that ID found."
+      redirect_to products_path
+    else
+      @products = Product.where(merchant_id: @merchant.id)
+    end
   end
 
   def category_product_index
     @category = Category.find_by(id: params[:id])
-    @products = Product.where(category_id: @category.id)
+
+    if !@category
+      flash[:status] = :error
+      flash[:message] = "No category with that ID found."
+      redirect_to products_path
+    else
+      @products = Product.includes(:categories).where(:categories => {:id => @category.id}).all
+    end
   end
 
   def show
     if !@product
-      flash[:error] = "No product with that ID found."
+      flash[:status] = :error
+      flash[:message] = "No product with that ID found."
       redirect_to products_path
     end
   end
@@ -25,10 +40,10 @@ class ProductsController < ApplicationController
   def new
     if session[:merchant_id]
       @product = Product.new
-      @categories = Category.all
     else
-      flash[:error] = "You don't have permission to create a new product. Please log in."
-      redirect_to github_login_path
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to create a new product. Please log in."
+      redirect_to root_path
     end
   end
 
@@ -40,57 +55,70 @@ class ProductsController < ApplicationController
       successful = product.save
 
       if successful
-        flash[:success] = "Product named #{product.name} successfully created with ID number #{product.id}."
+        flash[:status] = :success
+        flash[:message] = "Product named #{product.name} successfully created with ID number #{product.id}."
         redirect_to products_path
       else
-        flash[:error] = "Error saving product: #{product.errors.messages}"
+        flash[:status] = :error
+        flash[:message] = "Error saving product: #{product.errors.messages}"
         redirect_to products_path
       end
     else
-      flash[:error] = "You don't have permission to create a new product. Please log in."
-      redirect_to github_login_path
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to create a new product. Please log in."
+      redirect_to root_path
     end
   end
 
   def edit
     if !@product
-      flash[:error] = "No product with that ID found."
+      flash[:status] = :error
+      flash[:message] = "No product with that ID found."
       redirect_to products_path
     elsif !session[:merchant_id]
-      flash[:error] = "You don't have permission to edit product #{@product.id}. Please log in."
-      redirect_to github_login_path
-    else
-      categories = Category.all
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to root_path
     end
   end
 
   def update
     if !@product
-      flash[:error] = "No product with that ID found."
+      flash[:status] = :error
+      flash[:message] = "No product with that ID found."
       redirect_to products_path
+    elsif !session[:merchant_id]
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to root_path
     else
       @product.update!(product_params)
-      flash[:success] = "Successfully edited product #{@product.id}."
+      flash[:status] = :success
+      flash[:message] = "Successfully edited product #{@product.id}."
       redirect_to product_path(@product.id)
     end
   end
 
   def destroy
     if !@product
-      flash[:error] = "No product with that ID found."
+      flash[:status] = :error
+      flash[:message] = "No product with that ID found."
       redirect_to products_path
     elsif session[:merchant_id]
       successful = @product.destroy
       if successful
-        flash[:success] = "Product #{@product.name} with ID number #{@product.id} deleted."
+        flash[:status] = :success
+        flash[:message] = "Product #{@product.name} with ID number #{@product.id} deleted."
         redirect_to products_path
       else
-        flash[:error] = "There was an error: #{@product.errors.messages}."
+        flash[:status] = :error
+        flash[:message] = "There was an error: #{@product.errors.messages}."
         redirect_to products_path
       end
     else
-      flash[:error] = "You don't have permission to delete product #{@product.id}. Please log in."
-      redirect_to github_login_path
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to delete product #{@product.id}. Please log in."
+      redirect_to root_path
     end
   end
 
