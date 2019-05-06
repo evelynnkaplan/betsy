@@ -20,16 +20,20 @@ describe CategoriesController do
   end
 
   describe "new" do 
-    it "can generate new categories" do 
+    it "loads the new categories form only for logged in merchants" do
+      perform_login
       get new_category_path
 
-      must_respond_with :found # should be :ok but due to require_login it is different
+      must_respond_with :ok
+    end
+
+    it "will respond with redirect if not logged in" do 
     end
   end
 
   describe "create" do 
     it "allows merchant to create a new category" do
-      # perform_login
+      perform_login
 
       new_category = {
         category: {

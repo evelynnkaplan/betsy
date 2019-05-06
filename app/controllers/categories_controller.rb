@@ -5,25 +5,28 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    require_login
-    @category = Category.new
+    if current_merchant
+      @category = Category.new
+    else
+      require_login
+    end
   end
 
   def create
-    require_login
-
     @category = Category.new(category_params)
     @category.save
 
     if @category
       flash[:status] = :success
       flash[:message] = "Successfully added your category to the site."
+      redirect_to categories_path
     else
       flash[:status] = :error
       flash[:message] = "Unable to add your category to the site."
+      render:edit, status: :bad_request
     end
     
-    redirect_to categories_path
+    
   end
   
   def show
