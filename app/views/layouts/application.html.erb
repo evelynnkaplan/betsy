@@ -26,7 +26,7 @@
         </li>
 
          <li class='merchants-dropdown'>
-            <a class="btn btn-secondary dropdown-toggle secrets-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-secondary dropdown-toggle merchants-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Informants 
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -37,9 +37,21 @@
           <%= link_to raw('<h1 id="neon-tubing"><span>S</span>ecr<span>E</span>t<span>s</span>y</h1>'), root_path %>
         </li>
         <% if session[:merchant_id] %>
-          <li><%= link_to "Log out", logout_path, method: "delete", class: "btn btn-outline-warning log-button" %></li>
+
+        <%# failed this shit %>
+        <li class= 'logout-container', id='login-out'>
+              <a class="btn btn-secondary dropdown-toggle log-button" href="#" role="button" id="dropdownMenuLink log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= Merchant.find_by(id: session[:merchant_id]).name%> hello
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to "View Dashboard", dashboard_path, class: "dropdown-item" %>
+                <%= link_to "Log out", logout_path, method: "delete", class: "dropdown-item" %>
+              </div>
+        </li>
         <% else %>
-          <li><%= link_to "Login with Github", github_login_path, class: "btn btn-outline-warning log-button" %></li>
+          <li class='login-container', id='login-out'>
+            <%= link_to "Login with Github", github_login_path, class: "btn btn-outline-warning log-button" %>
+          </li>
         <% end %>
       </ul>
     </nav>
