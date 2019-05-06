@@ -49,6 +49,11 @@ class ActiveSupport::TestCase
     OmniAuth.config.test_mode = true
   end
 
+  def current_merchant
+    current_merchant = Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    return current_merchant
+  end
+
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
 

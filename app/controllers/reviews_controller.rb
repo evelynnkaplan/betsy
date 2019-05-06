@@ -2,19 +2,18 @@ class ReviewsController < ApplicationController
   before_action :find_product
 
   def new
+    current_merchant
+    if @product.merchant_id == current_merchant.id
+      flash[:status] = :error
+      flash[:message] = "You cannot review your own products"
+      return redirect_back(fallback_location: root_path)
+    end
+
     @review = Review.new
   end
       
   def create
-    if current_merchant
-      if @product.merchant_id == current_merchant.id
-        flash[:status] = :error
-        flash[:message] = "You cannot review your own products"
-        return redirect_back(fallback_location: root_path)
-      end
-    else
-      @review = Review.new(review_params)
-    end
+    @review = Review.new(review_params)
 
     if @review.save
       flash[:status] = :success

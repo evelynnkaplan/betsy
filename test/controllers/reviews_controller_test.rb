@@ -32,7 +32,11 @@ describe ReviewsController do
     end
 
     it "will not allow a merchant to review their own product" do 
-      
+      perform_login
+
+      expect
+
+
     end 
   end
 end
