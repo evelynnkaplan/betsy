@@ -12,6 +12,14 @@ describe ReviewsController do
       must_respond_with :ok
     end
 
+    it "responds with 404 if review request for nonexistant product" do 
+      bad_id = Product.last.id + 1
+
+      get new_product_review_path(bad_id)
+
+      must_respond_with :not_found
+    end
+
     it "will not allow a merchant to review their own product" do 
       merchant = merchants(:merch_one)
       perform_login(merchant)
@@ -38,7 +46,7 @@ describe ReviewsController do
       must_redirect_to product_path(product_id)
     end
 
-    it "requires a rating for a review" do 
+    it "does not create a review with missing required rating" do 
       review_data[:review][:rating] = 0
 
       expect {

@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :find_product
 
   def new
-    if current_merchant
+    if current_merchant  && @product
       if @product.merchant_id == current_merchant.id
         flash[:status] = :error
         flash[:message] = "You cannot review your own products"
@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.product = @product
-    
+
     if @review.save
       flash[:status] = :success
       flash[:message] = "Your review has been successfully added."
@@ -38,5 +38,10 @@ class ReviewsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:product_id])
+
+    unless @product
+      head :not_found
+      return 
+    end
   end
 end
