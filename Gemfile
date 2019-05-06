@@ -65,8 +65,6 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap', '~> 4.1.3'
 
-# added bootstrap sass gem 
-gem 'bootstrap-sass'
 group :development, :test do
   gem 'pry-rails'
 end

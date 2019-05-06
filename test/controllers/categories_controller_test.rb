@@ -29,7 +29,7 @@ describe CategoriesController do
 
   describe "create" do 
     it "allows merchant to create a new category" do
-      perform_login
+      # perform_login
 
       new_category = {
         category: {
@@ -42,12 +42,7 @@ describe CategoriesController do
     }.must_change "Category.count", +1
       
       must_respond_with :redirect
-      # must_redirect_to :back url???
     end 
-
-    it "does not allow an unauthorized user to create categories" do 
-      
-    end
   end
 
   describe "show" do

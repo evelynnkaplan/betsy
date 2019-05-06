@@ -6,11 +6,12 @@ class CategoriesController < ApplicationController
 
   def new
     require_login
-
     @category = Category.new
   end
 
   def create
+    require_login
+
     @category = Category.new(category_params)
     @category.save
 
@@ -30,6 +31,7 @@ class CategoriesController < ApplicationController
 
     unless @category
       head :not_found
+      return
     end
   end
 
