@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews, only: [:new, :create]
   end
+
+  get 'orders/view_cart', to: 'orders#view_cart', as: 'view_cart'
+  resources :orders, except: [:new, :destroy]
+
+  resources :order_items, only: [:create, :update, :destroy]
 end
