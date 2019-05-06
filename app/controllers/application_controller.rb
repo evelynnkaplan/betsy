@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
+    current_merchant
     if current_merchant.nil?
       flash[:error] = "You must be logged in to view this section"
       redirect_back(fallback_location: root_path)
