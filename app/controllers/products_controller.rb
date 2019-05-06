@@ -30,11 +30,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-    if !@product
+    unless @product
       flash[:status] = :error
       flash[:message] = "No product with that ID found."
       redirect_to products_path
     end
+    @order_item = current_order.order_items.new
   end
 
   def new

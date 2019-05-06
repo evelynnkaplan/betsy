@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   validates :order_items, presence: true
-  validates :order, inclusion: {in: [nil, "pending", "paid", "complete", "canceled"]}
+  validates :status, inclusion: {in: [nil, "pending", "paid", "complete", "canceled"]}
   before_save :update_total
   before_create :update_status
 

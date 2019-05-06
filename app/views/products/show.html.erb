@@ -44,6 +44,17 @@
       </ul>
     <% end %>
   </div>
+  <p><%= @product.description %></p>
+
+    <%# form with hidden fields to add item to shopping cart %>
+ 
+  <p><%= @product.name %> | <%= number_to_currency @product.price %>
+  <%= form_for @order_item do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.number_field :quantity %>
+    <%= f.submit "Add to cart" %>
+  <% end %></p>
+
 </main>
 
 

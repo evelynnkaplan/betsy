@@ -1,6 +1,8 @@
 require "pry"
 
 class ApplicationController < ActionController::Base
+  helper_method :current_order, :current_merchant
+
   def current_merchant
    @current_merchant = Merchant.find(session[:merchant_id]) if session[:merchant_id]
    return @current_merchant
