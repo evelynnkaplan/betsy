@@ -1,3 +1,8 @@
+require 'simplecov'
+SimpleCov.start do 
+  add_filter %r{^/specs?/}
+end
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
@@ -49,10 +54,10 @@ class ActiveSupport::TestCase
     OmniAuth.config.test_mode = true
   end
 
-  def current_merchant
-    current_merchant = Merchant.find(session[:merchant_id]) if session[:merchant_id]
-    return current_merchant
-  end
+  # def current_merchant
+  #   current_merchant = Merchant.find(session[:merchant_id]) if session[:merchant_id]
+  #   return current_merchant
+  # end
 
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
