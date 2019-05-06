@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   validates :order_items, presence: true
-  validates :order, inclusion: { in: [ nil, "pending", "paid", "complete", "canceled"] }
+  validates :order, inclusion: {in: [nil, "pending", "paid", "complete", "canceled"]}
   before_save :update_total
   before_create :update_status
 
@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   private
 
   def update_status
-    if self.status == nil?
+    unless self.status
       self.status = "pending"
     end
   end
@@ -20,10 +20,4 @@ class Order < ApplicationRecord
   def update_total
     self.total_price = calculate_total
   end
-  
 end
-
-
-
- 
-
