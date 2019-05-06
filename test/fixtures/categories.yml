@@ -9,5 +9,5 @@ government:
   products: [product_one, product_two]
 
 musicians:
-  name: 
+  name: A-lister
   products: [product_three]
