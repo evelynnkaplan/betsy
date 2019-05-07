@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
     @item = @order.order_items.new(item_params)
     if @order.save
       flash[:status] = :success
-      flash[:message] = "Order #{@order.id} successfully created"
+      flash[:message] = "Item successfully added to cart"
 
       session[:order_id] = @order.id
       redirect_to products_path

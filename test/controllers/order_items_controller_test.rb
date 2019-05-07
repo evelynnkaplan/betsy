@@ -1,13 +1,5 @@
 require "test_helper"
-require 'pry'
-
-def create
-  @order = current_order
-  @item = @order.order_items.new(item_params)
-  @order.save
-  session[:order_id] = @order.id
-  redirect_to products_path
-end
+require "pry"
 
 describe OrderItemsController do
   before do
@@ -19,13 +11,11 @@ describe OrderItemsController do
         quantity: 1,
       },
     }
-
   end
 
   describe "guest user" do
     describe "create" do
       it "adds order item to cart and creates new order" do
-
         expect {
           post order_items_path, params: @order_item_data
         }.must_change "OrderItem.count", +1, "Order.count", +1
@@ -35,7 +25,7 @@ describe OrderItemsController do
 
         check_flash
 
-        # Assert 
+        # Assert
 
         expect(order_item.product_id).must_equal @order_item_data[:order_item][:product_id]
         expect(order_item.quantity).must_equal @order_item_data[:order_item][:quantity]
@@ -48,23 +38,28 @@ describe OrderItemsController do
       end
 
       it "adds item to existing order" do
-        expect {
-          post order_items_path, params: @order_item_data 
-        }.must_change "OrderItem.count", +1
+        order_item_hash = {
+          order_item: {
+            product_id: Product.second.id,
+            quantity: 1,
+          },
+        }
 
         expect {
-          post order_items_path, params: @order_item_data 
+        post order_items_path, params: order_item_hash
+        }.must_change "Order.count", +1
+
+        expect {
+          post order_items_path, params: @order_item_data
         }.wont_change "Order.count"
 
         order_item = OrderItem.last
         order = Order.last
 
-        # binding.pry 
-
         check_flash
 
-        # Assert - Test in progres 
-        # expect(order.order_items.count).must_equal 3
+        # Assert 
+        expect(order.order_items.count).must_equal 2
         expect(order_item.product_id).must_equal @order_item_data[:order_item][:product_id]
         expect(order_item.quantity).must_equal @order_item_data[:order_item][:quantity]
         expect(session[:order_id]).must_equal order.id
@@ -75,8 +70,27 @@ describe OrderItemsController do
         must_redirect_to products_path
       end
 
-      it "fails to create order for nonexistent order" do
+      it "sends back bad_request if no order item data is sent" do
+        
+        order_item_hash = {
+          order_item: {
+            product_id: "",
+            quantity: "",
+          },
+        }
+        expect(OrderItem.new(order_item_hash[:order_item])).wont_be :valid?
+
+        # Act
+        expect {
+          post order_items_path, params: order_item_hash
+        }.wont_change "Order.count", "OrderItem.count"
+
+        # Assert
+        must_respond_with :redirect 
+
+        check_flash(:error)
       end
+
     end
   end
 
