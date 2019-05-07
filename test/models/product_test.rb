@@ -74,7 +74,7 @@ describe Product do
     end
 
     it "has one or many categories" do 
-      # save for once join table is created...
+      expect(product).must_respond_to :categories
     end
 
     it "has orders" do 
