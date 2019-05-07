@@ -1,7 +1,8 @@
 require "test_helper"
+require 'pry'
 
 describe ReviewsController do
-  let(:product_id) {Product.all.sample}
+  let(:product_id) {Product.first.id}
   let(:review_data) { { review: { rating: 5, comment: "The best information." } } }
 
   describe "new" do 
@@ -20,12 +21,11 @@ describe ReviewsController do
     end
 
     it "will not allow a merchant to review their own product" do 
-      merchant = merchants(:merch_one)
+      product = Product.first 
+      merchant = product.merchant 
       perform_login(merchant)
-      
-      product = Product.find_by(merchant_id: merchant.id)
 
-      get new_product_review_path(product_id)
+      get new_product_review_path(product.id)
 
       check_flash(:error)
       must_respond_with :redirect
