@@ -12,4 +12,14 @@ class Merchant < ApplicationRecord
 
     return merchant
   end
+
+  def orders
+    order_list = []
+    self.products.each do |prod|
+      prod.order_items.each do |item|
+        order_list << item.order
+      end
+    end
+    return order_list.uniq!
+  end
 end

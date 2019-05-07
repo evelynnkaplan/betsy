@@ -21,8 +21,8 @@ describe Category do
     it "can have many products" do 
       product = Product.first
       product_2 = Product.last
-      category.products << product
-      category.products << product_2
+      category.products.push(product, product_2)
+      category.save
 
       expect(category).must_respond_to :products
       expect(category.products.count).must_equal 2

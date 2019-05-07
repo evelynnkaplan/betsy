@@ -65,8 +65,6 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap', '~> 4.1.3'
 
-# added bootstrap sass gem 
-gem 'bootstrap-sass'
 group :development, :test do
   gem 'pry-rails'
 end
@@ -96,3 +94,4 @@ gem "omniauth-github"
 gem "faker", "~> 1.9"
 
 gem 'will_paginate', '~> 3.1.0' 
+gem "simplecov", "~> 0.16.1"
