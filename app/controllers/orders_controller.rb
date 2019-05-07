@@ -30,16 +30,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  def create
-  end
-
   def edit
+    @order = current_order
   end
 
   def update
+    # checkout
+  end
+
+  def confirmation
   end
 
   def view_cart
     @order_items = current_order.order_items
+  end
+
+  private
+
+  def order_params
+    
   end
 end
