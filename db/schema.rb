@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_170852) do
+ActiveRecord::Schema.define(version: 2019_05_07_190058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,9 +85,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_170852) do
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
-  add_foreign_key "merchants", "orders"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "merchants"
   add_foreign_key "reviews", "products"
 end
