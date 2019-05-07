@@ -2,7 +2,7 @@ require "test_helper"
 
 describe CategoriesController do
   let(:category) { categories(:government) }
-  let(:new_category_data) { { category: { name: "Wikileak" } } }
+  let(:new_category_data) { {category: {name: "Wikileak"}} }
 
   describe "index" do
     it "can get the categories index page" do
@@ -73,22 +73,6 @@ describe CategoriesController do
       # Assert
       check_flash(:error)
       must_respond_with :bad_request
-    end
-  end
-
-  describe "show" do
-    it "shows a specific category's page" do
-      get category_path(category)
-
-      must_respond_with :ok
-    end
-
-    it "responds with 404 for nonexistant category show page" do 
-      category_id = Category.last.id + 1
-
-      get category_path(category_id)
-
-      must_respond_with :not_found
     end
   end
 end
