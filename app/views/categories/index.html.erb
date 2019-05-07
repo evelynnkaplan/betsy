@@ -3,7 +3,7 @@
     <% next if category == "Hidden" %>
     <div class="card">
       <div class="card-body">
-        <a href="<%= category_path(category) %>">
+        <a href="<%= category_products_path(category) %>">
           <h5 class="card-title"><%= category.name %></h5>
           <% if category.products.length == 0 %>  
               <img src='https://arcmi-wphost.netdna-ssl.com/content/uploads/sites/15/2017/10/Coming-Soon-Light.png' class="card-img-bottom" alt="Products coming soon">
