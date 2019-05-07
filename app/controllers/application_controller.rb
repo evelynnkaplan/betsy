@@ -30,7 +30,11 @@ class ApplicationController < ActionController::Base
   # helper method for shopping cart functionality
   def current_order
     if session[:order_id]
-      Order.find(session[:order_id])
+      order = Order.find(session[:order_id]) 
+      # This conditional important for order confirmation screen.
+      if order && order.status == "paid"
+        Order.new
+      end
     else
       Order.new
     end
