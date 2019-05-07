@@ -9,6 +9,14 @@ class Order < ApplicationRecord
     self.order_items.collect { |item| item.product.price * item.quantity }.sum
   end
 
+  def merchants
+    merchant_list = []
+    self.order_items.each do |item|
+      merchant_list << item.product.merchant
+    end
+    return merchant_list.uniq!
+  end
+
   private
 
   def update_status
