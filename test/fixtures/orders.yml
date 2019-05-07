@@ -6,7 +6,7 @@
 #
 # cart_one:
 #   email: big_bird
-#   name: Big Bird
+#   name_on_card: Big Bird
 #   address:  123 Sesame St
 #   mailing_zip:  98119
 #   billing_zip: 98119
