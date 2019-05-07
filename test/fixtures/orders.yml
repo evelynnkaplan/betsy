@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 cart_one:
-  user_name: big_bird
+  # email: big_bird
   address:  123 Sesame St
   zipcode:  98119
   credit_card: 1234567891012355
@@ -14,7 +14,7 @@ cart_one:
   total_price: 12000
 
 cart_two:
-  user_name: demi_levato
+  # email: demi_levato
   address: Hollywood, CA
   zipcode: 90210
   credit_card: 4540332311231239

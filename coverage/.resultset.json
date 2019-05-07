@@ -33,6 +33,29 @@
         1,
         null
       ],
+      "/Users/Tatiana/Projects/betsy/app/models/category.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/Users/Tatiana/Projects/betsy/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/Tatiana/Projects/betsy/app/models/review.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/Users/Tatiana/Projects/betsy/app/models/product.rb": [
         1,
         1,
@@ -62,28 +85,6 @@
         null,
         0,
         null,
-        null
-      ],
-      "/Users/Tatiana/Projects/betsy/app/models/application_record.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/Tatiana/Projects/betsy/app/models/review.rb": [
-        1,
-        1,
-        1,
-        null
-      ],
-      "/Users/Tatiana/Projects/betsy/app/models/category.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
         null
       ],
       "/Users/Tatiana/Projects/betsy/app/models/order.rb": [
@@ -153,6 +154,6 @@
         null
       ]
     },
-    "timestamp": 1557251143
+    "timestamp": 1557251735
   }
 }
