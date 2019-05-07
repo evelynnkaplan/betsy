@@ -77,10 +77,18 @@ describe CategoriesController do
   end
 
   describe "show" do
-    it "shows a specific categorie's page" do
+    it "shows a specific category's page" do
       get category_path(category)
 
       must_respond_with :ok
+    end
+
+    it "responds with 404 for nonexistant category show page" do 
+      category_id = Category.last.id + 1
+
+      get category_path(category_id)
+
+      must_respond_with :not_found
     end
   end
 end
