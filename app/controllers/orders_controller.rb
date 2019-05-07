@@ -35,10 +35,23 @@ class OrdersController < ApplicationController
   end
 
   def update
-    # checkout
+    @order = Order.find_by(id: session[:order_id])
+    @order.update(order_params)
+    @order.status = "paid"
+    @order.save
+    redirect_to order_confirmation_path
   end
 
   def confirmation
+    @order = Order.find_by(id: session[:order_id])
+
+    if !@order || (@order.status == "nil" || @order.status == "pending")
+      flash[:status] = :error
+      flash[:message] = "There is no completed order to view."
+      redirect_to products_path
+    else
+      session[:order_id] = nil
+    end
   end
 
   def view_cart
@@ -48,6 +61,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    
+    return params.require(:order).permit(:email, :address, :mailing_zip, :name_on_card, :credit_card, :card_exp, :cvv, :billing_zip)
   end
 end
