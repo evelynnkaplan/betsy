@@ -3,14 +3,14 @@ Rails.application.routes.draw do
 
   get "merchants/:id/products", to: "products#merchant_product_index", as: "merchant_products"
 
-  resources :merchants
+  resources :merchants, except: :show
   get "/dashboard", to: "merchants#show", as: "dashboard"
 
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
 
-  resources :categories, only: [:index, :new, :create, :show]
+  resources :categories, only: [:index, :new, :create]
   get "categories/:id/products", to: "products#category_product_index", as: "category_products"
 
   resources :products do

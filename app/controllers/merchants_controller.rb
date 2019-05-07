@@ -6,7 +6,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = current_merchant 
+    @merchant = current_merchant
 
     require_login
     merchant_authorization
@@ -27,6 +27,8 @@ class MerchantsController < ApplicationController
       flash[:message] = "Logged in as returning merchant #{merchant.name}"
     else
       merchant = Merchant.build_from_github(auth_hash)
+      merchant[:name] = merchant.username if !merchant.name
+
       success = merchant.save
 
       if success
@@ -43,16 +45,16 @@ class MerchantsController < ApplicationController
     # If we get here, we have a valid merchant instance
     session[:merchant_id] = merchant.id
     redirect_to root_path
-    return merchant 
+    return merchant
   end
 
   def update
-    return unless find_merchant    
+    return unless find_merchant
     return unless require_login
 
     return unless merchant_authorization
     @merchant = find_merchant
-    
+
     if @merchant.update(merchant_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated merchant #{@merchant.id}"
@@ -83,8 +85,8 @@ class MerchantsController < ApplicationController
 
     unless @merchant
       head :not_found
-      return false 
+      return false
     end
-    return @merchant 
+    return @merchant
   end
 end
