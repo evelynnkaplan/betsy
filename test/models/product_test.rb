@@ -1,11 +1,10 @@
 require "test_helper"
 
 describe Product do
-  let(:product) { products(:product_one)}
+  let(:product) { products(:product_one) }
 
-  describe "instantiation" do 
+  describe "instantiation" do
     it "can be instantiated" do
-      
       expect(product.valid?).must_equal true
     end
 
@@ -15,7 +14,7 @@ describe Product do
       end
     end
 
-    it "validates present and unique names" do 
+    it "validates present and unique names" do
       # Arrange
       product.name = " "
       empty_name = product.save
@@ -34,7 +33,7 @@ describe Product do
       expect(new_product.errors.messages).must_include :name
     end
 
-    it "validates price is present and greater than zero" do 
+    it "validates price is present and greater than zero" do
       #Arrange edge cases
       product.price = 0
       result = product.save
@@ -46,21 +45,21 @@ describe Product do
       # Arrange and Act
       product.price = "A"
       string_result = product.save
-      
+
       expect(string_result).must_equal false
       expect(product.errors.messages).must_include :price
 
       # Arrange & Act
       product.price = 100
       valid_result = product.save
-      
+
       # nominal case
       expect(valid_result).must_equal true
     end
   end
 
-  describe "relationships" do 
-    it "belongs to a merchant" do 
+  describe "relationships" do
+    it "belongs to a merchant" do
       expect(product).must_respond_to :merchant
       expect(product.merchant).must_equal merchants(:merch_one)
     end
@@ -73,16 +72,20 @@ describe Product do
       expect(product.errors.messages).must_include :merchant
     end
 
-    it "has one or many categories" do 
-      expect(product).must_respond_to :categories
+    it "has one or many categories" do
+      # categories_products = Category.where(products: product) # this needs work
+
+      # expect(categories_products.include?(product)).must_equal true
     end
 
-    it "has orders" do 
-      # save for after order model is created
+    it "has order_items" do
+      order_items = OrderItem.find_by(product_id: product.id)
+
+      expect(product.order_items).must_equal
     end
   end
 
-  describe "custom methods" do 
+  describe "custom methods" do
     # if any, add tests here
   end
 end
