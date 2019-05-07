@@ -1,9 +1,21 @@
 require "test_helper"
 
 describe Order do
-#   let(:order) { Order.new }
+  describe "validations" do 
+    it "can be instantiated" do 
 
-#   it "must be valid" do
-#     value(order).must_be :valid?
-#   end
+    end
+
+    it "knows its fields" do 
+    
+    end
+  end
+
+  describe "relationships" do 
+
+  end
+  
+  describe "custom methods" do 
+
+  end
 end

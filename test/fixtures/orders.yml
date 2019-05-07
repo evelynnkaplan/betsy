@@ -4,22 +4,28 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-cart_one:
-  # email: big_bird
-  address:  123 Sesame St
-  zipcode:  98119
-  credit_card: 1234567891012355
-  card_exp: 11/2020
-  status: pending
-  total_price: 12000
+# cart_one:
+#   email: big_bird
+#   name: Big Bird
+#   address:  123 Sesame St
+#   mailing_zip:  98119
+#   billing_zip: 98119
+#   credit_card: 1234567891012355
+#   card_exp: 11/2020
+#   cvv: 130
+#   status: pending
+#   total_price: 15000
 
-cart_two:
-  # email: demi_levato
-  address: Hollywood, CA
-  zipcode: 90210
-  credit_card: 4540332311231239
-  card_exp: 10/22
-  status: pending
-  total_price: 30000
+# cart_two:
+#   email: j_zus-heals
+#   name: Jenna ZusHealer
+#   address:  1 Eden St
+#   mailing_zipcode:  98119
+#   billing_zipcode: 98119
+#   credit_card: 1234567891012355
+#   card_exp: 11/2021
+#   cvv: 116
+#   status: pending
+#   total_price: 12000
   
   

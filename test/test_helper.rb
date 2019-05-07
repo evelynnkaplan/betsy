@@ -37,6 +37,10 @@ class ActiveSupport::TestCase
     return ["uid", "provider", "name", "email", "username"]
   end
 
+  def order_attribute_array
+    return []
+  end
+
   def check_flash(expected_status = :success)
     if flash[:status]
       expect(flash[:status]).must_equal(expected_status)
