@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   get "orders/view_cart", to: "orders#view_cart", as: "view_cart"
-  get "order/details", to: "orders#details", as: "order_details"
+  get "order/:id/confirmation", to: "orders#confirmation", as: "order_confirmation"
   resources :orders, except: [:new, :destroy]
 
   resources :order_items, only: [:create, :update, :destroy]
