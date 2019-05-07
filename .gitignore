@@ -30,3 +30,4 @@
 
 #ignore simplecov
 coverage/*
+coverage
