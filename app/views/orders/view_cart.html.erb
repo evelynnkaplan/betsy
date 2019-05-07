@@ -6,8 +6,8 @@
     <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
   <% end %>
   <p>Your Total: <%= number_to_currency current_order.total_price %></p>
+  <%= link_to "Checkout", checkout_path %>
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>
 
-<%= link_to "Checkout", checkout_path %>
