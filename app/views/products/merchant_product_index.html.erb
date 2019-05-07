@@ -1,13 +1,21 @@
 <main>
 
   <header>
-    <h3><%= @merchant.username %>'s shop</h3>
+    <h3><%= @merchant.name %>'s shop</h3>
   </header>
 
-  <ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.name, product_path(product.id) %></li>
-  <% end %>
-  </ul>
-
+  <div class="product-cards">
+    <% @products.each do |product| %>
+      <div class="card">
+        <img src="<%= product.img_url%>" class="card-img-top" alt="<%= product.description%>">
+        <div class="card-body">
+          <a href="<%= product_path(product) %>">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.merchant.name %></p>
+            <p class="card-text">$<%= product.price %></p>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </main>

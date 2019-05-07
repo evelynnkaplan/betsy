@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
 
-  resources :categories, only: [:index, :new, :create, :show]
+  resources :categories, only: [:index, :new, :create]
   get "categories/:id/products", to: "products#category_product_index", as: "category_products"
 
   resources :products do
