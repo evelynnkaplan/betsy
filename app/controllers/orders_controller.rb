@@ -1,3 +1,5 @@
+require "pry"
+
 class OrdersController < ApplicationController
   def index
     if session[:merchant_id]
@@ -11,6 +13,21 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find_by(id: params[:id])
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "There is no order to view. Add an item to your shopping cart to start an order."
+      redirect_to products_path
+    elsif @order && (!@order.merchants || !@order.merchants.include?(Merchant.find(current_merchant.id)))
+      flash[:status] = :error
+      flash[:message] = "You don't have anything to do with that order. Mind your own business."
+      redirect_to dashboard_path
+    elsif @order.status == "pending"
+      flash[:status] = :error
+      flash[:message] = "The order is still pending. Check back for details after paying."
+      redirect_to view_cart_path
+    end
   end
 
   def create
