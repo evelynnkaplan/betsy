@@ -22,10 +22,22 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order = current_order
-    @item = @order.order_items.find(params[:id])
-    @item.destroy
-    @order.save
-    redirect_to view_cart_path
+    @item = @order.order_items.find_by(id: params[:id])
+    binding.pry 
+    unless @item
+      head :not_found
+      return
+    else
+      @item.destroy
+      if @order.save
+        flash[:status] = :success
+        flash[:message] = "Item successfully deleted from cart"
+      else
+        flash[:status] = :error
+        flash[:message] = "There was a problem deleting this item"
+      end
+      redirect_to view_cart_path
+    end
   end
 
   private

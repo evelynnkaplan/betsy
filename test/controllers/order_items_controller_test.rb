@@ -90,8 +90,45 @@ describe OrderItemsController do
 
         check_flash(:error)
       end
-
     end
+
+    describe 'destroy' do 
+      it "removes the order_item from the database" do
+        order_item = OrderItem.first 
+
+        # Act
+        # expect {
+          delete order_item_path(order_item)
+        # }.must_change "OrderItem.count", -1
+
+        # binding.pry 
+
+        # Assert
+        must_respond_with :redirect
+        must_redirect_to view_cart_path
+
+        check_flash
+
+        after_order_item = OrderItem.find_by(id: order_item.id)
+        expect(after_order_item).must_be_nil
+      end
+
+      it "returns a 404 if the order_item does not exist" do
+        # Arrange
+        order_item_id = -1
+
+        # Assumptions
+        expect(OrderItem.find_by(id: order_item_id)).must_be_nil
+
+        # Act
+        expect {
+          delete order_item_path(order_item_id)
+        }.wont_change "OrderItem.count"
+
+        # Assert
+        must_respond_with :not_found
+      end
+    end 
   end
 
   describe "merchant" do

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product: two 
-  order: one
+  product: Product.first.id
+  quantity: 1
+  order_id: Order.first.id
 
 two:
-  product: two
-  order: two
+  product: Product.second.id
+  quantity: 1
+  order_id: Order.second.id
