@@ -4,14 +4,14 @@
     <ul>
       <% Category.all.order("name ASC").each do |category| %>
         <% if category.name != "Hidden" %>
-          <li><%= link_to "#{category.name}", category_path(category) %></li>
+          <li><%= link_to "#{category.name}", category_products_path(category) %></li>
         <% end %>
       <% end %>
     </ul>
     <h4>Informants</h4>
     <ul>
       <% Merchant.all.order("name ASC").each do |merchant| %>
-        <li><%= link_to "#{merchant.name}", merchant_path(merchant) %></li>
+        <li><%= link_to "#{merchant.name}", merchant_products_path(merchant) %></li>
       <% end %>
     </ul>
   </div>
