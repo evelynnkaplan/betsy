@@ -155,6 +155,18 @@ describe ProductsController do
         must_redirect_to products_path
         check_flash(:error)
       end
+
+      # add test merchant who tries to edit a product that is not theirs
+      # check controller
+
+      it "will not allow a merchant to edit a product that doesn't belong to them" do
+        another_merch_product = products(:product_three)
+
+        get edit_product_path(another_merch_product)
+
+        must_respond_with :redirect
+      end
+      
     end
 
     describe "update" do
