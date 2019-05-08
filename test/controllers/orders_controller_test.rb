@@ -39,6 +39,56 @@ describe OrdersController do
         must_redirect_to products_path
       end
     end
+
+    describe "update" do
+      it "successfully updates an order when given good data" do
+        make_order
+        test_order = Order.find(session[:order_id])
+
+        order_params = {
+          order: {
+            email: "erica@noterica.com",
+            address: "123 General Porpoise Ln",
+            mailing_zip: 12345,
+            name_on_card: "ELN",
+            credit_card: 1234,
+            card_exp: Date.new(2009, 01),
+            cvv: 555,
+            billing_zip: 12345,
+          },
+        }
+
+        patch order_path(session[:order_id]), params: order_params
+
+        test_order.reload
+
+        expect(test_order.email).must_equal order_params[:order][:email]
+      end
+
+      it "redirects if there is no order id in the session" do
+        
+        order_params = {
+          order: {
+            email: "erica@noterica.com",
+            address: "123 General Porpoise Ln",
+            mailing_zip: 12345,
+            name_on_card: "ELN",
+            credit_card: 1234,
+            card_exp: Date.new(2009, 01),
+            cvv: 555,
+            billing_zip: 12345,
+          },
+        }
+
+        patch order_path(session: [:order_id]), params: order_params
+        
+        must_respond_with :redirect
+
+        must_redirect_to products_path
+
+        check_flash(:error)
+      end
+    end
   end
 
   describe "logged-in merchants" do
