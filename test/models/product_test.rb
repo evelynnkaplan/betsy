@@ -102,8 +102,5 @@ describe Product do
   end
 
   describe "custom methods" do
-    describe "update inventory" do 
-      it "will "
-    end
   end
 end

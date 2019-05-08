@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_190827) do
     t.string "email"
     t.string "address"
     t.integer "mailing_zip"
-    t.integer "credit_card"
+    t.bigint "credit_card"
     t.date "card_exp"
     t.string "status"
     t.integer "total_price"

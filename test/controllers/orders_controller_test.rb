@@ -22,6 +22,39 @@ describe OrdersController do
         check_flash(:error)
       end
     end
+
+    describe "update" do 
+      it "will update a complete order and change status to 'paid'" do 
+        # Arrange
+        item_to_purchase = order_items(:oi_one)
+        product_stock = item_to_purchase.product.stock
+        cart = item_to_purchase.order
+
+        cart_data = {
+            order: {
+            email: "big_bird",
+            name_on_card: "Big Bird",
+            address:  "123 Sesame St",
+            mailing_zip:  98119,
+            billing_zip: 98119,
+            credit_card: 1234567891012355,
+            card_exp: "11/2020",
+            cvv: 130,
+            status: "pending",
+            total_price: 15000,
+          }
+        }
+        # Act
+        expect {
+        post orders_path, params: cart_data
+        }.must_change product_stock, -1
+
+      end
+      it "will reduce the inventory on a product when purchased" do
+       
+      end
+    end
+
   end
 
   describe "logged-in merchants" do

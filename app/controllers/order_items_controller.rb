@@ -1,5 +1,3 @@
-require "pry"
-
 class OrderItemsController < ApplicationController
   def create
     @order = current_order

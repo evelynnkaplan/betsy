@@ -31,3 +31,6 @@
 #ignore simplecov
 /coverage.data
 /coverage/
+
+# ignore ENV
+.env
