@@ -18,10 +18,10 @@ cart_one:
 
 cart_two:
   email: j_zus-heals
-  name: Jenna ZusHealer
+  name_on_card: Jenna ZusHealer
   address:  1 Eden St
-  mailing_zipcode:  98119
-  billing_zipcode: 98119
+  mailing_zip:  98119
+  billing_zip: 98119
   credit_card: 4012888888881883
   card_exp: 11/2021
   cvv: 116
