@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe Category do
-  let(:category) { Category.new(name: "Taco Cat") }
+  let(:category) { categories(:government) }
 
   describe "validations" do 
     it "must be valid" do
@@ -19,13 +19,20 @@ describe Category do
 
   describe "relationships" do 
     it "can have many products" do 
-      product = Product.first
-      product_2 = Product.last
-      category.products.push(product, product_2)
-      category.save
 
       expect(category).must_respond_to :products
       expect(category.products.count).must_equal 2
+    end
+  end
+
+  describe "custom methods" do 
+    it "makes all input names downcase" do 
+      upcase_name = "TACO CAT"
+      lowercase = upcase_name.downcase
+      new_category = Category.new(name: upcase_name)
+      new_category.save
+
+      expect(new_category.name).must_equal lowercase
     end
   end
 end

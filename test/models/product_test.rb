@@ -72,20 +72,24 @@ describe Product do
       expect(product.errors.messages).must_include :merchant
     end
 
-    it "has one or many categories" do
-      # categories_products = Category.where(products: product) # this needs work
+    it "has many categories" do
+      government_category = categories(:government) # this needs work
 
-      # expect(categories_products.include?(product)).must_equal true
+      expect(government_category.products).must_include product
     end
 
-    it "has order_items" do
-      order_items = OrderItem.find_by(product_id: product.id)
+    it "can have multiple categories" do
+      expect(product.categories.count).must_equal 2
+    end
 
-      expect(product.order_items).must_equal
+    it "when purchased it becomes an order_item" do
+      order_item = order_items(:oi_one)
+
+      expect(product.order_items).must_include order_item
     end
   end
 
   describe "custom methods" do
-    # if any, add tests here
+    # Erica will test this one
   end
 end

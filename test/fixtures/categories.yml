@@ -2,12 +2,10 @@
 
 celebrities:
   name: Celebrity
-  products: [product_three, product_one]
 
 government:
   name: Russian Politics
-  products: [product_one, product_two]
 
 musicians:
   name: A-lister
-  products: [product_three]
+

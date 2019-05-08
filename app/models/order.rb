@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   validates :order_items, presence: true
+  # validates_on_save :name_on_card, :email, :credit_card, :cvv, :card_exp, :billing_zip, presence: true
   validates :status, inclusion: {in: [nil, "pending", "paid", "complete", "cancelled"]}
   before_save :update_total
   before_create :update_status
@@ -12,9 +13,11 @@ class Order < ApplicationRecord
   def merchants
     merchant_list = []
     self.order_items.each do |item|
-      merchant_list << item.product.merchant
+      if !merchant_list.include?(item.product.merchant)
+        merchant_list << item.product.merchant
+      end
     end
-    return merchant_list.uniq!
+    return merchant_list
   end
 
   

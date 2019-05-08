@@ -1,1 +1,17 @@
-<h1>Merchants Index page</h1>
+<div class="merchant-cards">
+  <% @merchants.order("name ASC").each do |merchant| %>
+    <div class="card">
+      <div class="card-body">
+        <a href="<%= merchant_path(merchant) %>">
+          <h5 class="card-title"><%= merchant.name %></h5>
+          <% if merchant.products.length == 0 %>  
+              <img src='https://arcmi-wphost.netdna-ssl.com/content/uploads/sites/15/2017/10/Coming-Soon-Light.png' class="card-img-bottom" alt="Products coming soon">
+          <% else %>
+              <% product = merchant.products.first %>
+              <img src="<%= product.img_url%>" class="card-img-bottom" alt="<%= product.description%>">
+          <% end %>
+        </a>
+      </div>
+    </div>
+  <% end %>
+</div>

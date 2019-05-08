@@ -1,5 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+oi_one:
+  product: product_one
+  order: cart_one
+  quantity: 1
+
+oi_two:
+  product: product_two
+  order: cart_one
+  quantity: 1
+  
 one:
   product: Product.first.id
   quantity: 1

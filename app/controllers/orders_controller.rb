@@ -15,11 +15,15 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find_by(id: params[:id])
 
-    if !@order
+    if !session[:merchant_id]
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to see this order. Please log in."
+      redirect_to root_path
+    elsif !@order
       flash[:status] = :error
       flash[:message] = "There is no order to view. Add an item to your shopping cart to start an order."
       redirect_to products_path
-    elsif @order && (!@order.merchants || !@order.merchants.include?(Merchant.find(current_merchant.id)))
+    elsif @order && (!@order.merchants || !@order.merchants.include?(Merchant.find_by(id: session[:merchant_id])))
       flash[:status] = :error
       flash[:message] = "You don't have anything to do with that order. Mind your own business."
       redirect_to dashboard_path
@@ -30,16 +34,37 @@ class OrdersController < ApplicationController
     end
   end
 
-  def create
-  end
-
   def edit
+    @order = current_order
   end
 
   def update
+    @order = Order.find_by(id: session[:order_id])
+    @order.update(order_params)
+    @order.status = "paid"
+    @order.save
+    redirect_to order_confirmation_path
+  end
+
+  def confirmation
+    @order = Order.find_by(id: session[:order_id])
+
+    if !@order || (@order.status == "nil" || @order.status == "pending")
+      flash[:status] = :error
+      flash[:message] = "There is no completed order to view."
+      redirect_to products_path
+    else
+      session[:order_id] = nil
+    end
   end
 
   def view_cart
     @order_items = current_order.order_items
+  end
+
+  private
+
+  def order_params
+    return params.require(:order).permit(:email, :address, :mailing_zip, :name_on_card, :credit_card, :card_exp, :cvv, :billing_zip)
   end
 end

@@ -19,10 +19,13 @@ class ProductsController < ApplicationController
 
   def category_product_index
     @category = Category.find_by(id: params[:id])
-
     if !@category
       flash[:status] = :error
       flash[:message] = "No category with that ID found."
+      redirect_to products_path
+    elsif @category.name == "hidden"
+      flash[:status] = :error
+      flash[:message] = "Illegal request"
       redirect_to products_path
     else
       @products = Product.includes(:categories).where(:categories => {:id => @category.id}).all
@@ -79,6 +82,10 @@ class ProductsController < ApplicationController
     elsif !session[:merchant_id]
       flash[:status] = :error
       flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to root_path
+    elsif session[:merchant_id] == @product.merchant.id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit product #{@product.id} that doesn't belong to you."
       redirect_to root_path
     end
   end
