@@ -23,6 +23,11 @@ describe OrderItemsController do
   end
 
   describe "guest user" do
+    # duplicate item 
+    # quantity less than 0
+    # less than available stock 
+    # product doesn't exit
+    # product is retired 
     describe "create" do
       it "adds order item to cart and creates new order" do
 
