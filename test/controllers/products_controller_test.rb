@@ -143,7 +143,7 @@ describe ProductsController do
 
     describe "edit" do
       it "can get the edit page for an existing project" do
-        get edit_product_path(product)
+        get edit_product_path(Product.create!(stock: 1, name: "secret", merchant: Merchant.find(session[:merchant_id]), price: 5))
 
         must_respond_with :ok
       end
