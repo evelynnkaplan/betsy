@@ -35,7 +35,14 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = current_order
+    # This is the action for checking out.
+    @order = Order.find_by(id: session[:order_id])
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    end
   end
 
   def update
