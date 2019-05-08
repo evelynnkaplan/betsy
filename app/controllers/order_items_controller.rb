@@ -23,7 +23,6 @@ class OrderItemsController < ApplicationController
   def destroy
     @order = current_order
     @item = @order.order_items.find_by(id: params[:id])
-    binding.pry 
     unless @item
       head :not_found
       return
