@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 
 describe OrderItemsController do
   before do
@@ -105,8 +104,6 @@ describe OrderItemsController do
         # expect {
           delete order_item_path(order_item)
         # }.must_change "OrderItem.count", -1
-
-        # binding.pry 
 
         # Assert
         must_respond_with :redirect

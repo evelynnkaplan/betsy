@@ -56,6 +56,18 @@ describe Product do
       # nominal case
       expect(valid_result).must_equal true
     end
+
+    it "must have a stock > 0 upon instantiation" do 
+      product.stock = 0
+
+      # It fails with invalid data
+      expect(product.valid?).must_equal false
+      expect(product.errors.messages).must_include :stock
+
+      # It passes with valid data
+      product.reload
+      expect(product.valid?).must_equal true
+    end
   end
 
   describe "relationships" do
@@ -90,6 +102,8 @@ describe Product do
   end
 
   describe "custom methods" do
-    # Erica will test this one
+    describe "update inventory" do 
+      it "will "
+    end
   end
 end
