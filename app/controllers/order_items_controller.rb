@@ -1,9 +1,32 @@
 require "pry"
 
 class OrderItemsController < ApplicationController
+  def add_product(product)
+    if cart_product = self.cart_products.find_by_product_id(product.id)
+      cart_product.quantity += 1
+      cart_product.save
+      cart_product
+    else
+      self.cart_products.create(:product_id => product.id, :quantity => 1)
+    end
+  end
+  
+  
   def create
+    # an order is made, but not yet saved 
     @order = current_order
-    @item = @order.order_items.new(item_params)
+
+    # checks whether order item already exists in cart 
+    @item = @order.order_items.find_by(product_id: item_params[:product_id])
+    
+    # updates quantity if orderitem already exists, otherwise creates new order item 
+    if @item
+      @item.quantity += item_params[:quantity].to_i 
+    else 
+      @item = @order.order_items.new(item_params)
+    end 
+    
+    # save the order with the new item. each time an order item gets added, the order will be saved 
     if @order.save
       flash[:status] = :success
       flash[:message] = "Item successfully added to cart"

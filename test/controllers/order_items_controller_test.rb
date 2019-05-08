@@ -14,18 +14,26 @@ describe OrderItemsController do
   end
 
   describe "guest user" do
-    # duplicate item 
     # quantity less than 0
     # less than available stock 
-    # product doesn't exit
     # product is retired 
     describe "create" do
       it "adds order item to cart and creates new order" do
-        expect { make_order }.must_change "Order.count", +1 
+        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1 
 
         must_respond_with :redirect
         must_redirect_to products_path
       end
+
+      it 'updates quantity for duplicate item' do
+        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1  
+        expect { make_order }.wont_change "Order.count"
+
+        must_respond_with :redirect
+        must_redirect_to products_path
+        order = Order.last 
+        expect(order.order_items.count).must_equal 1
+      end 
 
       it "adds item to existing order" do
         order_item_hash = {
