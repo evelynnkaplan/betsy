@@ -3,8 +3,8 @@
     <h4>Categories</h4>
     <ul>
       <% Category.all.order("name ASC").each do |category| %>
-        <% if category.name != "Hidden" %>
-          <li><%= link_to "#{category.name}", category_products_path(category) %></li>
+        <% if category.name != "hidden" %>
+          <li><%= link_to "#{category.name.capitalize}", category_products_path(category) %></li>
         <% end %>
       <% end %>
     </ul>
