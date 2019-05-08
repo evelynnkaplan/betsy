@@ -46,11 +46,26 @@ class OrdersController < ApplicationController
   end
 
   def update
+    # This is the action that completes an order.
     @order = Order.find_by(id: session[:order_id])
-    @order.update(order_params)
-    @order.status = "paid"
-    @order.save
-    redirect_to order_confirmation_path
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    else
+      @order.update(order_params)
+      @order.status = "paid"
+      successful = @order.save
+      
+      if !successful
+        flash[:status] = :error
+        flash[:message] = "Error: #{@order.errors.messages}."
+        redirect_to root_path
+      end
+
+      redirect_to order_confirmation_path
+    end
   end
 
   def confirmation
