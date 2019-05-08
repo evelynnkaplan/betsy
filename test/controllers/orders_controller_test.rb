@@ -24,17 +24,19 @@ describe OrdersController do
     end
 
     describe "edit" do
-      it "can get the edit page for the current order" do
-        test_order = Order.new
+      it "can get the checkout page for the current order" do
+        make_order
 
-        order_params = {
-          order_items: [OrderItem.create!(order: test_order, product: products(:product_one), quantity: 1)],
-        }
+        get checkout_path
 
-        test_order.update(order_params)
-        test_order.save
+        must_respond_with :ok
+      end
 
-        get edit_order_path(test_order.id)
+      it "can't get the checkout page if there isn't an order id in session" do
+        get checkout_path
+
+        must_respond_with :redirect
+        must_redirect_to products_path
       end
     end
   end
