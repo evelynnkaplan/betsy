@@ -57,12 +57,6 @@ class OrdersController < ApplicationController
       @order.update(order_params)
       @order.status = "paid"
       successful = @order.save
-      
-      if !successful
-        flash[:status] = :error
-        flash[:message] = "Error: #{@order.errors.messages}."
-        redirect_to root_path
-      end
 
       redirect_to order_confirmation_path
     end
