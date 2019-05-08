@@ -25,7 +25,7 @@ describe ReviewsController do
       
       product = Product.find_by(merchant_id: merchant.id)
 
-      get new_product_review_path(product_id)
+      get new_product_review_path(product.id)
 
       check_flash(:error)
       must_respond_with :redirect
