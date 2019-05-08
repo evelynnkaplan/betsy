@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
     @item = @order.order_items.new(item_params)
     if @order.save
       flash[:status] = :success
-      flash[:message] = "Order #{@order.id} successfully created"
+      flash[:message] = "Item successfully added to cart"
 
       session[:order_id] = @order.id
       redirect_to products_path
@@ -22,10 +22,21 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order = current_order
-    @item = @order.order_items.find(params[:id])
-    @item.destroy
-    @order.save
-    redirect_to view_cart_path
+    @item = @order.order_items.find_by(id: params[:id])
+    unless @item
+      head :not_found
+      return
+    else
+      @item.destroy
+      if @order.save
+        flash[:status] = :success
+        flash[:message] = "Item successfully deleted from cart"
+      else
+        flash[:status] = :error
+        flash[:message] = "There was a problem deleting this item"
+      end
+      redirect_to view_cart_path
+    end
   end
 
   private
