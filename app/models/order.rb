@@ -17,6 +17,8 @@ class Order < ApplicationRecord
     return merchant_list.uniq!
   end
 
+  
+
   private
 
   def update_status

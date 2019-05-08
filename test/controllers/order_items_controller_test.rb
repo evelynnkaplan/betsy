@@ -16,22 +16,24 @@ describe OrderItemsController do
   describe "guest user" do
     describe "create" do
       it "adds order item to cart and creates new order" do
-        expect {
-          post order_items_path, params: @order_item_data
-        }.must_change "OrderItem.count", +1, "Order.count", +1
+        # expect {
+        #   post order_items_path, params: @order_item_data
+        # }.must_change "OrderItem.count", +1, "Order.count", +1
 
-        order_item = OrderItem.last
-        order = order_item.order
+        # order_item = OrderItem.last
+        # order = order_item.order
 
-        check_flash
+        # check_flash
 
-        # Assert
+        # # Assert
 
-        expect(order_item.product_id).must_equal @order_item_data[:order_item][:product_id]
-        expect(order_item.quantity).must_equal @order_item_data[:order_item][:quantity]
-        expect(session[:order_id]).must_equal order.id
-        expect(order.order_items).must_include order_item
-        expect(order.status).must_equal "pending"
+        # expect(order_item.product_id).must_equal @order_item_data[:order_item][:product_id]
+        # expect(order_item.quantity).must_equal @order_item_data[:order_item][:quantity]
+        # expect(session[:order_id]).must_equal order.id
+        # expect(order.order_items).must_include order_item
+        # expect(order.status).must_equal "pending"
+
+        expect { make_order }.must_change "Order.count", +1 
 
         must_respond_with :redirect
         must_redirect_to products_path
@@ -94,12 +96,13 @@ describe OrderItemsController do
 
     describe 'destroy' do 
       it "removes the order_item from the database" do
-        order_item = OrderItem.first 
+        make_order(Product.first)
+        order_item = make_order(Product.second)
 
         # Act
-        # expect {
+        expect {
           delete order_item_path(order_item)
-        # }.must_change "OrderItem.count", -1
+        }.must_change "OrderItem.count", -1
 
         # binding.pry 
 
@@ -112,6 +115,33 @@ describe OrderItemsController do
         after_order_item = OrderItem.find_by(id: order_item.id)
         expect(after_order_item).must_be_nil
       end
+
+      it "removes the only item in the order" do
+        order_item = make_order 
+        order = order_item.order 
+
+        # Act
+        expect {
+          delete order_item_path(order_item)
+        }.must_change "OrderItem.count", -1
+
+        # Assert
+        must_respond_with :redirect
+        must_redirect_to products_path 
+
+        check_flash
+
+        # order in session should be cleared 
+        after_order_item = OrderItem.find_by(id: order_item.id)
+        expect(after_order_item).must_be_nil
+        expect(session[:order_id]).must_be_nil
+      end
+
+      it 'rejects removal for item in another cart' do 
+        order_item = make_order 
+        order = Order.first 
+        
+      end 
 
       it "returns a 404 if the order_item does not exist" do
         # Arrange

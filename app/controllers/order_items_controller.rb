@@ -23,12 +23,19 @@ class OrderItemsController < ApplicationController
   def destroy
     @order = current_order
     @item = @order.order_items.find_by(id: params[:id])
-    binding.pry 
     unless @item
       head :not_found
       return
     else
-      @item.destroy
+      @item.destroy 
+      # if cart is empty, reset session order_id to be nil 
+      if @order.order_items == []
+          session[:order_id] = nil
+          flash[:status] = :success
+          flash[:message] = "Your cart is empty"
+          redirect_to products_path
+          return 
+      end 
       if @order.save
         flash[:status] = :success
         flash[:message] = "Item successfully deleted from cart"
@@ -37,7 +44,7 @@ class OrderItemsController < ApplicationController
         flash[:message] = "There was a problem deleting this item"
       end
       redirect_to view_cart_path
-    end
+    end 
   end
 
   private
@@ -45,4 +52,5 @@ class OrderItemsController < ApplicationController
   def item_params
     params.require(:order_item).permit(:quantity, :product_id)
   end
+    
 end
