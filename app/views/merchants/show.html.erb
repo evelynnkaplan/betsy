@@ -1,1 +1,41 @@
-Hey YouTube it's me Evelynn
+<main>
+    <header>Welcome to your dashboard, Informant <%= @merchant.name %></header>
+
+    <section class="Summary">
+        <h2>Summary: </h2>
+        <ul>
+            <li>Name: <%= @merhant.name %></li>
+            <li>Username: <%= @merchant.username %></li>
+            <li>Email: <%= @merchant.email %></li>
+            <li>Informant since: <%= @merchant.created_at %>
+        </ul>
+    </section>
+
+    <section class="merchant-products">
+        <h2>Products</h2>
+        <% @products.each do |product| %> 
+            <section class="card mb-3">
+                <div class="row no-gutters">
+                    <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= product.name %></h5>
+                        <ul class="card-text">
+                            <li>Price: <%= product.price %>
+                            <li>Description: <%= product.description %></li>
+                            <li>Category: <%= product.categories %></li>
+                            <li>Price: <%= product.price %></li>
+                            <li>Stock: <%= product.stock%></li>
+                        </ul>
+                        <ul>
+                            <li>Edit</li>
+                            <li>Hide</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        <% end %>
+    </section>
+</main>
+
