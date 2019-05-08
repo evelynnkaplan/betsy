@@ -20,6 +20,8 @@ class Order < ApplicationRecord
     return merchant_list
   end
 
+  
+
   private
 
   def update_status
