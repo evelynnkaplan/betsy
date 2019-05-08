@@ -9,3 +9,13 @@ oi_two:
   product: product_two
   order: cart_one
   quantity: 1
+  
+one:
+  product: Product.first.id
+  quantity: 1
+  order_id: Order.first.id
+
+two:
+  product: Product.second.id
+  quantity: 1
+  order_id: Order.second.id

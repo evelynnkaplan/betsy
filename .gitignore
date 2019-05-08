@@ -29,5 +29,5 @@
 /config/master.key
 
 #ignore simplecov
-coverage/*
-coverage
+/coverage.data
+/coverage/
