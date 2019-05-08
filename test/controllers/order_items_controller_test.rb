@@ -106,8 +106,6 @@ describe OrderItemsController do
           delete order_item_path(order_item)
         # }.must_change "OrderItem.count", -1
 
-        # binding.pry 
-
         # Assert
         must_respond_with :redirect
         must_redirect_to view_cart_path
