@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
       flash[:status] = :error
       flash[:message] = "No category with that ID found."
       redirect_to products_path
-    elsif @category.name = "hidden"
+    elsif @category.name == "hidden"
       flash[:status] = :error
       flash[:message] = "Illegal request"
       redirect_to products_path

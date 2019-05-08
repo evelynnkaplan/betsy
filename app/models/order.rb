@@ -13,9 +13,11 @@ class Order < ApplicationRecord
   def merchants
     merchant_list = []
     self.order_items.each do |item|
-      merchant_list << item.product.merchant
+      if !merchant_list.include?(item.product.merchant)
+        merchant_list << item.product.merchant
+      end
     end
-    return merchant_list.uniq!
+    return merchant_list
   end
 
   private

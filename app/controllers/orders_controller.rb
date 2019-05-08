@@ -15,11 +15,15 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find_by(id: params[:id])
 
-    if !@order
+    if !session[:merchant_id]
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to see this order. Please log in."
+      redirect_to root_path
+    elsif !@order
       flash[:status] = :error
       flash[:message] = "There is no order to view. Add an item to your shopping cart to start an order."
       redirect_to products_path
-    elsif @order && (!@order.merchants || !@order.merchants.include?(Merchant.find(current_merchant.id)))
+    elsif @order && (!@order.merchants || !@order.merchants.include?(Merchant.find_by(id: session[:merchant_id])))
       flash[:status] = :error
       flash[:message] = "You don't have anything to do with that order. Mind your own business."
       redirect_to dashboard_path

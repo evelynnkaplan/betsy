@@ -17,9 +17,11 @@ class Merchant < ApplicationRecord
     order_list = []
     self.products.each do |prod|
       prod.order_items.each do |item|
-        order_list << item.order
+        if !order_list.include?(item.order)
+          order_list << item.order
+        end
       end
     end
-    return order_list.uniq!
+    return order_list
   end
 end

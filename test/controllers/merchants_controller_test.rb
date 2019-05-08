@@ -24,19 +24,6 @@ describe MerchantsController do
         must_respond_with :ok
       end 
 
-     
-      it "rejects access to another merchant's dashboard" do
-        merchant = merchants(:mickey)
-
-        perform_login(merchant)
-        another_merchant = merchants(:minnie)
-
-        get merchant_path(another_merchant)
-
-        check_flash(:error)
-
-        must_redirect_to dashboard_path
-      end
     end 
 
 
