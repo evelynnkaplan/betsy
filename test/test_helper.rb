@@ -83,4 +83,22 @@ class ActiveSupport::TestCase
 
     return merchant
   end
+
+
+  def make_order(product = nil)
+    product ||= Product.first 
+    order_item_data = {
+      order_item: {
+        product_id: product.id,
+        quantity: 1,
+      },
+    }
+    expect {
+      post order_items_path, params: @order_item_data
+    }.must_change "OrderItem.count", +1, "Order.count", +1
+
+    check_flash
+
+    return OrderItem.last 
+  end 
 end
