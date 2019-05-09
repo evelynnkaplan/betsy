@@ -3,6 +3,8 @@ SimpleCov.start do
   add_filter %r{^/specs?/}
 end
 
+require 'pry'
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
@@ -38,12 +40,12 @@ class ActiveSupport::TestCase
   end
 
   def order_attribute_array
-    return %w(name_on_card email mailing_zip billing_zip cvv address credit_card card_exp status merchant_id total_price)
+    return %w(name_on_card email mailing_zip billing_zip cvv address credit_card card_exp status total_price)
   end
 
   def check_flash(expected_status = :success)
     if flash[:status]
-      expect(flash[:status]).must_equal(expected_status)
+      expect(flash[:status].to_sym).must_equal(expected_status)
       expect(flash[:message]).wont_be_nil
     else 
       expect(flash.keys).must_include(expected_status.to_s)

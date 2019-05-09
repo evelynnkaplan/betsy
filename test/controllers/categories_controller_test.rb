@@ -34,6 +34,7 @@ describe CategoriesController do
       get new_category_path
 
       # Assert
+      check_flash
       must_respond_with :ok
     end
 

@@ -1,5 +1,3 @@
-require "pry"
-
 class OrderItemsController < ApplicationController
   def create
     # an order is made, but not yet saved

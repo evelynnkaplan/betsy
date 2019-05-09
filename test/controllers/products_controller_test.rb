@@ -142,8 +142,9 @@ describe ProductsController do
     end
 
     describe "edit" do
-      it "can get the edit page for an existing project" do
-        get edit_product_path(Product.create!(stock: 1, name: "secret", merchant: Merchant.find(session[:merchant_id]), price: 5))
+      it "can get the edit page for an existing product" do
+        # THIS TEST IS FAILING, IS SESSION AT FAULT?
+        get edit_product_path(product.id)
 
         must_respond_with :ok
       end
@@ -160,7 +161,13 @@ describe ProductsController do
       # check controller
 
       it "will not allow a merchant to edit a product that doesn't belong to them" do
-        another_merch_product = products(:product_three)
+        another_merch_product = Product.create!(name: "Test Product Four",
+                                                description: "Wrote this just for a test",
+                                                price: 20000,
+                                                stock: 5,
+                                                img_url: 'images/testimg.jpg',
+                                                merchant: merchants(:merch_four),
+                                                )
 
         get edit_product_path(another_merch_product)
 
@@ -201,7 +208,8 @@ describe ProductsController do
       it "can destroy an existing product" do
         test_product = Product.new(name: "test",
                                    price: 5,
-                                   merchant_id: Merchant.first.id)
+                                   merchant_id: Merchant.first.id, 
+                                   stock: 3)
 
         expect { test_product.save }.must_change "Product.count", +1
 
