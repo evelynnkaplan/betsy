@@ -31,5 +31,5 @@
 #ignore simplecov
 coverage/*
 coverage/.last_run.json
-coverage/.resultset.json
 coverage/index.html
+coverage/.resultset.json
