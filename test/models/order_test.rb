@@ -1,5 +1,5 @@
 require "test_helper"
-require 'pry'
+
 describe Order do
   let(:order) {orders(:cart_one)}
 
@@ -52,6 +52,20 @@ describe Order do
   end
   
   describe "custom methods" do 
-    # no custom methods
+    describe "merchants" do 
+      it "can access the merchants associated with an order item in a cart"  do
+        
+        expect(order).must_respond_to :merchants 
+
+      end
+
+      it "will return an array of merchants" do
+        merchant = order_items(:oi_one).product.merchant
+        order.order_items << order_items(:oi_one)
+
+        expect(order.merchants.first).must_equal merchant
+        expect(order.merchants).must_be_kind_of Array
+      end
+    end
   end
 end
