@@ -37,7 +37,7 @@ class MerchantsController < ApplicationController
       else
         flash[:status] = :error
         flash[:message] = "Could not create new merchant account: #{merchant.errors.messages}"
-        redirect_to github_login_path
+        redirect_to root_path
         return merchant
       end
     end
