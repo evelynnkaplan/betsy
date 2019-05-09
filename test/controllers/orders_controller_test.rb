@@ -147,6 +147,20 @@ describe OrdersController do
         check_flash(:error)
       end
     end
+
+    describe "view_cart" do
+      it "can get the page if there's an order id stored in session" do
+        make_order
+
+        get view_cart_path
+        must_respond_with :ok
+      end
+
+      it "can still get the page if there's not an order id stored in session" do
+        get view_cart_path
+        must_respond_with :ok
+      end
+    end
   end
 
   describe "logged-in merchants" do
