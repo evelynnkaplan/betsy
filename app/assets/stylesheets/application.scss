@@ -85,14 +85,14 @@ nav ul {
 
 // logo styling// 
 
-.logo #neon-tubing {
-	text-align: center;
-	color: #8ECEB8;
-	font-family: 'BeonRegular', sans-serif;
-	font-size: 6rem;
-	letter-spacing: .5rem;
-  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #fdeb1f, 0 0 0.5em #fdeb1f, 0 0 0.1em #fdeb1f, 0 10px 3px #000;
-}
+// .logo #neon-tubing {
+// 	text-align: center;
+// 	color: #8ECEB8;
+// 	font-family: 'BeonRegular', sans-serif;
+// 	font-size: 6rem;
+// 	letter-spacing: .5rem;
+//   text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #fdeb1f, 0 0 0.5em #fdeb1f, 0 0 0.1em #fdeb1f, 0 10px 3px #000;
+// }
 
 @keyframes neonspark  {
     78% {
@@ -142,3 +142,7 @@ nav ul {
 
 
 // end logo styling 
+
+img {
+  max-width: 150px;
+}
