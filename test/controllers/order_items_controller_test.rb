@@ -165,7 +165,14 @@ describe OrderItemsController do
         # 
       end 
 
-      it 'rejects update for other '
+      it 'updates both quantity and product id' do
+      end 
+
+      it 'updates quantity for item not in cart' do
+      end
+
+      it "returns a 404 if the order_item does not exist" do
+      end 
     end 
   end
 

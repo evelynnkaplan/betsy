@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-05-08T16:54:45-07:00">2019-05-08T16:54:45-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-05-09T12:22:08-07:00">2019-05-09T12:22:08-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">96.38%</span></span>
+    (<span class="covered_percent"><span class="green">94.96%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.74
+         1.72
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>35</b> files in total.
-    <b>939</b> relevant lines. 
-    <span class="green"><b>905</b> lines covered</span> and
-    <span class="red"><b>34</b> lines missed </span>
+    <b>952</b> relevant lines. 
+    <span class="green"><b>904</b> lines covered</span> and
+    <span class="red"><b>48</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -82,22 +82,22 @@
       
       <tr>
         <td class="strong"><a href="#925c7d98b752c29d2df45c45433b2534bdc4cb0f" class="src_link" title="app/controllers/merchants_controller.rb">app/controllers/merchants_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
+        <td class="green strong">96.43 %</td>
         <td>92</td>
         <td>56</td>
-        <td>56</td>
-        <td>0</td>
+        <td>54</td>
+        <td>2</td>
         <td>5.2</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#4ec11df1d4c17344f69d2ed6741e8a018823e546" class="src_link" title="app/controllers/order_items_controller.rb">app/controllers/order_items_controller.rb</a></td>
-        <td class="green strong">94.74 %</td>
-        <td>69</td>
-        <td>38</td>
-        <td>36</td>
-        <td>2</td>
-        <td>3.5</td>
+        <td class="red strong">75.51 %</td>
+        <td>79</td>
+        <td>49</td>
+        <td>37</td>
+        <td>12</td>
+        <td>2.7</td>
       </tr>
       
       <tr>
@@ -292,20 +292,20 @@
       
       <tr>
         <td class="strong"><a href="#f8d9b96cac08233c54464bdc5da9e985e19801f3" class="src_link" title="test/controllers/merchants_controller_test.rb">test/controllers/merchants_controller_test.rb</a></td>
-        <td class="green strong">100.0 %</td>
+        <td class="green strong">98.2 %</td>
         <td>205</td>
         <td>111</td>
-        <td>111</td>
-        <td>0</td>
+        <td>109</td>
+        <td>2</td>
         <td>1.1</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#933ce954e6b6d2c36cfd0ab87ca9441e0c41e52d" class="src_link" title="test/controllers/order_items_controller_test.rb">test/controllers/order_items_controller_test.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>174</td>
-        <td>80</td>
-        <td>80</td>
+        <td>181</td>
+        <td>82</td>
+        <td>82</td>
         <td>0</td>
         <td>1.3</td>
       </tr>
@@ -1022,11 +1022,11 @@
         <div class="source_table" id="925c7d98b752c29d2df45c45433b2534bdc4cb0f">
   <div class="header">
     <h3>app/controllers/merchants_controller.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">96.43 %</span> covered</h4>
     <div>
       <b>56</b> relevant lines. 
-      <span class="green"><b>56</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <span class="green"><b>54</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -1237,14 +1237,14 @@
           <code class="ruby">      if success</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="35">
+          
           
           <code class="ruby">        flash[:status] = :success</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="36">
+          
           
           <code class="ruby">        flash[:message] = &quot;Logged in as new merchant #{merchant.name}&quot;</code>
         </li>
@@ -1255,26 +1255,26 @@
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="38">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="38">
+          <span class="hits">2</span>
           
           <code class="ruby">        flash[:status] = :error</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="39">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="39">
+          <span class="hits">2</span>
           
           <code class="ruby">        flash[:message] = &quot;Could not create new merchant account: #{merchant.errors.messages}&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="40">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="40">
+          <span class="hits">2</span>
           
           <code class="ruby">        redirect_to github_login_path</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="41">
+          <span class="hits">2</span>
           
           <code class="ruby">        return merchant</code>
         </li>
@@ -1303,20 +1303,20 @@
           <code class="ruby">    # If we get here, we have a valid merchant instance</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="46">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="24" data-linenumber="46">
+          <span class="hits">24</span>
           
           <code class="ruby">    session[:merchant_id] = merchant.id</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="47">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="24" data-linenumber="47">
+          <span class="hits">24</span>
           
           <code class="ruby">    redirect_to root_path</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="48">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="24" data-linenumber="48">
+          <span class="hits">24</span>
           
           <code class="ruby">    return merchant</code>
         </li>
@@ -1593,11 +1593,11 @@
         <div class="source_table" id="4ec11df1d4c17344f69d2ed6741e8a018823e546">
   <div class="header">
     <h3>app/controllers/order_items_controller.rb</h3>
-    <h4><span class="green">94.74 %</span> covered</h4>
+    <h4><span class="red">75.51 %</span> covered</h4>
     <div>
-      <b>38</b> relevant lines. 
-      <span class="green"><b>36</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>49</b> relevant lines. 
+      <span class="green"><b>37</b> lines covered</span> and
+      <span class="red"><b>12</b> lines missed.</span>
     </div>
   </div>
   
@@ -1622,397 +1622,457 @@
           <code class="ruby">class OrderItemsController &lt; ApplicationController</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="4">
-          
-          
-          <code class="ruby">  </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="5">
+        <li class="covered" data-hits="1" data-linenumber="4">
           <span class="hits">1</span>
           
           <code class="ruby">  def create</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="6">
+        <li class="never" data-hits="" data-linenumber="5">
           
           
-          <code class="ruby">    # an order is made, but not yet saved </code>
+          <code class="ruby">    # an order is made, but not yet saved</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="7">
+        <li class="covered" data-hits="9" data-linenumber="6">
           <span class="hits">9</span>
           
           <code class="ruby">    @order = current_order</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="8">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    # checks whether order item already exists in cart</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="9">
-          
-          
-          <code class="ruby">    # checks whether order item already exists in cart </code>
-        </li>
-      
-        <li class="covered" data-hits="9" data-linenumber="10">
+        <li class="covered" data-hits="9" data-linenumber="9">
           <span class="hits">9</span>
           
           <code class="ruby">    @item = @order.order_items.find_by(product_id: item_params[:product_id])</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby">    </code>
+          <code class="ruby">    # updates quantity if orderitem already exists, otherwise creates new order item</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="12">
-          
-          
-          <code class="ruby">    # updates quantity if orderitem already exists, otherwise creates new order item </code>
-        </li>
-      
-        <li class="covered" data-hits="9" data-linenumber="13">
+        <li class="covered" data-hits="9" data-linenumber="12">
           <span class="hits">9</span>
           
           <code class="ruby">    if @item</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="14">
+        <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">      @item.quantity += item_params[:quantity].to_i </code>
+          <code class="ruby">      @item.quantity += item_params[:quantity].to_i</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="14">
           
           
-          <code class="ruby">    else </code>
+          <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="16">
+        <li class="covered" data-hits="8" data-linenumber="15">
           <span class="hits">8</span>
           
           <code class="ruby">      @item = @order.order_items.new(item_params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
-          
-          
-          <code class="ruby">    end </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="18">
-          
-          
-          <code class="ruby">    </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="19">
-          
-          
-          <code class="ruby">    # save the order with the new item. each time an order item gets added, the order will be saved </code>
-        </li>
-      
-        <li class="covered" data-hits="9" data-linenumber="20">
-          <span class="hits">9</span>
-          
-          <code class="ruby">    if @order.save</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="21">
-          <span class="hits">8</span>
-          
-          <code class="ruby">      flash[:status] = :success</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="22">
-          <span class="hits">8</span>
-          
-          <code class="ruby">      flash[:message] = &quot;Item successfully added to cart&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="23">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="24">
-          <span class="hits">8</span>
-          
-          <code class="ruby">      session[:order_id] = @order.id</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="25">
-          <span class="hits">8</span>
-          
-          <code class="ruby">      redirect_to products_path</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="26">
-          
-          
-          <code class="ruby">    else</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="27">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      flash[:status] = :error</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="28">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      flash[:message] = &quot;Order cannot be saved: #{@order.errors.messages}&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="29">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      redirect_back(fallback_location: products_path)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="30">
+        <li class="never" data-hits="" data-linenumber="16">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="never" data-hits="" data-linenumber="17">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="33">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="18">
           
-          <code class="ruby">  def update</code>
+          
+          <code class="ruby">    # save the order with the new item. each time an order item gets added, the order will be saved</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="covered" data-hits="9" data-linenumber="19">
+          <span class="hits">9</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    if @order.save</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="covered" data-hits="8" data-linenumber="20">
+          <span class="hits">8</span>
+          
+          <code class="ruby">      flash[:status] = :success</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="21">
+          <span class="hits">8</span>
+          
+          <code class="ruby">      flash[:message] = &quot;Item successfully added to cart&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="8" data-linenumber="23">
+          <span class="hits">8</span>
           
-          <code class="ruby">  def destroy</code>
+          <code class="ruby">      session[:order_id] = @order.id</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="37">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="8" data-linenumber="24">
+          <span class="hits">8</span>
           
-          <code class="ruby">    @order = current_order</code>
+          <code class="ruby">      redirect_to products_path</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="38">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    @item = @order.order_items.find_by(id: params[:id])</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="39">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    unless @item</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="40">
-          <span class="hits">2</span>
-          
-          <code class="ruby">      head :not_found</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="41">
-          
-          
-          <code class="ruby">      return</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="43">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
           
-          <code class="ruby">      @item.destroy </code>
+          <code class="ruby">      flash[:status] = :error</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      flash[:message] = &quot;Order cannot be saved: #{@order.errors.messages}&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      redirect_back(fallback_location: products_path)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="29">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def update</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="33">
+          
+          
+          <code class="ruby">    @order = current_order</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="34">
+          
+          
+          <code class="ruby">    @item = @order.order_items.find(params[:id])</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="35">
+          
+          
+          <code class="ruby">    unless @item</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="36">
+          
+          
+          <code class="ruby">      return head :not_found</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="38">
+          
+          
+          <code class="ruby">    if @item.update_attributes(item_params)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="39">
+          
+          
+          <code class="ruby">      flash[:status] = :success</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="40">
+          
+          
+          <code class="ruby">      flash[:message] = &quot;Quantity successfully updated&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="42">
+          
+          
+          <code class="ruby">      flash[:status] = :error</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="43">
+          
+          
+          <code class="ruby">      flash[:message] = &quot;Quantity invalid: #{@item.error.messages}&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">      # if cart is empty, reset session order_id to be nil </code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="45">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="45">
           
-          <code class="ruby">      if @order.order_items == []</code>
+          
+          <code class="ruby">    redirect_to view_cart_path</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="46">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="46">
           
-          <code class="ruby">          session[:order_id] = nil</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="47">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="47">
           
-          <code class="ruby">          flash[:status] = :success</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">          flash[:message] = &quot;Your cart is empty&quot;</code>
+          <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="49">
+        <li class="covered" data-hits="4" data-linenumber="49">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    @order = current_order</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="50">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    @item = @order.order_items.find_by(id: params[:id])</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="51">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    unless @item</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="52">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      head :not_found</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="53">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      return</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="54">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="55">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    @item.destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">    # if cart is empty, reset session order_id to be nil</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="57">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    if @order.order_items == []</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
-          <code class="ruby">          redirect_to products_path</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="50">
-          <span class="hits">1</span>
-          
-          <code class="ruby">          return </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="51">
-          
-          
-          <code class="ruby">      end </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="52">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      if @order.save</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        flash[:status] = :success</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="54">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        flash[:message] = &quot;Item successfully deleted from cart&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="55">
-          
-          
-          <code class="ruby">      else</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="56">
-          
-          
-          <code class="ruby">        flash[:status] = :error</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="57">
-          
-          
-          <code class="ruby">        flash[:message] = &quot;There was a problem deleting this item&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby">      end</code>
+          <code class="ruby">      session[:order_id] = nil</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
-          <code class="ruby">      redirect_to view_cart_path</code>
+          <code class="ruby">      flash[:status] = :success</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
-          
-          
-          <code class="ruby">    end </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="61">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="62">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
-          <code class="ruby">  private</code>
+          <code class="ruby">      flash[:message] = &quot;Your cart is empty&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="covered" data-hits="1" data-linenumber="61">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      redirect_to products_path</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      return</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    if @order.save</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
-          <code class="ruby">  def item_params</code>
+          <code class="ruby">      flash[:status] = :success</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="66">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
           
-          <code class="ruby">    params.require(:order_item).permit(:quantity, :product_id)</code>
+          <code class="ruby">      flash[:message] = &quot;Item successfully deleted from cart&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="68">
+          
+          
+          <code class="ruby">      flash[:status] = :error</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="69">
+          
+          
+          <code class="ruby">      flash[:message] = &quot;There was a problem deleting this item&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    redirect_to view_cart_path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="68">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">    </code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="69">
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def item_params</code>
+        </li>
+      
+        <li class="covered" data-hits="18" data-linenumber="77">
+          <span class="hits">18</span>
+          
+          <code class="ruby">    params.require(:order_item).permit(:quantity, :product_id)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">end</code>
@@ -4075,7 +4135,7 @@
         <li class="covered" data-hits="2" data-linenumber="11">
           <span class="hits">2</span>
           
-          <code class="ruby">    merchant.username = auth_hash[&quot;info&quot;][&quot;username&quot;]</code>
+          <code class="ruby">    merchant.username = auth_hash[&quot;info&quot;][&quot;nickname&quot;]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="12">
@@ -4769,11 +4829,11 @@
         <div class="source_table" id="f8d9b96cac08233c54464bdc5da9e985e19801f3">
   <div class="header">
     <h3>test/controllers/merchants_controller_test.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">98.2 %</span> covered</h4>
     <div>
       <b>111</b> relevant lines. 
-      <span class="green"><b>111</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <span class="green"><b>109</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -5896,8 +5956,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="187">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="187">
+          
           
           <code class="ruby">      Merchant.count.must_equal start_count + 1</code>
         </li>
@@ -5908,8 +5968,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="189">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="189">
+          
           
           <code class="ruby">      session[:merchant_id].must_equal Merchant.last.id</code>
         </li>
@@ -6020,8 +6080,8 @@
     <h3>test/controllers/order_items_controller_test.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>80</b> relevant lines. 
-      <span class="green"><b>80</b> lines covered</span> and
+      <b>82</b> relevant lines. 
+      <span class="green"><b>82</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -6059,8 +6119,8 @@
           <code class="ruby">  before do</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="6">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="12" data-linenumber="6">
+          <span class="hits">12</span>
           
           <code class="ruby">    @product = Product.first</code>
         </li>
@@ -6071,8 +6131,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="8">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="12" data-linenumber="8">
+          <span class="hits">12</span>
           
           <code class="ruby">    @order_item_data = {</code>
         </li>
@@ -7034,40 +7094,82 @@
         <li class="covered" data-hits="1" data-linenumber="168">
           <span class="hits">1</span>
           
-          <code class="ruby">      it &#39;rejects update for other &#39;</code>
+          <code class="ruby">      it &#39;updates both quantity and product id&#39; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="169">
           
           
-          <code class="ruby">    end </code>
+          <code class="ruby">      end </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="170">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="171">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="172">
+        <li class="covered" data-hits="1" data-linenumber="171">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;merchant&quot; do</code>
+          <code class="ruby">      it &#39;updates quantity for item not in cart&#39; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="172">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="173">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="174">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &quot;returns a 404 if the order_item does not exist&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
+          <code class="ruby">      end </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="176">
+          
+          
+          <code class="ruby">    end </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="177">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="174">
+        <li class="never" data-hits="" data-linenumber="178">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="179">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;merchant&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="180">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="181">
           
           
           <code class="ruby">end</code>

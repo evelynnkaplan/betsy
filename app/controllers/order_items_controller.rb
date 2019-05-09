@@ -30,47 +30,45 @@ class OrderItemsController < ApplicationController
   end
 
   def update
+    order = current_order
+    item = @order.order_items.find(params[:id])
+    unless item
+      return head :not_found
+    end
+    if item.update_attributes(item_params)
+      flash[:status] = :success
+      flash[:message] = "Quantity successfully updated"
+    else
+      flash[:status] = :error
+      flash[:message] = "Quantity invalid: #{item.error.messages}"
+    end
+    redirect_to view_cart_path
+  end
+
+  def destroy
     @order = current_order
-    @item = @order.order_items.find(params[:id])
+    @item = @order.order_items.find_by(id: params[:id])
     unless @item
       head :not_found
       return
+    end
+    @item.destroy
+    # if cart is empty, reset session order_id to be nil
+    if @order.order_items == []
+      session[:order_id] = nil
+      flash[:status] = :success
+      flash[:message] = "Your cart is empty"
+      redirect_to products_path
+      return
+    end
+    if @order.save
+      flash[:status] = :success
+      flash[:message] = "Item successfully deleted from cart"
     else
-      if @item.update_attributes(item_params)
-        flash[:status] = :success
-        flash[:message] = "Quantity successfully updated"
-      else
-        flash[:status] = :error
-        flash[:message] = "Quantity invalid: #{@item.error.messages}"
-      end
-      redirect_to view_cart_path
+      flash[:status] = :error
+      flash[:message] = "There was a problem deleting this item"
     end
-
-    def destroy
-      @order = current_order
-      @item = @order.order_items.find_by(id: params[:id])
-      unless @item
-        head :not_found
-        return
-      end
-      @item.destroy
-      # if cart is empty, reset session order_id to be nil
-      if @order.order_items == []
-        session[:order_id] = nil
-        flash[:status] = :success
-        flash[:message] = "Your cart is empty"
-        redirect_to products_path
-        return
-      end
-      if @order.save
-        flash[:status] = :success
-        flash[:message] = "Item successfully deleted from cart"
-      else
-        flash[:status] = :error
-        flash[:message] = "There was a problem deleting this item"
-      end
-      redirect_to view_cart_path
-    end
+    redirect_to view_cart_path
   end
 
   private
