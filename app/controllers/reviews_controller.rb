@@ -1,4 +1,4 @@
-require 'pry'
+
 class ReviewsController < ApplicationController
   before_action :find_product
 

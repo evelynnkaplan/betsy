@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 
 describe OrderItemsController do
   before do
@@ -204,8 +203,6 @@ describe OrderItemsController do
         check_flash(:error)
 
         @order_item.reload 
-
-        binding.pry 
 
         expect(@order_item.product_id).wont_equal (update_order_item[:order_item][:product_id])
         expect(@order_item.quantity).must_equal item_quantity

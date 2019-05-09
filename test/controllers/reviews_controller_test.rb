@@ -1,5 +1,5 @@
 require "test_helper"
-require 'pry'
+
 
 describe ReviewsController do
   let(:product_id) {Product.first.id}

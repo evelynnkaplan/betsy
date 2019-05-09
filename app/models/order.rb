@@ -1,7 +1,8 @@
 class Order < ApplicationRecord
   has_many :order_items
+  has_many :products, through: :order_items
   validates :order_items, presence: true
-  # validates_on_save :name_on_card, :email, :credit_card, :cvv, :card_exp, :billing_zip, presence: true
+  validates :name_on_card, :email, :credit_card, :cvv, :card_exp, :billing_zip, presence: true, if: :status_paid
   validates :status, inclusion: {in: [nil, "pending", "paid", "complete", "cancelled"]}
   before_save :update_total
   before_create :update_status
@@ -20,9 +21,22 @@ class Order < ApplicationRecord
     return merchant_list
   end
 
-  
+  def sold_by_merchant(merch)
+    merch_items = []
+    self.order_items.each do |item|
+      if item.product.merchant == merch
+        merch_items << item
+      end
+    end
+    return merch_items
+  end
 
   private
+
+  # used on line 4 to validate after status is changed to paid
+  def status_paid 
+    self.status == "paid"
+  end
 
   def update_status
     unless self.status

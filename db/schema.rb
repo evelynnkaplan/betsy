@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_190827) do
+ActiveRecord::Schema.define(version: 2019_05_08_221428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_190827) do
     t.string "email"
     t.string "address"
     t.integer "mailing_zip"
-    t.integer "credit_card"
+    t.bigint "credit_card"
     t.date "card_exp"
     t.string "status"
     t.integer "total_price"

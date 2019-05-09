@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :products
+  # has_many :order_items, through: :product
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
 
@@ -23,5 +24,19 @@ class Merchant < ApplicationRecord
       end
     end
     return order_list
+  end
+
+  def sold_order_items
+    orders_with_items = {}
+    self.orders.each do |order|
+      order.order_items.each do |oi|
+        oi_list = []
+        if oi.product.merchant == self
+          oi_list << oi
+        end
+        orders_with_items[oi.id] = oi_list
+      end
+    end
+    return orders_with_items
   end
 end
