@@ -4,7 +4,7 @@
     <section class="Summary">
         <h2>Summary: </h2>
         <ul>
-            <li>Name: <%= @merhant.name %></li>
+            <li>Name: <%= @merchant.name %></li>
             <li>Username: <%= @merchant.username %></li>
             <li>Email: <%= @merchant.email %></li>
             <li>Informant since: <%= @merchant.created_at %>
@@ -24,13 +24,16 @@
                         <ul class="card-text">
                             <li>Price: <%= product.price %>
                             <li>Description: <%= product.description %></li>
-                            <li>Category: <%= product.categories %></li>
+                            <li>Category: 
+                                <% product.categories.each do |category| %>
+                                    <%= category.name.titleize %>
+                                <% end %>  
+                            </li>
                             <li>Price: <%= product.price %></li>
                             <li>Stock: <%= product.stock%></li>
                         </ul>
                         <ul>
-                            <li>Edit</li>
-                            <li>Hide</li>
+                            <li>Edit | Hide</li>
                         </ul>
                     </div>
                 </div>

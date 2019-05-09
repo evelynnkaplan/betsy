@@ -1,6 +1,6 @@
 require "faker"
 
-["US Government", "Area 51", "World Politics", "Illumanti", "Conspiracies", "Movie Stars", "A-list Celebrites", "Ada Developers Academy", "Misc", "Hidden"].each do |category|
+["US Government", "Area 51", "World Politics", "Illumanti", "Conspiracies", "Movie Stars", "Celebrities", "Ada Developers Academy", "Misc", "Hidden"].each do |category|
   Category.create(name: category)
 end
 
@@ -26,7 +26,7 @@ products = [
   {name: "FBI-sanctioned Assassinations", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "You know it happens, now you can know to who.", img_url: Faker::LoremFlickr.image},
   {name: "The Truth behind the Moon Landing", merchant_id: Merchant.find_by(uid: 4).id, stock: rand(1..50), price: rand(1..10000), description: "Whatever you thought happened is incorrect.", img_url: Faker::LoremFlickr.image},
   {name: "Known Aliens", merchant_id: Merchant.find_by(uid: 4).id, stock: rand(1..50), price: rand(1..10000), description: "A list of all currently known aliens", img_url: Faker::LoremFlickr.image},
-  {name: "SETI's Secret files", merchant_id: Merchant.find_by(uid: 4).id, stock: rand(1..50), price: rand(1..10000), description: "The files Search for Extra-Terrestial Intelligence doesn't want you to have", img_url: Faker::LoremFlickr.image},
+  {name: "SETI's Secret Files", merchant_id: Merchant.find_by(uid: 4).id, stock: rand(1..50), price: rand(1..10000), description: "The files Search for Extra-Terrestial Intelligence doesn't want you to have", img_url: Faker::LoremFlickr.image},
   {name: "Area 51 Tell-All Package", merchant_id: Merchant.find_by(uid: 4).id, stock: rand(1..50), price: 20000, description: "A complete breakdown of everything related to Area 51", img_url: Faker::LoremFlickr.image},
   {name: "Why Ariana Grande broke up with Pete Davidson", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "You may think you know, but you have no idea.", img_url: Faker::LoremFlickr.image},
   {name: "Beyonce's Next Album", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "You already love it, but be the first to find out when the next surprise release is.", img_url: Faker::LoremFlickr.image},
@@ -40,4 +40,32 @@ products = [
 
 products.each do |product|
   Product.create(product)
+end
+
+products_categories = [
+  {product_name: "Erica's Github Password", categories: ["ada developers academy"]},
+  {product_name: "Dan's Middle Name", categories: ["ada developers academy"]},
+  {product_name: "Who is DB Cooper?", categories: ["conspiracies"]},
+  {product_name: "Stupid Watergate", categories: ["conspiracies", "us government"]},
+  {product_name: "Marilyn Monroe", categories: ["us government", "illumanti", "celebrities"]},
+  {product_name: "FBI-sanctioned Assassinations", categories: ["conspiracies", "us government"]},
+  {product_name: "The Truth behind the Moon Landing", categories: ["conspiracies", "us government", "area 51"]},
+  {product_name: "Known Aliens", categories: ["conspiracies", "area 51", "illumanti"]},
+  {product_name: "SETI's Secret Files", categories: ["conspiracies", "area 51"]},
+  {product_name: "Why Ariana Grande broke up with Pete Davidson", categories: ["celebrities"]},
+  {product_name: "Beyonce's Next Album", categories: ["illumanti", "celebrities"]},
+  {product_name: "The Meaning of Zigazig Ha", categories: ["illumanti", "celebrities"]},
+  {product_name: "JonBenet Ramsey", categories: ["misc"]},
+  {product_name: "Who is Becky with the Good Hair", categories: ["illumanti", "celebrities"]},
+  {product_name: "Royal Baby's Name", categories: ["hidden"]},
+  {product_name: "Zodiac Killer", categories: ["conspiracies"]},
+  {product_name: "What is your roomba hiding", categories: ["conspiracies", "illumanti"]},
+]
+
+products_categories.each do |group|
+  group[:categories].each do |category|
+    product = Product.find_by(name: group[:product_name])
+    product.categories.push(Category.find_by(name: category))
+    # puts product.name
+  end
 end
