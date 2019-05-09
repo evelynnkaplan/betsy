@@ -57,10 +57,14 @@ class OrdersController < ApplicationController
       @order.update(order_params)
       if in_stock?(@order.order_items)
         update_product_inventory
+        @order.status = "paid"
       end
-      @order.status = "paid"
-      successful = @order.save
-      redirect_to order_confirmation_path
+     
+     if @order.save
+        redirect_to order_confirmation_path
+     else
+        render :edit, status: :bad_request
+     end
     end
   end
 
