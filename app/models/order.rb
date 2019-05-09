@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   validates :order_items, presence: true
-  # validates_on_save :name_on_card, :email, :credit_card, :cvv, :card_exp, :billing_zip, presence: true
+  validates :name_on_card, :email, :credit_card, :cvv, :card_exp, :billing_zip, presence: true
   validates :status, inclusion: {in: [nil, "pending", "paid", "complete", "cancelled"]}
   before_save :update_total
   before_create :update_status

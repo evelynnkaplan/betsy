@@ -38,7 +38,7 @@ class ActiveSupport::TestCase
   end
 
   def order_attribute_array
-    return %w(name_on_card email mailing_zip billing_zip cvv address credit_card card_exp status merchant_id total_price)
+    return %w(name_on_card email mailing_zip billing_zip cvv address credit_card card_exp status total_price)
   end
 
   def check_flash(expected_status = :success)
