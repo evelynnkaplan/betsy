@@ -15,11 +15,11 @@
       <tbody>
           <% @order_items.each do |item| %>
             <tr>
-                <td><%= item.product.name %> </td> 
+                <td><%= link_to item.product.name, product_path(item.product_id) %> </td> 
                 <td> <%= number_to_currency item.product.price %></td>
                 <td> 
                     <%= form_with model: item, url: order_item_path(item), class: "cart-quantity-form", method: :patch do |f|%>
-                      <%= f.text_field :quantity, type: :number, value: item.quantity, placeholder: item.quantity, required: true, min: 1, maxlength: 3 %>
+                      <%= f.text_field :quantity, type: :number, value: item.quantity, placeholder: item.quantity, required: true, min: 1, max: 300 %>
                       <%= f.hidden_field :product_id, value: item.product.id %>
                       <%= f.submit "Update", class: "cart-quantity-button btn", role: "button" %>
                     <% end %>
