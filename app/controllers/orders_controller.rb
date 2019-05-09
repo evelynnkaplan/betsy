@@ -80,6 +80,19 @@ class OrdersController < ApplicationController
 
   private
 
+  def in_stock?(order_items)
+    order_items.each { |item| return false if item.product.stock < item.quantity }
+
+    return true
+  end
+
+  def update_product_inventory
+    @order.order_items.each do |item|
+      item.product.stock -=  item.quantity
+      item.product.save
+    end
+  end
+
   def order_params
     return params.require(:order).permit(:email, :address, :mailing_zip, :name_on_card, :credit_card, :card_exp, :cvv, :billing_zip)
   end
