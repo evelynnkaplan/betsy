@@ -71,7 +71,7 @@ class ActiveSupport::TestCase
       uid: merchant.uid,
       provider: merchant.provider,
       info: {
-        username: merchant.username,
+        nickname: merchant.username,
         email: merchant.email,
       },
     }

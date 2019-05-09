@@ -1,1 +1,35 @@
-Hi!
+<h3>Thanks for your order!</h3>
+<p>
+To keep your secrets a secret, this page will not be saved.
+Please make a copy for your records.
+</p>
+
+<section>
+  <h4>Order Summary</h4>
+  <table>
+    <tr>
+      <th>Secret</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  <% @order.order_items.each do |item| %>
+    <tr>
+      <td><%= link_to item.product.name, product_path(item.product.id) %></td>
+      <td><%= item.quantity %></td>
+      <td>$<%= item.quantity * item.product.price %> for <%= item.quantity %></td>
+  <% end %>
+  </table>
+
+</section>
+
+<p>
+Total Price of Order: <%= @order.total_price %>
+</p>
+
+<p>
+Order placed <%= @order.updated_at.strftime("%B %d, %Y") %>
+</p>
+
+<p>Order status: <%= @order.status %></p>
+
+
