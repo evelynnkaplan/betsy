@@ -66,7 +66,15 @@ describe OrdersController do
       end
 
       it "redirects if there is no order id in the session" do
-        
+        test_order = Order.new
+
+        order_params = {
+          order_items: [order_items(:oi_one)],
+        }
+
+        test_order.update(order_params)
+        test_order.save
+
         order_params = {
           order: {
             email: "erica@noterica.com",
@@ -80,8 +88,8 @@ describe OrdersController do
           },
         }
 
-        patch order_path(session: [:order_id]), params: order_params
-        
+        patch order_path(test_order.id), params: order_params
+
         must_respond_with :redirect
 
         must_redirect_to products_path
