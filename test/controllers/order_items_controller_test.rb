@@ -158,6 +158,15 @@ describe OrderItemsController do
         must_respond_with :not_found
       end
     end 
+
+    describe 'update' do
+      it 'successfully updates quantity' do
+        # quantity changes
+        # 
+      end 
+
+      it 'rejects update for other '
+    end 
   end
 
   describe "merchant" do

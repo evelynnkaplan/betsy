@@ -1,16 +1,6 @@
 require "pry"
 
 class OrderItemsController < ApplicationController
-  def add_product(product)
-    if cart_product = self.cart_products.find_by_product_id(product.id)
-      cart_product.quantity += 1
-      cart_product.save
-      cart_product
-    else
-      self.cart_products.create(:product_id => product.id, :quantity => 1)
-    end
-  end
-  
   
   def create
     # an order is made, but not yet saved 
@@ -41,6 +31,10 @@ class OrderItemsController < ApplicationController
   end
 
   def update
+    @order = current_order
+    @order_item = @order.order_items.find(params[:id])
+    @order_item.update_attributes(order_item_params)
+    @order_items = @order.order_items
   end
 
   def destroy
