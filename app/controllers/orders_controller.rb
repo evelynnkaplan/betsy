@@ -34,34 +34,38 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit # fills out the customer details to ship an order
-    @order = current_order
+  def edit
+    # This is the action for checking out.
+    @order = Order.find_by(id: session[:order_id])
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    end
   end
 
-  def update # saving a completed order to database
+  def update
+    # This is the action that completes an order.
     @order = Order.find_by(id: session[:order_id])
-    @order.update(order_params)
-    @order_items = OrderItem.where(order_id: @order.id)
 
-    if Product.in_stock?(@order_items)
-      update_product_inventory
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    else
+      @order.update(order_params)
       @order.status = "paid"
+      successful = @order.save
 
-      if @order.save
-        redirect_to order_confirmation_path
-      else
-        flash.now[:status] = :failure
-        flash.now[:result_text] = "Could not complete order"
-        flash.now[:messages] = @order.errors.messages
-        return render :edit, status: :bad_request
-      end
+      redirect_to order_confirmation_path
     end
   end
 
   def confirmation
     @order = Order.find_by(id: session[:order_id])
 
-    if !@order || (@order.status == "nil" || @order.status == "pending")
+    if !@order || (@order.status == nil || @order.status == "pending")
       flash[:status] = :error
       flash[:message] = "There is no completed order to view."
       redirect_to products_path

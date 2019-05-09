@@ -1,5 +1,5 @@
 require "test_helper"
-require 'pry'
+require "pry"
 
 describe MerchantsController do
   before do
@@ -15,17 +15,14 @@ describe MerchantsController do
   end
 
   describe "logged-in merchant" do
-    
-    describe 'show' do
-      it 'responds with OK' do
+    describe "show" do
+      it "responds with OK" do
         perform_login(@merchant)
 
         get dashboard_path
         must_respond_with :ok
-      end 
-
-    end 
-
+      end
+    end
 
     describe "edit" do
       it "responds with OK for logged in merchant" do
@@ -46,7 +43,7 @@ describe MerchantsController do
 
         check_flash(:error)
 
-        must_redirect_to dashboard_path 
+        must_redirect_to dashboard_path
       end
     end
 
@@ -77,7 +74,6 @@ describe MerchantsController do
         expect(@merchant.email).must_equal(merchant_data[:merchant][:email])
       end
 
-
       it "responds with NOT FOUND for a fake merchant" do
         merchant_id = Merchant.last.id + 1
         patch merchant_path(merchant_id), params: merchant_data
@@ -87,7 +83,7 @@ describe MerchantsController do
       it "responds with BAD REQUEST for bad data" do
         # Arrange
         merchant_data[:merchant][:email] = ""
-        perform_login 
+        perform_login
         # Assumptions
         @merchant.assign_attributes(merchant_data[:merchant])
         expect(@merchant).wont_be :valid?
@@ -112,8 +108,7 @@ describe MerchantsController do
         expect(session[:merchant_id]).must_be_nil
         must_redirect_to root_path
       end
-    end 
-    
+    end
   end
 
   describe "guest users" do
@@ -125,9 +120,9 @@ describe MerchantsController do
         must_respond_with :redirect
         must_redirect_to root_path
       end
-    end 
+    end
 
-    describe 'show' do
+    describe "show" do
       it "requests login for merchant not logged in" do
         get dashboard_path
 
@@ -135,14 +130,14 @@ describe MerchantsController do
         must_respond_with :redirect
         must_redirect_to root_path
       end
-    end 
+    end
 
-    describe 'update' do
+    describe "update" do
       it "requests login for merchant not logged in" do
         merchant_data = {
           merchant: {
             email: "updatedemail@disney.com",
-          }
+          },
         }
 
         patch merchant_path(@merchant, merchant_data)
@@ -151,7 +146,7 @@ describe MerchantsController do
         must_respond_with :redirect
         must_redirect_to root_path
       end
-    end 
+    end
 
     describe "logout" do
       it "resets session_id to nil" do
@@ -161,9 +156,8 @@ describe MerchantsController do
         expect(session[:merchant_id]).must_be_nil
         must_redirect_to root_path
       end
-    end 
+    end
   end
-
 
   describe "auth_callback" do
     it "logs in an existing merchant and redirects to root route" do
@@ -196,7 +190,7 @@ describe MerchantsController do
 
       perform_login(new_merchant)
 
-      must_redirect_to github_login_path
+      must_redirect_to root_path
 
       check_flash(:error)
       Merchant.count.must_equal start_count
