@@ -3,7 +3,7 @@ SimpleCov.start do
   add_filter %r{^/specs?/}
 end
 
-require 'pry'
+
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)

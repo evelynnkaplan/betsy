@@ -1,4 +1,4 @@
-require "pry"
+
 
 class OrdersController < ApplicationController
   def index # a merchant can see their orders
