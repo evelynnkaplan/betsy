@@ -21,6 +21,8 @@ class Order < ApplicationRecord
     return merchant_list
   end
 
+  
+
   private
 
   # used on line 4 to validate after status is changed to paid
