@@ -36,8 +36,12 @@ describe OrderItem do
 
   describe "custom validation" do 
     describe "max quantity" do 
-      it "does not allow a end user to request more than what is in stock" do 
+      it "" do 
+        new_oi = OrderItem.create!(quantity: 5, product: products(:product_two), order: orders(:cart_one))
+        inventory = products(:product_two).stock
 
+        expect(order_item.max_quantity).must_equal true
+        expect(order_item.quantity > inventory).must_equal true
       end
     end
   end
