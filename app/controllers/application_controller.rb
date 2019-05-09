@@ -36,4 +36,12 @@ class ApplicationController < ActionController::Base
       Order.new
     end
   end
+
+  def parse_error_message(item)
+    messages = item.errors.messages.map do |key, message|
+      "#{key}" + message 
+    end 
+    return messages
+  end 
+
 end
