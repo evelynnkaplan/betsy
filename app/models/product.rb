@@ -6,12 +6,6 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, :stock, presence: true, numericality: { greater_than: 0 }
 
-  def self.in_stock?(orderitems)
-    orderitems.each { |item| return false if item.product.stock < item.quantity }
-
-    return true
-  end
-
   def related_products
     related_products = []
     if Product.count >= 6

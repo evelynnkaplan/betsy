@@ -34,8 +34,8 @@ describe CategoriesController do
       get new_category_path
 
       # Assert
-      must_respond_with :ok
       check_flash
+      must_respond_with :ok
     end
 
     it "will respond with redirect if not logged in" do

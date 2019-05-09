@@ -45,7 +45,7 @@ class ActiveSupport::TestCase
 
   def check_flash(expected_status = :success)
     if flash[:status]
-      expect(flash[:status]).must_equal(expected_status)
+      expect(flash[:status].to_sym).must_equal(expected_status)
       expect(flash[:message]).wont_be_nil
     else 
       expect(flash.keys).must_include(expected_status.to_s)

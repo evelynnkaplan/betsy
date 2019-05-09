@@ -55,9 +55,11 @@ class OrdersController < ApplicationController
       redirect_to products_path
     else
       @order.update(order_params)
+      if in_stock?(@order.order_items)
+        update_product_inventory
+      end
       @order.status = "paid"
       successful = @order.save
-
       redirect_to order_confirmation_path
     end
   end
@@ -79,6 +81,12 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def in_stock?(order_items)
+    order_items.each { |item| return false if item.product.stock < item.quantity }
+
+    return true
+  end
 
   def update_product_inventory
     # I might move this into the model... 
