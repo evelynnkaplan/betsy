@@ -1,11 +1,35 @@
 <%#  view cart, with editable options %>
+<h1> Yo Burn Book </h1>
 
 <% if @order_items.any? %>
-  <% @order_items.each do |item| %>
-    <p><%= item.product.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
-    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
-  <% end %>
-  <p>Your Total: <%= number_to_currency current_order.total_price %></p>
+  <table class='table'>
+      <thead>
+          <tr>
+              <th>Item</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @order_items.each do |item| %>
+            <tr>
+                <td><%= link_to item.product.name, product_path(item.product_id) %> </td> 
+                <td> <%= number_to_currency item.product.price %></td>
+                <td> 
+                    <%= form_with model: item, url: order_item_path(item), class: "cart-quantity-form", method: :patch do |f|%>
+                      <%= f.text_field :quantity, type: :number, value: item.quantity, placeholder: item.quantity, required: true, min: 1, max: 300 %>
+                      <%= f.hidden_field :product_id, value: item.product.id %>
+                      <%= f.submit "Update", class: "cart-quantity-button btn", role: "button" %>
+                    <% end %>
+                </td>
+                <td> <%= number_to_currency (item.product.price * item.quantity) %> </td>
+                <td> <%= link_to "X", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %> </td>
+            </tr>
+          <% end %>
+      </tbody>
+  </table>
   <%= link_to "Checkout", checkout_path %>
 <% else %>
   <p>Your shopping cart is empty.</p>

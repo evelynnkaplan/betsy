@@ -35,21 +35,37 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = current_order
+    # This is the action for checking out.
+    @order = Order.find_by(id: session[:order_id])
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    end
   end
 
   def update
+    # This is the action that completes an order.
     @order = Order.find_by(id: session[:order_id])
-    @order.update(order_params)
-    @order.status = "paid"
-    @order.save
-    redirect_to order_confirmation_path
+
+    if !@order
+      flash[:status] = :error
+      flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
+      redirect_to products_path
+    else
+      @order.update(order_params)
+      @order.status = "paid"
+      successful = @order.save
+
+      redirect_to order_confirmation_path
+    end
   end
 
   def confirmation
     @order = Order.find_by(id: session[:order_id])
 
-    if !@order || (@order.status == "nil" || @order.status == "pending")
+    if !@order || (@order.status == nil || @order.status == "pending")
       flash[:status] = :error
       flash[:message] = "There is no completed order to view."
       redirect_to products_path

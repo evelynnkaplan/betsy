@@ -16,6 +16,17 @@
 /* Import scss content */
 @import "**/*";
 
+@font-face {
+  font-family: 'BeonMedium';
+  src: asset_url('beon-webfont.eot');
+  src: asset_url('beon-webfont.eot?#iefix') format('embedded-opentype'),
+       asset_url('beon-webfont.woff') format('woff'),
+       asset_url('beon-webfont.ttf') format('truetype'),
+       asset_url('beon-webfont.svg#BeonMedium') format('svg');
+  font-weight: normal;
+  font-style: normal;}
+  
+
 ul li {
   list-style: none;
 }
@@ -51,7 +62,8 @@ nav ul {
 }
 
 #login-out .log-button {
-  border: 1px solid #8ECEB8
+  border: 1px solid #8ECEB8;
+  color: white
 }
 
 // .logout-container .btn.dropdown-toggle.log-button {
@@ -88,7 +100,7 @@ nav ul {
 .logo #neon-tubing {
 	text-align: center;
 	color: #8ECEB8;
-	font-family: 'Courier New', sans-serif;
+	font-family: 'BeonMedium', sans-serif;
 	font-size: 6rem;
 	letter-spacing: .5rem;
   text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #fdeb1f, 0 0 0.5em #fdeb1f, 0 0 0.1em #fdeb1f, 0 10px 3px #000;
