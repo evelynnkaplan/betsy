@@ -143,9 +143,8 @@ describe ProductsController do
 
     describe "edit" do
       it "can get the edit page for an existing product" do
-
-        merchants_product = Product.find_by(merchant_id: @merchant.id)
-        get edit_product_path(merchants_product.id)
+        # THIS TEST IS FAILING, IS SESSION AT FAULT?
+        get edit_product_path(product.id)
 
         must_respond_with :ok
       end
