@@ -2,6 +2,7 @@ require "test_helper"
 require 'pry'
 describe Order do
   let(:order) {orders(:cart_one)}
+
   describe "validations" do 
     it "can be instantiated" do 
       order.order_items << order_items(:oi_one)
@@ -33,10 +34,24 @@ describe Order do
   end
 
   describe "relationships" do 
+    it "has many ties to order items and products" do 
+      expect(order).must_respond_to :order_items
+      expect(order).must_respond_to :products
+    end
 
+    it "must have at least one order item" do 
+      another_order = orders(:cart_two)
+
+      expect(another_order.valid?).must_equal false
+
+      another_order.order_items << order_items(:oi_one)
+      another_order.reload
+
+      expect(another_order.valid?).must_equal true
+    end
   end
   
   describe "custom methods" do 
-
+    # no custom methods
   end
 end
