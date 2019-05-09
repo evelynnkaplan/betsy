@@ -84,6 +84,10 @@ class ProductsController < ApplicationController
       flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
       redirect_to root_path
     elsif session[:merchant_id] != @product.merchant_id
+      flash[:status] = :error
+      flash[:message] = "You cannot edit another merchant's products"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def update
