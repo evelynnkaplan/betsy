@@ -1,9 +1,25 @@
 require "test_helper"
 
 describe OrderItem do
-  # let(:order_item) { OrderItem.new }
+  let(:order_item) { order_items{:oi_one} }
 
-  # it "must be valid" do
-  #   value(order_item).must_be :valid?
-  # end
+  describe "validations" do 
+    it "can be instantiated" do 
+      new_oi = OrderItem.new
+
+      expect(new_oi.valid?).must_be true
+    end
+  end
+
+  desribe "relationships" do 
+    it "belongs to a merchant" do 
+
+    end
+
+    it "belongs to a product" do 
+      
+    end
+  end
+
+
 end
