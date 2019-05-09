@@ -65,7 +65,7 @@ class OrdersController < ApplicationController
   def confirmation
     @order = Order.find_by(id: session[:order_id])
 
-    if !@order || (@order.status == "nil" || @order.status == "pending")
+    if !@order || (@order.status == nil || @order.status == "pending")
       flash[:status] = :error
       flash[:message] = "There is no completed order to view."
       redirect_to products_path

@@ -97,6 +97,56 @@ describe OrdersController do
         check_flash(:error)
       end
     end
+
+    describe "confirmation" do
+      it "can get the confirmation page if there's an order_id stored in session and then clears the session order id" do
+        make_order
+        test_order = Order.find_by(id: session[:order_id])
+        test_order.status = "paid"
+        test_order.save
+
+        get order_confirmation_path
+
+        must_respond_with :ok
+        expect(session[:order_id]).must_equal nil
+      end
+
+      it "redirects if there's no order id stored in session" do
+        get order_confirmation_path
+
+        must_respond_with :redirect
+        must_redirect_to products_path
+        check_flash(:error)
+      end
+
+      it "redirects if the order stored in session has a status of nil" do
+        make_order
+        test_order = Order.find_by(id: session[:order_id])
+        test_order.status = nil
+        test_order.save
+
+        get order_confirmation_path
+
+        must_respond_with :redirect
+        must_redirect_to products_path
+        check_flash(:error)
+      end
+
+      it "redirects if the order stored in session has a status of pending, the default" do
+        make_order
+        test_order = Order.find_by(id: session[:order_id])
+        if test_order.status != "pending"
+          test_order.status = "pending"
+          test_order.save
+        end
+
+        get order_confirmation_path
+
+        must_respond_with :redirect
+        must_redirect_to products_path
+        check_flash(:error)
+      end
+    end
   end
 
   describe "logged-in merchants" do
