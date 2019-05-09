@@ -76,6 +76,20 @@ describe OrdersController do
       end
     end
 
+    describe "edit" do
+      it "can get the edit page for the current order" do
+        test_order = Order.new
+
+        order_params = {
+          order_items: [OrderItem.create!(order: test_order, product: products(:product_one), quantity: 1)],
+        }
+
+        test_order.update(order_params)
+        test_order.save
+
+        get edit_order_path(test_order.id)
+      end
+    end
   end
 
   describe "logged-in merchants" do

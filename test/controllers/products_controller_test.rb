@@ -143,7 +143,7 @@ describe ProductsController do
 
     describe "edit" do
       it "can get the edit page for an existing product" do
-        binding.pry
+
         merchants_product = Product.find_by(merchant_id: @merchant.id)
         get edit_product_path(merchants_product.id)
 
