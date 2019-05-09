@@ -2,7 +2,7 @@
   <% @merchants.order("name ASC").each do |merchant| %>
     <div class="card">
       <div class="card-body">
-        <a href="<%= merchant_path(merchant) %>">
+        <a href="<%= merchant_products_path(merchant) %>">
           <h5 class="card-title"><%= merchant.name %></h5>
           <% if merchant.products.length == 0 %>  
               <img src='https://arcmi-wphost.netdna-ssl.com/content/uploads/sites/15/2017/10/Coming-Soon-Light.png' class="card-img-bottom" alt="Products coming soon">

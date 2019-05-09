@@ -66,6 +66,5 @@ products_categories.each do |group|
   group[:categories].each do |category|
     product = Product.find_by(name: group[:product_name])
     product.categories.push(Category.find_by(name: category))
-    # puts product.name
   end
 end
