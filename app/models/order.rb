@@ -20,7 +20,15 @@ class Order < ApplicationRecord
     return merchant_list
   end
 
-  
+  def sold_by_merchant(merch)
+    merch_items = []
+    self.order_items.each do |item|
+      if item.product.merchant == merch
+        merch_items << item
+      end
+    end
+    return merch_items
+  end
 
   private
 
