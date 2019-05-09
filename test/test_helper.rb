@@ -3,6 +3,8 @@ SimpleCov.start do
   add_filter %r{^/specs?/}
 end
 
+require 'pry'
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
@@ -43,7 +45,7 @@ class ActiveSupport::TestCase
 
   def check_flash(expected_status = :success)
     if flash[:status]
-      expect(flash[:status]).must_equal(expected_status)
+      expect(flash[:status].to_sym).must_equal(expected_status)
       expect(flash[:message]).wont_be_nil
     else 
       expect(flash.keys).must_include(expected_status.to_s)

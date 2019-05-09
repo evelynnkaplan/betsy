@@ -1,7 +1,7 @@
 require "pry"
 
 class OrdersController < ApplicationController
-  def index
+  def index # a merchant can see their orders
     if session[:merchant_id]
       @merchant = Merchant.find_by(id: session[:merchant_id])
       @orders = @merchant.orders
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
+  def show # see the cart
     @order = Order.find_by(id: params[:id])
 
     if !session[:merchant_id]
@@ -55,10 +55,16 @@ class OrdersController < ApplicationController
       redirect_to products_path
     else
       @order.update(order_params)
-      @order.status = "paid"
-      successful = @order.save
-
-      redirect_to order_confirmation_path
+      if in_stock?(@order.order_items)
+        update_product_inventory
+        @order.status = "paid"
+      end
+     
+     if @order.save
+        redirect_to order_confirmation_path
+     else
+        render :edit, status: :bad_request
+     end
     end
   end
 
@@ -74,7 +80,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def view_cart
+  def view_cart 
     @order_items = current_order.order_items
   end
 

@@ -23,6 +23,58 @@ describe OrdersController do
       end
     end
 
+    describe "update" do
+      it "will reduce the product stock " do
+        # Arrange
+        item_to_purchase = make_order
+        cart = item_to_purchase.order
+
+        cart_data = {
+          order: {
+            email: "big_bird",
+            name_on_card: "Big Bird",
+            address: "123 Sesame St",
+            mailing_zip: 98119,
+            billing_zip: 98119,
+            credit_card: 1234567891012355,
+            card_exp: "11/2020",
+            cvv: 130,
+            status: "pending",
+            total_price: 15000,
+          },
+        }
+        # Act
+        patch order_path(cart.id), params: cart_data
+        product_stock = item_to_purchase.product.stock
+
+        expect(product_stock).must_equal 99
+      end
+
+      it "change the status from pending to paid" do
+        item_to_purchase = make_order
+        cart = item_to_purchase.order
+
+        cart_data = {
+          order: {
+            email: "big_bird",
+            name_on_card: "Big Bird",
+            address: "123 Sesame St",
+            mailing_zip: 98119,
+            billing_zip: 98119,
+            credit_card: 1234567891012355,
+            card_exp: Time.now,
+            cvv: 130,
+            status: "pending",
+            total_price: 15000,
+          },
+        }
+        # Act
+        patch order_path(cart.id), params: cart_data
+        cart.reload
+        expect(cart.status).must_equal "paid"
+      end
+    end
+
     describe "edit" do
       it "can get the checkout page for the current order" do
         make_order
@@ -103,7 +155,21 @@ describe OrdersController do
         make_order
         test_order = Order.find_by(id: session[:order_id])
         test_order.status = "paid"
+        order_params = {
+          email: "erica@noterica.com",
+          address: "123 General Porpoise Ln",
+          mailing_zip: 12345,
+          name_on_card: "ELN",
+          credit_card: 1234,
+          card_exp: Date.new(2009, 01),
+          cvv: 555,
+          billing_zip: 12345,
+        }
+        test_order.update(order_params)
         test_order.save
+        test_order.reload
+
+        # binding.pry
 
         get order_confirmation_path
 
@@ -181,12 +247,25 @@ describe OrdersController do
         test_order = Order.new
 
         order_params = {
-          order_items: [OrderItem.create!(order: test_order, product: Product.create!(merchant: Merchant.find_by(id: session[:merchant_id]), name: "test", price: 5), quantity: 1)],
+          order_items: [OrderItem.create!(order: test_order,
+                                          product: Product.create!(merchant: Merchant.find_by(id: session[:merchant_id]),
+                                                                   stock: 5, name: "test", price: 5), quantity: 1)],
           status: "paid",
+          email: "big_bird",
+          name_on_card: "Big Bird",
+          address: "123 Sesame St",
+          mailing_zip: 98119,
+          billing_zip: 98119,
+          credit_card: 1234567891012355,
+          card_exp: Time.now,
+          cvv: 130,
+          total_price: 15000,
         }
 
         test_order.update(order_params)
         test_order.save
+
+        # binding.pry
         test_order.reload
 
         get order_path(test_order.id)
@@ -206,12 +285,24 @@ describe OrdersController do
         test_order = Order.new
 
         order_params = {
-          order_items: [OrderItem.create!(order: test_order, product: Product.create!(merchant: Merchant.create!(username: "test", email: "test.test"), name: "test", price: 5), quantity: 1)],
+          order_items: [OrderItem.create!(order: test_order,
+                                          product: Product.create!(merchant: Merchant.new(username: "hihi"),
+                                                                   stock: 5, name: "test", price: 5), quantity: 1)],
           status: "paid",
+          email: "big_bird",
+          name_on_card: "Big Bird",
+          address: "123 Sesame St",
+          mailing_zip: 98119,
+          billing_zip: 98119,
+          credit_card: 1234567891012355,
+          card_exp: Time.now,
+          cvv: 130,
+          total_price: 15000,
         }
 
         test_order.update(order_params)
         test_order.save
+        # binding.pry
         test_order.reload
 
         get order_path(test_order.id)
@@ -224,7 +315,7 @@ describe OrdersController do
         test_order = Order.new
 
         order_params = {
-          order_items: [OrderItem.create!(order: test_order, product: Product.create!(merchant: Merchant.find_by(id: session[:merchant_id]), name: "test", price: 5), quantity: 1)],
+          order_items: [OrderItem.create!(order: test_order, product: Product.create!(merchant: Merchant.find_by(id: session[:merchant_id]), stock: 5, name: "test", price: 5), quantity: 1)],
         }
 
         test_order.update(order_params)

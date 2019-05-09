@@ -25,7 +25,4 @@ cart_two:
   credit_card: 1234567891012355
   card_exp: 11/2021
   cvv: 116
-  status: pending
   total_price: 12000
-  
-  
