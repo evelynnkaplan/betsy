@@ -26,3 +26,10 @@ minnie:
   name: minnie
   email: minnie@disney.com
   username: minniethegirlmouse
+
+merch_four:
+  uid: 4
+  provider: github
+  name: Merchant Four
+  email: m4@gmail.com
+  username: merch-four

@@ -41,10 +41,21 @@ class OrdersController < ApplicationController
   def update # saving a completed order to database
     @order = Order.find_by(id: session[:order_id])
     @order.update(order_params)
-    update_inventory
-    @order.status = "paid"
-    @order.save
-    redirect_to order_confirmation_path
+    @order_items = OrderItem.where(order_id: @order.id)
+
+    if Product.in_stock?(@order_items)
+      update_product_inventory
+      @order.status = "paid"
+
+      if @order.save
+        redirect_to order_confirmation_path
+      else
+        flash.now[:status] = :failure
+        flash.now[:result_text] = "Could not complete order"
+        flash.now[:messages] = @order.errors.messages
+        return render :edit, status: :bad_request
+      end
+    end
   end
 
   def confirmation
@@ -65,9 +76,10 @@ class OrdersController < ApplicationController
 
   private
 
-  def update_inventory
-    current_order.order_items.each do |item|
-      item.product.stock -= item.quantity
+  def update_product_inventory
+    # I might move this into the model... 
+    @order.order_items.each do |item|
+      item.product.stock -=  item.quantity
       item.product.save
     end
   end

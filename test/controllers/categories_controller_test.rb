@@ -35,6 +35,7 @@ describe CategoriesController do
 
       # Assert
       must_respond_with :ok
+      check_flash
     end
 
     it "will respond with redirect if not logged in" do

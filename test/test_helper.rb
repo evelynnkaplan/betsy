@@ -3,6 +3,8 @@ SimpleCov.start do
   add_filter %r{^/specs?/}
 end
 
+require 'pry'
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
@@ -94,9 +96,9 @@ class ActiveSupport::TestCase
       },
     }
     expect {
-      post order_items_path, params: @order_item_data
+      post order_items_path, params: order_item_data
     }.must_change "OrderItem.count", +1, "Order.count", +1
-
+ 
     check_flash
 
     return OrderItem.last 
