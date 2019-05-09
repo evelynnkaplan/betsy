@@ -10,10 +10,10 @@ cart_one:
   address:  123 Sesame St
   mailing_zip:  98119
   billing_zip: 98119
-  credit_card: 4012888888881881
+  credit_card: 1234567891012355
   card_exp: 11/2020
   cvv: 130
-  status: pending
+  status: paid
   total_price: 15000
 
 cart_two:
@@ -22,10 +22,7 @@ cart_two:
   address:  1 Eden St
   mailing_zip:  98119
   billing_zip: 98119
-  credit_card: 4012888888881883
+  credit_card: 1234567891012355
   card_exp: 11/2021
   cvv: 116
-  status: pending
   total_price: 12000
-  
-  

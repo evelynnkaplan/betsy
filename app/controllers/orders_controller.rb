@@ -93,7 +93,6 @@ class OrdersController < ApplicationController
   end
 
   def update_product_inventory
-    # I might move this into the model... 
     @order.order_items.each do |item|
       item.product.stock -=  item.quantity
       item.product.save
