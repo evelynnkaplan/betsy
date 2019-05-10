@@ -6,6 +6,7 @@
 
   <div class="product-cards">
     <% @products.each do |product| %>
+      <% next if product.categories.include?(Category.find_by(name: "hidden")) %>
       <div class="card">
         <a href="<%= product_path(product) %>">
           <img src="<%= product.img_url%>" class="card-img-top" alt="<%= product.description%>">

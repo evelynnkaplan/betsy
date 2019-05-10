@@ -15,7 +15,7 @@
     height: 100%;
 }
 
-.product-cards {
+.product-cards, .category-cards, .merchant-cards {
     display: flex;
     flex-wrap: wrap;
     vertical-align: top;
@@ -58,3 +58,6 @@
     vertical-align: top;
 }
 
+.product-details img {
+    max-width: 175px;
+}
