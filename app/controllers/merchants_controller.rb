@@ -20,6 +20,8 @@ class MerchantsController < ApplicationController
     else
       @orders = @merchant.orders
     end
+
+    @orders = @orders.sort_by { |order| order.id }
   end
 
   def edit
