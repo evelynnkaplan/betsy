@@ -36,3 +36,12 @@ product_four:
   img_url: 'images/testimg.jpg'
   merchant: mickey
   categories: musicians
+
+product_five:
+  name: Last test item
+  description: blah
+  price: 100
+  stock: 5
+  img_url: 'images/testimg.jpg'
+  merchant: merch_one
+  categories: government

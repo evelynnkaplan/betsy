@@ -1,4 +1,5 @@
 require "test_helper"
+require 'pry'
 
 describe Merchant do
   before do
@@ -59,7 +60,7 @@ describe Merchant do
     it "has products" do
       merchant = merchants(:merch_one)
       expect(merchant).must_respond_to :products
-      expect(merchant.products).must_equal [products(:product_one), products(:product_two)]
+      expect(merchant.products).must_equal [products(:product_one), products(:product_two),  products(:product_five)]
     end
   end
 
@@ -80,6 +81,28 @@ describe Merchant do
       end
     end
 
-    #it returns a hash where the key is an order and the value is the order_item that belings to that merchant
+    describe "sold order items" do 
+      it "needs a test" do 
+        # test
+      end
+    end
+
+    describe "total revenue" do 
+      it "returns the total of all order item price sold by merchant" do
+        merchy = merchants(:merch_one)
+        revenue = 0
+        merchant_products =  merchy.products
+        merchant_products.each do |product|
+          product.order_items.each do |order_item|
+            product = Product.find_by(id: order_item.product_id)
+            revenue += (product.price * order_item.quantity)
+          end
+        end
+        
+
+        expect(merchy.total_revenue).must_be_kind_of Integer
+        expect(merchy.total_revenue).must_equal revenue
+      end 
+    end
   end
 end
