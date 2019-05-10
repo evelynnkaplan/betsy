@@ -102,5 +102,6 @@ describe Product do
   end
 
   describe "custom methods" do
+    # Erica will do
   end
 end

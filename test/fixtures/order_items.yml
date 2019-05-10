@@ -19,3 +19,8 @@ two:
   product: Product.second.id
   quantity: 1
   order_id: Order.second.id
+
+oi_three:
+  product: product_four
+  quantity: 1
+  order_id: cart_two

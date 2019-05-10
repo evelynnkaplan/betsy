@@ -62,4 +62,24 @@ describe Merchant do
       expect(merchant.products).must_equal [products(:product_one), products(:product_two)]
     end
   end
+
+  describe "custom methods" do
+    describe "order" do 
+      it "gets the orders associated with a specific merchant" do
+        oi_test = order_items(:oi_three)
+        order = orders(:cart_three)
+        order.order_items << oi_test
+
+        expect(@merchant.orders).must_include order
+      end
+
+      it "will return nil if no order has that merchant's products" do 
+        merchant = merchants(:merch_one)
+
+        expect(@merchant.orders.first).must_be_nil
+      end
+    end
+
+    #it returns a hash where the key is an order and the value is the order_item that belings to that merchant
+  end
 end
