@@ -38,7 +38,7 @@
         <% if session[:merchant_id] %>
           <li class= 'logout-container', id='login-out'>
             <a class="btn btn-secondary dropdown-toggle log-button" href="#" role="button" id="dropdownMenuLink log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= Merchant.find_by(id: session[:merchant_id]).name%> hello
+              Informant <%= Merchant.find_by(id: session[:merchant_id]).name%>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <%= link_to "View Dashboard", dashboard_path, class: "dropdown-item" %>
