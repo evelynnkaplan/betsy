@@ -3,7 +3,7 @@
     <h3>Edit <%= @product.name %></h3>
   <header>
 
-  <section>
+  <section class="form-group">
       <%= render partial: "form", locals: { submit_title: "Edit #{@product.name}", submit_url: product_path(@product.id), submit_method: "patch" } %>
   </section>
 </main>
