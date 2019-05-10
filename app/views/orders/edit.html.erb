@@ -1,30 +1,78 @@
-<%= form_for @order, method: :patch do |f| %>
+<div class="container">
+  <section>
+    <h1> Checkout </h1>
+  </section>
 
-  <%= f.label :email %>
-  <%= f.text_field :email, :required => true, :placeholder => "name@example.com" %>
 
-  <%= f.label :address %>
-  <%= f.text_field :address, :required => true, :placeholder => "123 Example St, Seattle WA" %>
+  <section class="mt-4">
+    <%= form_for @order, class: "edit-form", method: :patch do |f| %>
+    <div class="form-group row">
+      <%= f.label :email, class: "col-md-3 col-form-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :email, class: "form-control", :required => true, :placeholder => "name@example.com" %>
+      </div>
+    </div>
 
-  <%= f.label :mailing_zip %>
-  <%= f.text_field :mailing_zip, :required => true, :pattern => '\d{5}', :placeholder => "5-digit zip" %>
+    <div class="form-group row">
+      <%= f.label :address, class: "col-md-3 col-form-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :address, class: "form-control", :required => true, :placeholder => "123 Example St, Seattle WA" %>
+      </div>
+    </div>
 
-  <%= f.label :name_on_card %>
-  <%= f.text_field :name_on_card, :required => true, :placeholder => "First and Last" %>
+    <div class="form-group row">
+      <%= f.label :mailing_zip, class: "col-md-3 col-form-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :mailing_zip, class: "form-control", :required => true, :pattern => '\d{5}', :placeholder => "5-digit zip" %>
+      </div>
+    </div>
 
-  <%= f.label :credit_card %>
-  <%= f.text_field :credit_card, :required => true, :pattern => '\d{16}', :placeholder => "No spaces ####" %>
+    <div class="form-group row">
+      <%= f.label :name_on_card, class: "col-md-3 col-form-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :name_on_card, class: "form-control", :required => true, :placeholder => "First and Last" %>
+      </div>
+    </div>
 
-  <%= f.label :card_exp %>
-  <%= f.text_field :card_exp, :required => true, :placeholder => "MM/YYYY"  %>
+    <div class="form-group row">
+      <%= f.label :billing_zip, class: "col-md-3 col-form-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :billing_zip, :required => true, :pattern => '\d{5}', :placeholder => "5 digit-zip" %>
+      </div>
+    </div>
 
-  <%= f.label :cvv %>
-  <%= f.text_field :cvv, :required => true, :pattern => '\d{3}', :placeholder => "3-digits"%>
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.label :credit_card %>
+          <div class="input-group">
+            <%= f.text_field :credit_card, class: "form-control", :required => true, :pattern => '\d{16}', :placeholder => "No spaces ####" %>
+          </div>
+        </div>
 
-  <%= f.label :billing_zip %>
-  <%= f.text_field :billing_zip, :required => true, :pattern => '\d{5}', :placeholder => "5 digit-zip" %>
-
-  <%= f.submit "Submit Order" %>
-
-<% end %>
+        <div class="row">
+          <div class="col-xs-7 col-md-7">
+            <div class="form-group">
+              <%= f.label :card_exp, "Expiration" %>
+              <div class="col-xs-9 col-lg-9 pl-ziro">
+                <%= f.text_field :card_exp, class: "form-control", :required => true, :placeholder => "MMYYYY"  %>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-md-4 pull-right">
+            <div class="form-group">
+              <%= f.label :cvv ,"CVV" %>
+              <%= f.text_field :cvv, class: "form-control", :required => true, :pattern => '\d{3}', :placeholder => "3-digits"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <%= f.submit "Submit Order", class: "btn btn-secondary"%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </section>
+</div>
   
