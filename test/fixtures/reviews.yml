@@ -9,3 +9,8 @@ two:
   rating: 1
   comment: MyString
   product_id: product_two
+
+three:
+  rating: 5
+  comment: This is a great test product
+  product_id: product_one

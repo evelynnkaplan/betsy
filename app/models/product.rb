@@ -30,7 +30,8 @@ class Product < ApplicationRecord
   def average_rating
     average = 0
     no_of_reviews = self.reviews.count
-    if average == 0 
+    total_ratings = 0
+    if no_of_reviews == 0 
       return 0
     else
       self.reviews.each do |review|

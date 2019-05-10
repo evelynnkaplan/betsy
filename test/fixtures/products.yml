@@ -8,6 +8,7 @@ product_one:
   img_url: 'images/testimg.jpg'
   merchant: merch_one
   categories: government, celebrities
+  
 product_two:
   name: Julian Assange
   description: How to evade the CIA. 
@@ -16,6 +17,7 @@ product_two:
   img_url: 'images/testimg.jpg'
   merchant: merch_one
   categories: celebrities, government
+  
 product_three:
   name: Ariana Grande
   description: Why did Ariana Grande and Pete Davidson broke up
@@ -24,6 +26,7 @@ product_three:
   img_url: 'images/testimg.jpg'
   merchant: merch_two
   categories: celebrities, musicians
+  
 
 product_four:
   name: Test
