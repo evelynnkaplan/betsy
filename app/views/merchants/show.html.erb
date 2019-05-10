@@ -8,7 +8,8 @@
             <li>Name: <%= @merchant.name %></li>
             <li>Username: <%= @merchant.username %></li>
             <li>Email: <%= @merchant.email %></li>
-            <li>Informant since: <%= @merchant.created_at %>
+            <li>Total Revenue: $<%= @merchant.total_revenue %>
+            <li>Informant since: <%= @merchant.created_at.strftime("%B %d, %Y") %>
         </ul>
     </section>
 
@@ -43,7 +44,7 @@
                                     <li>Stock: <%= product.stock%></li>
                                 </ul>
                                 <ul>
-                                    <li><%= link_to "Edit", edit_product_path(product)%> | Hide FIXE ME</li>
+                                    <li><%= link_to "Edit", edit_product_path(product)%> | Hide </li>
                                 </ul>
                             </div>
                         </div>
