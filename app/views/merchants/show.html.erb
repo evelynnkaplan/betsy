@@ -3,6 +3,7 @@
 
     <section class="Summary">
         <h2>Summary: </h2>
+            <p><%= link_to "Edit", edit_merchant_path(@merchant) %></p>
         <ul>
             <li>Name: <%= @merchant.name %></li>
             <li>Username: <%= @merchant.username %></li>
@@ -13,31 +14,78 @@
 
     <section class="merchant-products">
         <h2>Products</h2>
-        <% @products.each do |product| %> 
-            <section class="card mb-3">
-                <div class="row no-gutters">
-                    <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= product.name %></h5>
-                        <ul class="card-text">
-                            <li>Price: <%= product.price %>
-                            <li>Description: <%= product.description %></li>
-                            <li>Category: 
-                                <% product.categories.each do |category| %>
-                                    <%= category.name.titleize %>
-                                <% end %>  
-                            </li>
-                            <li>Price: <%= product.price %></li>
-                            <li>Stock: <%= product.stock%></li>
-                        </ul>
-                        <ul>
-                            <li>Edit | Hide</li>
-                        </ul>
+        <p><%= link_to "Add a secret", new_product_path %></p>
+        <% if @products.length == 0 %>
+            <p>You currently have no secrets.</p>
+        <% else %>
+            <% @products.each do |product| %> 
+                <section class="card mb-3">
+                    <div class="row no-gutters">
+                        <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
                     </div>
-                </div>
-            </section>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <ul class="card-text">
+                                <li>Price: <%= product.price %>
+                                <li>Description: <%= product.description %></li>
+                                <li>Category: 
+                                    <% product.categories.each do |category| %>
+                                        <%= category.name.titleize %>
+                                    <% end %>  
+                                </li>
+                                <li>Price: <%= product.price %></li>
+                                <li>Stock: <%= product.stock%></li>
+                            </ul>
+                            <ul>
+                                <li>Edit | Hide</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            <% end %>
+        <% end %>
+    </section>
+
+    <section class="merchant-products">
+        <h2>Orders</h2>
+        <% if @merchant.orders.length == 0 %>
+            <p>You currently have no orders.</p>
+        <% else %>
+            <% @merchant.orders.each do |order| %> 
+                <% order.order_items.where(merchant_id: @merchant.id).each do |item| %>
+                    <section class="card mb-3">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <table class='table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Buyer</th>
+                                            <th>Product</th>
+                                            <th>Unit Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @order_items.each do |item| %>
+                                        <tr>
+                                            <td><%= item.order.name %>
+                                            <td><%= item.product.name %> </td>
+                                            <td><%= number_to_currency item.product.price %></td>
+                                            <td><%= item.quantity %>
+                                            <td><%= number_to_currency (item.product.price * item.quantity) %></td>
+                                            <td><%= item.order.status %></td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                <% end %>
+            <% end %>
         <% end %>
     </section>
 </main>
