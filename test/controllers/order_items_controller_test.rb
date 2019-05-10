@@ -15,25 +15,25 @@ describe OrderItemsController do
 
   describe "guest user" do
     # quantity less than 0
-    # less than available stock 
-    # product is retired 
+    # less than available stock
+    # product is retired
     describe "create" do
       it "adds order item to cart and creates new order" do
-        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1 
+        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1
 
         must_respond_with :redirect
         must_redirect_to products_path
       end
 
-      it 'updates quantity for duplicate item' do
-        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1  
+      it "updates quantity for duplicate item" do
+        expect { make_order }.must_change "Order.count", +1, "OrderItem.count", +1
         expect { make_order }.wont_change "Order.count"
 
         must_respond_with :redirect
         must_redirect_to products_path
-        order = Order.last 
+        order = Order.last
         expect(order.order_items.count).must_equal 1
-      end 
+      end
 
       it "adds item to existing order" do
         order_item_hash = {
@@ -44,7 +44,7 @@ describe OrderItemsController do
         }
 
         expect {
-        post order_items_path, params: order_item_hash
+          post order_items_path, params: order_item_hash
         }.must_change "Order.count", +1
 
         expect {
@@ -56,7 +56,7 @@ describe OrderItemsController do
 
         check_flash
 
-        # Assert 
+        # Assert
         expect(order.order_items.count).must_equal 2
         expect(order_item.product_id).must_equal @order_item_data[:order_item][:product_id]
         expect(order_item.quantity).must_equal @order_item_data[:order_item][:quantity]
@@ -69,7 +69,6 @@ describe OrderItemsController do
       end
 
       it "sends back bad_request if no order item data is sent" do
-        
         order_item_hash = {
           order_item: {
             product_id: "",
@@ -84,13 +83,49 @@ describe OrderItemsController do
         }.wont_change "Order.count", "OrderItem.count"
 
         # Assert
-        must_respond_with :redirect 
+        must_respond_with :redirect
 
         check_flash(:error)
       end
     end
 
-    describe 'destroy' do 
+    describe "update" do
+      it "updates an order item's quantity" do
+        make_order
+        order_item = Order.find_by(id: session[:order_id]).order_items[0]
+
+        order_item_params = {
+          order_item: {
+            quantity: 3,
+          },
+        }
+
+        patch order_item_path(order_item.id), params: order_item_params
+
+        order_item.reload
+
+        expect(order_item.quantity).must_equal 3
+        check_flash
+      end
+
+      it "redirects and flashes an error if given a bad order_item id" do
+        make_order
+
+        order_item_params = {
+          order_item: {
+            quantity: 3,
+          },
+        }
+
+        patch order_item_path(-1111111), params: order_item_params
+
+        must_respond_with :redirect
+        must_redirect_to view_cart_path
+        check_flash(:error)
+      end
+    end
+
+    describe "destroy" do
       it "removes the order_item from the database" do
         make_order(Product.first)
         order_item = make_order(Product.second)
@@ -111,8 +146,8 @@ describe OrderItemsController do
       end
 
       it "removes the only item in the order" do
-        order_item = make_order 
-        order = order_item.order 
+        order_item = make_order
+        order = order_item.order
 
         # Act
         expect {
@@ -121,26 +156,25 @@ describe OrderItemsController do
 
         # Assert
         must_respond_with :redirect
-        must_redirect_to products_path 
+        must_redirect_to products_path
 
         check_flash
 
-        # order in session should be cleared 
+        # order in session should be cleared
         after_order_item = OrderItem.find_by(id: order_item.id)
         expect(after_order_item).must_be_nil
         expect(session[:order_id]).must_be_nil
       end
 
-      it "doesn't remove item in another cart" do 
-        order_item = OrderItem.first 
-        
+      it "doesn't remove item in another cart" do
+        order_item = OrderItem.first
+
         expect {
           delete order_item_path(order_item)
         }.wont_change "OrderItem.count"
 
         must_respond_with :not_found
-
-      end 
+      end
 
       it "returns a 404 if the order_item does not exist" do
         # Arrange
@@ -157,23 +191,23 @@ describe OrderItemsController do
         # Assert
         must_respond_with :not_found
       end
-    end 
+    end
 
-    describe 'update' do
-      it 'successfully updates quantity' do
+    describe "update" do
+      it "successfully updates quantity" do
         # quantity changes
-        # 
-      end 
+        #
+      end
 
-      it 'updates both quantity and product id' do
-      end 
+      it "updates both quantity and product id" do
+      end
 
-      it 'updates quantity for item not in cart' do
+      it "updates quantity for item not in cart" do
       end
 
       it "returns a 404 if the order_item does not exist" do
-      end 
-    end 
+      end
+    end
   end
 
   describe "merchant" do
