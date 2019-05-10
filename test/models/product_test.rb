@@ -125,5 +125,11 @@ describe Product do
         expect(related.length).must_equal 5
       end
     end
+
+    describe "average rating" do 
+      it "shows the average rating for a product" do 
+        
+      end
+    end
   end
 end
