@@ -11,7 +11,9 @@ class MerchantsController < ApplicationController
     require_login
     merchant_authorization
 
-    @products = Product.where(merchant_id: @merchant.id)
+    if @merchant
+      @products = Product.where(merchant_id: @merchant.id)
+    end
   end
 
   def edit
