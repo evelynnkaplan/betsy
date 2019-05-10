@@ -88,6 +88,8 @@ describe OrderItemsController do
       end
     end
 
+<<<<<<< HEAD
+=======
     describe "update" do
       it "updates an order item's quantity" do
         make_order
@@ -124,6 +126,7 @@ describe OrderItemsController do
       end
     end
 
+>>>>>>> c50b0d832c8dccf90e1a854dba5779c625e91a65
     describe "destroy" do
       it "removes the order_item from the database" do
         make_order(Product.first)
@@ -247,11 +250,13 @@ describe OrderItemsController do
       it "updates quantity for item not in cart" do
       end
 
-      it "returns a 404 if the order_item does not exist" do
+      it "redirects back if the order_item does not exist" do
         order_item_id = -1
         expect(OrderItem.find_by(id: order_item_id)).must_be_nil
         patch order_item_path(order_item_id), params: @update_order_item
-        must_respond_with :not_found
+        check_flash(:error)
+        must_respond_with :redirect
+        must_redirect_to view_cart_path
       end
     end
   end
