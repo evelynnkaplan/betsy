@@ -9,3 +9,6 @@ government:
 musicians:
   name: A-lister
 
+hidden:
+  name: hidden
+
