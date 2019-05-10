@@ -72,6 +72,31 @@ describe OrdersController do
         cart.reload
         expect(cart.status).must_equal "paid"
       end
+
+      it "sets the order status to 'hidden' if the remainder of a product's stock is bought" do
+        oi = make_big_quantity_order
+        cart = oi.order
+
+        cart_data = {
+          order: {
+            email: "big_bird",
+            name_on_card: "Big Bird",
+            address: "123 Sesame St",
+            mailing_zip: 98119,
+            billing_zip: 98119,
+            credit_card: 1234567891012355,
+            card_exp: Time.now,
+            cvv: 130,
+            status: "pending",
+            total_price: 15000,
+          },
+        }
+
+        patch order_path(cart.id), params: cart_data
+        cart.reload
+
+        expect(oi.product.stock).must_equal 0
+      end
     end
 
     describe "edit" do
@@ -95,7 +120,6 @@ describe OrdersController do
       it "successfully updates an order when given good data" do
         make_order
         test_order = Order.find(session[:order_id])
-
         order_params = {
           order: {
             email: "erica@noterica.com",
@@ -167,8 +191,6 @@ describe OrdersController do
         test_order.update(order_params)
         test_order.save
         test_order.reload
-
-        # binding.pry
 
         get order_confirmation_path
 
@@ -264,7 +286,6 @@ describe OrdersController do
         test_order.update(order_params)
         test_order.save
 
-        # binding.pry
         test_order.reload
 
         get order_path(test_order.id)
@@ -301,7 +322,6 @@ describe OrdersController do
 
         test_order.update(order_params)
         test_order.save
-        # binding.pry
         test_order.reload
 
         get order_path(test_order.id)

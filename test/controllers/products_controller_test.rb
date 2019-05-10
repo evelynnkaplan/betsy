@@ -26,7 +26,8 @@ describe ProductsController do
     end
 
     it "can get the page of products by category" do
-      get category_products_path(Category.first.id)
+      test_category = categories(:celebrities)
+      get category_products_path(test_category.id)
 
       must_respond_with :ok
     end
@@ -37,6 +38,16 @@ describe ProductsController do
       must_respond_with :redirect
       must_redirect_to products_path
       check_flash(:error)
+    end
+
+    it "won't get the page of products in the category called hidden" do
+      test_category = Category.find_by(name: "hidden")
+
+      get category_products_path(test_category.id)
+
+      check_flash(:error)
+      must_respond_with :redirect
+      must_redirect_to products_path
     end
 
     describe "show" do
@@ -165,15 +176,13 @@ describe ProductsController do
                                                 description: "Wrote this just for a test",
                                                 price: 20000,
                                                 stock: 5,
-                                                img_url: 'images/testimg.jpg',
-                                                merchant: merchants(:merch_four),
-                                                )
+                                                img_url: "images/testimg.jpg",
+                                                merchant: merchants(:merch_four))
 
         get edit_product_path(another_merch_product)
 
         must_respond_with :redirect
       end
-      
     end
 
     describe "update" do
@@ -208,7 +217,7 @@ describe ProductsController do
       it "can destroy an existing product" do
         test_product = Product.new(name: "test",
                                    price: 5,
-                                   merchant_id: Merchant.first.id, 
+                                   merchant_id: Merchant.first.id,
                                    stock: 3)
 
         expect { test_product.save }.must_change "Product.count", +1
