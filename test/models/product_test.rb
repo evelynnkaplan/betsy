@@ -1,5 +1,5 @@
 require "test_helper"
-require 'pry'
+
 
 describe Product do
   let(:product) { products(:product_one) }
