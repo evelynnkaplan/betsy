@@ -19,11 +19,11 @@
             <p>You currently have no secrets.</p>
         <% else %>
             <% @products.each do |product| %> 
-                <section class="card mb-3">
+                <section class="card">
                     <div class="row no-gutters">
                         <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
                     </div>
-                    <div class="col-md-8">
+                    <div>
                         <div class="card-body">
                             <h5 class="card-title"><%= product.name %></h5>
                             <ul class="card-text">
@@ -52,39 +52,33 @@
         <% if @merchant.orders.length == 0 %>
             <p>You currently have no orders.</p>
         <% else %>
+            <% order_hash = @merchant.sold_order_items %>
             <% @merchant.orders.each do |order| %> 
-                <% order.order_items.where(merchant_id: @merchant.id).each do |item| %>
-                    <section class="card mb-3">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <table class='table'>
-                                    <thead>
+                <section >
+                    <div >
+                        <div class="card-body">
+                            <table class='table'>
+                                <h4>Order <%= order.id %>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Unit Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% order_hash[order.id].each do |item| %>
                                         <tr>
-                                            <th>Buyer</th>
-                                            <th>Product</th>
-                                            <th>Unit Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total Price</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% @order_items.each do |item| %>
-                                        <tr>
-                                            <td><%= item.order.name %>
                                             <td><%= item.product.name %> </td>
                                             <td><%= number_to_currency item.product.price %></td>
-                                            <td><%= item.quantity %>
-                                            <td><%= number_to_currency (item.product.price * item.quantity) %></td>
-                                            <td><%= item.order.status %></td>
+                                            <td><%= item.quantity %></td>
                                         </tr>
-                                        <% end %>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <% end %>
+                                </tbody>
+                            </table>
                         </div>
-                    </section>
-                <% end %>
+                    </div>
+                </section>
             <% end %>
         <% end %>
     </section>
