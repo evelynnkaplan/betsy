@@ -39,4 +39,9 @@ main {
 table {
     table-layout: fixed;
     word-wrap: break-word;
+    background-color: black;
+}
+
+thead, td {
+    background-color: black;
 }

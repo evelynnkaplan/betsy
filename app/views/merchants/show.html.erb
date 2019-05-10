@@ -53,19 +53,28 @@
         <% end %>
     </section>
 
-    <section class="merchant-products">
+
+    <section class="merchant-orders">
         <h2>Orders</h2>
         <% if @merchant.orders.length == 0 %>
             <p>You currently have no orders.</p>
         <% else %>
-            <% order_hash = @merchant.sold_order_items %>
-            <% Order.count.times do |order_id| %> 
-                <% next if !order_hash[order_id] %>
-                <section >
-                    <div >
-                        
+
+            <div id="myBtnContainer">
+                <%= link_to "All", dashboard_path, class: "btn btn-show" %>
+                <%= link_to "Pending", dashboard_path(order_filter: "pending"), class: "btn btn-show" %>
+                <%= link_to "Paid", dashboard_path(order_filter: "paid"), class: "btn btn-show" %>
+                <%= link_to "Complete", dashboard_path(order_filter: "complete"), class: "btn btn-show" %>
+                <%= link_to "Cancelled", dashboard_path(order_filter: "cancelled"), class: "btn btn-show" %>
+            </div>
+
+            <div >
+                <% @orders.each do |order| %> 
+
+                    <div>
+                        <div>
                             <table class='table table-borderless'>
-                                <h4>Order <%= order_id %>
+                                <h4>Order <%= order.id %>
                                 <thead>
                                     <tr>
                                         <th>Product</th>
@@ -74,8 +83,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% order_hash[order_id].each do |item| %>
+                                    <% order.order_items.each do |item| %>
                                         <tr>
+                                            <% next if Product.find(item.product_id).merchant_id != @merchant.id %>
                                             <td style="width:20"><%= item.product.name %> </td>
                                             <td><%= number_to_currency item.product.price %></td>
                                             <td><%= item.quantity %></td>
@@ -85,9 +95,8 @@
                             </table>
                         </div>
                     </div>
-                </section>
-            <% end %>
+                <% end %>
+            </div>
         <% end %>
     </section>
 </main>
-
