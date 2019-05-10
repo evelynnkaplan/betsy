@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def create
+def create
     @category = Category.new(category_params)
 
     if @category.save
@@ -28,15 +28,6 @@ class CategoriesController < ApplicationController
     
   end
   
-  def show
-    @category = Category.find_by(id: params[:id])
-
-    unless @category
-      head :not_found
-      return
-    end
-  end
-
   private
 
   def category_params

@@ -1,6 +1,5 @@
 require "test_helper"
 
-
 describe OrdersController do
   describe "all users" do
     describe "index" do
@@ -26,7 +25,7 @@ describe OrdersController do
     describe "update" do
       it "will reduce the product stock " do
         # Arrange
-        item_to_purchase = make_order
+        item_to_purchase = make_order(products(:product_one))
         cart = item_to_purchase.order
 
         cart_data = {
