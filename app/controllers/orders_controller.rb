@@ -1,5 +1,3 @@
-
-
 class OrdersController < ApplicationController
   def index # a merchant can see their orders
     if session[:merchant_id]
@@ -37,35 +35,43 @@ class OrdersController < ApplicationController
   def edit
     # This is the action for checking out.
     @order = Order.find_by(id: session[:order_id])
-    @total_price = @order.total_price
 
     if !@order
       flash[:status] = :error
       flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
-      redirect_to products_path
+      return redirect_to products_path
     end
+
+    @total_price = @order.total_price
   end
 
   def update
     # This is the action that completes an order.
     @order = Order.find_by(id: session[:order_id])
 
-    if !@order
+    unless @order
       flash[:status] = :error
       flash[:message] = "You don't currently have an order. Add a secret to your cart to start an order."
-      redirect_to products_path
-    else
-      @order.update(order_params)
-      if in_stock?(@order.order_items)
-        update_product_inventory
-        @order.status = "paid"
+      return redirect_to products_path
+    end
+
+    @order.update(order_params)
+    if in_stock?(@order.order_items)
+      update_product_inventory(@order)
+      @order.status = "paid"
+    end
+
+    if @order.save
+      @order.order_items.each do |oi|
+        if oi.product.stock == 0
+          categ = Category.find_by(name: "hidden")
+          oi.product.categories << categ
+          oi.product.save
+        end
       end
-     
-     if @order.save
-        redirect_to order_confirmation_path
-     else
-        render :edit, status: :bad_request
-     end
+      redirect_to order_confirmation_path
+    else
+      render :edit, status: :bad_request
     end
   end
 
@@ -81,7 +87,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def view_cart 
+  def view_cart
     @order_items = current_order.order_items
   end
 
@@ -93,14 +99,15 @@ class OrdersController < ApplicationController
     return true
   end
 
-  def update_product_inventory
-    @order.order_items.each do |item|
-      item.product.stock -=  item.quantity
-      item.product.save
+  def update_product_inventory(order)
+    order.order_items.each do |item|
+      product = Product.find_by(id: item.product_id)
+      product.stock -= item.quantity
+      product.save
     end
   end
 
   def order_params
-    return params.require(:order).permit(:email, :address, :mailing_zip, :name_on_card, :credit_card, :card_exp, :cvv, :billing_zip)
+    return params.require(:order).permit(:email, :address, :mailing_zip, :name_on_card, :credit_card, :card_exp, :cvv, :billing_zip, :status)
   end
 end
