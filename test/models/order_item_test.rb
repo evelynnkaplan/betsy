@@ -6,7 +6,9 @@ describe OrderItem do
   describe "validations" do 
     it "can be instantiated with valid data" do 
       new_oi = OrderItem.new
-
+      new_oi.quantity = 0
+      new_oi.save
+      
       expect(new_oi.valid?).must_equal false
 
       new_oi.update_attributes({ product: products(:product_one), 
