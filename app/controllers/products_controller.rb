@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
         redirect_to products_path
       else
         flash[:status] = :error
-        flash[:message] = "Error saving product: #{product.errors.messages}"
+        flash[:message] = "Error saving product: #{parse_error_message(product)}"
         redirect_to products_path
       end
     else
