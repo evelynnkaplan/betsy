@@ -83,35 +83,6 @@ describe OrderItemsController do
 
         # Assert
         must_respond_with :redirect
-<<<<<<< HEAD
-=======
-
-        check_flash(:error)
-      end
-    end
-
-    describe "update" do
-      it "updates an order item's quantity" do
-        make_order
-        order_item = Order.find_by(id: session[:order_id]).order_items[0]
-
-        order_item_params = {
-          order_item: {
-            quantity: 3,
-          },
-        }
-
-        patch order_item_path(order_item.id), params: order_item_params
-
-        order_item.reload
-
-        expect(order_item.quantity).must_equal 3
-        check_flash
-      end
-
-      it "redirects and flashes an error if given a bad order_item id" do
-        make_order
->>>>>>> html-css-work
 
         order_item_params = {
           order_item: {
@@ -194,7 +165,6 @@ describe OrderItemsController do
         must_respond_with :not_found
       end
     end
-<<<<<<< HEAD
 
     # need to add validations for stock
     describe "update" do
@@ -228,13 +198,13 @@ describe OrderItemsController do
 
       it "rejects updating product_id" do
         item_quantity = @order_item.quantity
-        product = Product.last 
+        product = Product.last
         update_order_item = {
           order_item: {
-            product_id: product.id
+            product_id: product.id,
           },
         }
-        
+
         patch order_item_path(@order_item), params: update_order_item
 
         must_respond_with :redirect
@@ -242,38 +212,21 @@ describe OrderItemsController do
 
         check_flash(:error)
 
-        @order_item.reload 
+        @order_item.reload
 
         expect(@order_item.product_id).wont_equal (update_order_item[:order_item][:product_id])
         expect(@order_item.quantity).must_equal item_quantity
       end
 
-=======
-
-    describe "update" do
-      it "successfully updates quantity" do
-        # quantity changes
-        #
-      end
-
-      it "updates both quantity and product id" do
-      end
-
->>>>>>> html-css-work
       it "updates quantity for item not in cart" do
       end
 
       it "returns a 404 if the order_item does not exist" do
-<<<<<<< HEAD
         order_item_id = -1
         expect(OrderItem.find_by(id: order_item_id)).must_be_nil
         patch order_item_path(order_item_id), params: @update_order_item
         must_respond_with :not_found
       end
-
-=======
-      end
->>>>>>> html-css-work
     end
   end
 
