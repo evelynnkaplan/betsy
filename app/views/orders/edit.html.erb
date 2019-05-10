@@ -66,6 +66,11 @@
             </div>
           </div>
         </div>
+        <div class="card-footer text-center">
+          <h4>
+            Final Payment: <strong><%= number_to_currency(@total_price) %></strong>
+          </h4>
+        </div>
         <div class="text-center">
           <%= f.submit "Submit Order", class: "btn btn-secondary"%>
         </div>
