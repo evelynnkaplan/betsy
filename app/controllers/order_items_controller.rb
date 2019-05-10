@@ -38,8 +38,9 @@ class OrderItemsController < ApplicationController
       flash[:message] = "Quantity successfully updated"
     else
       flash[:status] = :error
-      flash[:result_text] = "Quantity invalid"
-      flash[:message] = item.errors.messages
+      item.errors.messages.each do |k, msg|
+        msg.each { |message| flash[:message] = "Quantity invalid" }
+      end
     end
     redirect_to view_cart_path
   end
