@@ -97,6 +97,7 @@ describe OrdersController do
 
         patch order_path(cart.id), params: cart_data
         cart.reload
+        oi.reload
 
         expect(oi.product.stock).must_equal 0
       end
