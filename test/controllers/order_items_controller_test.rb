@@ -83,8 +83,6 @@ describe OrderItemsController do
 
         # Assert
         must_respond_with :redirect
-<<<<<<< HEAD
-=======
 
         check_flash(:error)
       end
@@ -111,7 +109,6 @@ describe OrderItemsController do
 
       it "redirects and flashes an error if given a bad order_item id" do
         make_order
->>>>>>> html-css-work
 
         order_item_params = {
           order_item: {
