@@ -43,5 +43,4 @@ class ApplicationController < ActionController::Base
     end 
     return messages
   end 
-
 end

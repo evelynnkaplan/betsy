@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
   def edit
     # This is the action for checking out.
     @order = Order.find_by(id: session[:order_id])
+    @total_price = @order.total_price
 
     if !@order
       flash[:status] = :error
