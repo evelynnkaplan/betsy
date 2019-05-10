@@ -1,1 +1,18 @@
-<h1> Edit Merchant Page </h1>
+<main>
+  <header>
+    <h3>Edit <%= @merchant.name %></h3>
+  <header>
+
+  <%= form_with model: @merchant do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.submit "Edit", url: merchant_path(@merchant.id), method: :patch %>
+<% end %>
+
+  
+</main>
+
