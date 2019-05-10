@@ -84,6 +84,32 @@ describe OrderItemsController do
         # Assert
         must_respond_with :redirect
 
+        check_flash(:error)
+      end
+    end
+
+    describe "update" do
+      it "updates an order item's quantity" do
+        make_order
+        order_item = Order.find_by(id: session[:order_id]).order_items[0]
+
+        order_item_params = {
+          order_item: {
+            quantity: 3,
+          },
+        }
+
+        patch order_item_path(order_item.id), params: order_item_params
+
+        order_item.reload
+
+        expect(order_item.quantity).must_equal 3
+        check_flash
+      end
+
+      it "redirects and flashes an error if given a bad order_item id" do
+        make_order
+
         order_item_params = {
           order_item: {
             quantity: 3,
