@@ -3,7 +3,7 @@
 oi_one:
   product: product_one
   order: cart_one
-  quantity: 1
+  quantity: 5
 
 oi_two:
   product: product_two
