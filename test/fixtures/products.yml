@@ -24,3 +24,12 @@ product_three:
   img_url: 'images/testimg.jpg'
   merchant: merch_two
   categories: celebrities, musicians
+
+product_four:
+  name: Test
+  description: Test
+  price: 300
+  stock: 5
+  img_url: 'images/testimg.jpg'
+  merchant: mickey
+  categories: musicians
