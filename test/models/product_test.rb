@@ -57,8 +57,8 @@ describe Product do
       expect(valid_result).must_equal true
     end
 
-    it "must have a stock > 0 upon instantiation" do 
-      product.stock = 0
+    it "must have a stock > -1 upon instantiation" do 
+      product.stock = -1
 
       # It fails with invalid data
       expect(product.valid?).must_equal false
