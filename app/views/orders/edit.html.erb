@@ -7,35 +7,35 @@
   <section class="mt-4">
     <%= form_for @order, class: "edit-form", method: :patch do |f| %>
     <div class="form-group row">
-      <%= f.label :email, class: "col-md-3 col-form-label" %>
+      <%= f.label :email, class: "col-md-2 col-form-label" %>
       <div class="col-md-9">
         <%= f.text_field :email, type: "email", class: "form-control", :required => true, :placeholder => "name@example.com" %>
       </div>
     </div>
 
     <div class="form-group row">
-      <%= f.label :address, class: "col-md-3 col-form-label" %>
+      <%= f.label :address, class: "col-md-2 col-form-label" %>
       <div class="col-md-9">
         <%= f.text_field :address, class: "form-control", :required => true, :placeholder => "123 Example St, Seattle WA" %>
       </div>
     </div>
 
     <div class="form-group row">
-      <%= f.label :mailing_zip, class: "col-md-3 col-form-label" %>
+      <%= f.label :mailing_zip, class: "col-md-2 col-form-label" %>
       <div class="col-md-9">
         <%= f.text_field :mailing_zip, class: "form-control", :required => true, :pattern => '\d{5}', :placeholder => "5-digit zip" %>
       </div>
     </div>
 
     <div class="form-group row">
-      <%= f.label :name_on_card, class: "col-md-3 col-form-label" %>
+      <%= f.label :name_on_card, class: "col-md-2 col-form-label" %>
       <div class="col-md-9">
         <%= f.text_field :name_on_card, class: "form-control", :required => true, :placeholder => "First and Last" %>
       </div>
     </div>
 
     <div class="form-group row">
-      <%= f.label :billing_zip, class: "col-md-3 col-form-label" %>
+      <%= f.label :billing_zip, class: "col-md-2 col-form-label" %>
       <div class="col-md-9">
         <%= f.text_field :billing_zip, :required => true, :pattern => '\d{5}', :placeholder => "5 digit-zip" %>
       </div>
