@@ -12,7 +12,6 @@ class OrderItemsController < ApplicationController
     else
       @item = @order.order_items.new(item_params)
     end
-
     # save the order with the new item. each time an order item gets added, the order will be saved
     if @order.save
       flash[:status] = :success
