@@ -88,45 +88,6 @@ describe OrderItemsController do
       end
     end
 
-<<<<<<< HEAD
-=======
-    describe "update" do
-      it "updates an order item's quantity" do
-        make_order
-        order_item = Order.find_by(id: session[:order_id]).order_items[0]
-
-        order_item_params = {
-          order_item: {
-            quantity: 3,
-          },
-        }
-
-        patch order_item_path(order_item.id), params: order_item_params
-
-        order_item.reload
-
-        expect(order_item.quantity).must_equal 3
-        check_flash
-      end
-
-      it "redirects and flashes an error if given a bad order_item id" do
-        make_order
-
-        order_item_params = {
-          order_item: {
-            quantity: 3,
-          },
-        }
-
-        patch order_item_path(-1111111), params: order_item_params
-
-        must_respond_with :redirect
-        must_redirect_to view_cart_path
-        check_flash(:error)
-      end
-    end
-
->>>>>>> c50b0d832c8dccf90e1a854dba5779c625e91a65
     describe "destroy" do
       it "removes the order_item from the database" do
         make_order(Product.first)
