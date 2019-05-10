@@ -57,7 +57,7 @@ describe Product do
       expect(valid_result).must_equal true
     end
 
-    it "must have a stock > 0 upon instantiation" do 
+    it "must have a stock > 0 upon instantiation" do
       product.stock = 0
 
       # It fails with invalid data
@@ -102,6 +102,28 @@ describe Product do
   end
 
   describe "custom methods" do
-    # Erica will do
+    describe "related products" do
+      it "returns an array of products even if less than 6 total products" do
+        related = product.related_products
+
+        expect(related).must_be_kind_of Array
+        expect(related.length).must_equal (Product.count - 1)
+      end
+
+      it "returns an array of only 5 products if are more than 5 products" do
+        merchant = merchants(:merch_one)
+
+        Product.create(name: "A test product", merchant_id: merchant.id, price: 6, stock: 1)
+        Product.create(name: "Another product", merchant_id: merchant.id, price: 6, stock: 1)
+        Product.create(name: "A new other product", merchant_id: merchant.id, price: 6, stock: 1)
+
+        expect(Product.count).must_be :>, 5
+
+        related = product.related_products
+
+        expect(related).must_be_kind_of Array
+        expect(related.length).must_equal 5
+      end
+    end
   end
 end
