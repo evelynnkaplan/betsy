@@ -60,12 +60,12 @@ class OrdersController < ApplicationController
         update_product_inventory
         @order.status = "paid"
       end
-     
-     if @order.save
+
+      if @order.save
         redirect_to order_confirmation_path
-     else
+      else
         render :edit, status: :bad_request
-     end
+      end
     end
   end
 
@@ -81,8 +81,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def view_cart 
+  def view_cart
     @order_items = current_order.order_items
+    @order = current_order
   end
 
   private
@@ -95,7 +96,7 @@ class OrdersController < ApplicationController
 
   def update_product_inventory
     @order.order_items.each do |item|
-      item.product.stock -=  item.quantity
+      item.product.stock -= item.quantity
       item.product.save
     end
   end

@@ -1,7 +1,7 @@
 <main class="show">
   <%= link_to '← Back', :back %>
 
-  <div class="card mb-3">
+  <div class="card mb-3 product-details" style="max-width: 600px;">
     <div class="row no-gutters">
       <div class="col-md-4">
         <img src="<%= @product.img_url %>">
@@ -10,8 +10,16 @@
         <div class="card-body">
           <h5 class="card-title"><%= @product.name %></h5>
           <p class="card-text">$ <%= @product.price %></p>
-          <p class="card-text">Sold by <%= link_to "#{@product.merchant.username}", merchant_products_path(@product.merchant) %></p>
+          <p class="card-text">Sold by <%= link_to "#{@product.merchant.name}", merchant_products_path(@product.merchant) %></p>
           <p class="card-text">Description: <%= @product.description %></p>
+          <p>
+            <%= @product.name %> | <%= number_to_currency @product.price %>
+            <%= form_for @order_item do |f| %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.number_field :quantity %>
+              <%= f.submit "Add to cart" %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -44,17 +52,3 @@
       </ul>
     <% end %>
   </div>
-  <p><%= @product.description %></p>
-
-    <%# form with hidden fields to add item to shopping cart %>
- 
-  <p><%= @product.name %> | <%= number_to_currency @product.price %>
-  <%= form_for @order_item do |f| %>
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <%= f.number_field :quantity, min: 1, max: @product.stock, step: 1 %>
-    <%= f.submit "Add to cart" %>
-  <% end %></p>
-
-</main>
-
-

@@ -1,1 +1,24 @@
-Hi
+<section class="merchant-products">
+                        
+    <table class='table table-borderless'>
+        <h4>Order <%= @order.id %>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @order.order_items.each do |item| %>
+                <tr>
+                    <td style="width:20"><%= item.product.name %> </td>
+                    <td><%= number_to_currency item.product.price %></td>
+                    <td><%= item.quantity %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+                
+    </section>
