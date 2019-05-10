@@ -1,10 +1,12 @@
 require "test_helper"
+require 'pry'
 
 describe Product do
   let(:product) { products(:product_one) }
 
   describe "instantiation" do
     it "can be instantiated" do
+      tst_product = Product.new(name: "Test", price: 10, stock: 12, merchant_id: merchants(:merch_one).id, )
       expect(product.valid?).must_equal true
     end
 
@@ -83,23 +85,46 @@ describe Product do
       expect(result).must_equal false
       expect(product.errors.messages).must_include :merchant
     end
-
-    it "has many categories" do
-      government_category = categories(:government) # this needs work
-
-      expect(government_category.products).must_include product
-    end
-
-    it "can have multiple categories" do
-      expect(product.categories.count).must_equal 2
-    end
-
-    it "when purchased it becomes an order_item" do
-      order_item = order_items(:oi_one)
-
-      expect(product.order_items).must_include order_item
-    end
   end
+  
+    describe "categories" do 
+      it "has many categories" do
+        government_category = categories(:government) # this needs work
+
+        expect(government_category.products).must_include product
+      end
+
+      it "can have multiple categories" do
+        expect(product.categories.count).must_equal 2
+      end
+
+      it "when purchased it becomes an order_item" do
+        order_item = order_items(:oi_one)
+
+        expect(product.order_items).must_include order_item
+      end
+    end
+
+    describe "reviews" do 
+      let(:t_prod) { Product.create!(name: "Test Product1",
+                                       description: "What does she store in all 752 rooms at Buckingham palace?",
+                                       price: 10000,
+                                       stock: 100,
+                                       img_url: 'images/testimg.jpg',
+                                       merchant: merchants(:merch_one),
+                                       categories: [categories(:government), categories("celebrities")],
+                                      )
+                      }
+      let(:review1) { Review.create!(rating: 5, product_id: t_prod.id) }
+      let(:review2) { Review.create!(rating: 5, product_id: t_prod.id )}
+
+      it "has reviews" do
+        t_prod.reviews.push(review1, review2)
+
+        expect(t_prod.reviews.count).must_equal 2
+
+      end
+    end
 
   describe "custom methods" do
     describe "related products" do
@@ -123,6 +148,25 @@ describe Product do
 
         expect(related).must_be_kind_of Array
         expect(related.length).must_equal 5
+      end
+    end
+
+    describe "average rating" do 
+      let(:avg_prod) { Product.create!(name: "Test Product1",
+                                       description: "What does she store in all 752 rooms at Buckingham palace?",
+                                       price: 10000,
+                                       stock: 100,
+                                       img_url: 'images/testimg.jpg',
+                                       merchant: merchants(:merch_one),
+                                       categories: [categories(:government), categories("celebrities")],
+                                      )
+                      }
+      it "shows the average rating for a product" do 
+        avg_prod.reviews << Review.create!(rating: 1, product_id: avg_prod.id)
+        avg_prod.reviews << Review.create!(rating: 5, product_id: avg_prod.id )
+        
+        expect(avg_prod.reviews.count).must_equal 2
+        expect(avg_prod.average_rating).must_equal 3
       end
     end
   end

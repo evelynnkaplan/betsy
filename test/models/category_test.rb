@@ -21,7 +21,7 @@ describe Category do
     it "can have many products" do 
 
       expect(category).must_respond_to :products
-      expect(category.products.count).must_equal 2
+      expect(category.products.count).must_equal 3
     end
   end
 

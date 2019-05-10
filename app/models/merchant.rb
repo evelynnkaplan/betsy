@@ -1,7 +1,7 @@
+require 'pry'
+
 class Merchant < ApplicationRecord
   has_many :products
-  # has_many :order_items, through: :product
-  # has_many :orders, through: :order_items
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
 
@@ -42,6 +42,15 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue
-    #code
+    paid_orders = self.orders
+    paid_revenue = 0
+
+    paid_orders.each do |order|
+      order.order_items.each do |oi|
+       product = Product.find_by(id: oi.product_id)
+       paid_revenue += (product.price * oi.quantity)
+      end
+    end
+    return paid_revenue
   end
 end

@@ -36,10 +36,4 @@ describe Review do
       expect(review.errors.messages).must_include :product
     end
   end
-
-  # describe "custom methods" do 
-  #   it " " do 
-      
-  #   end
-  # end
 end
