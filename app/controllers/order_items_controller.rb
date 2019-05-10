@@ -28,12 +28,12 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order = current_order
-    item = @order.order_items.find_by(id: params[:id])
+    order = current_order
+    item = order.order_items.find_by(id: params[:id])
     if !item
       flash[:status] = :error
       flash[:message] = "That item was not found. Please try again."
-    elsif item.update_attributes(item_params)
+  elsif item.update_attributes(quantity: item_params[:quantity])
       flash[:status] = :success
       flash[:message] = "Quantity successfully updated"
     else
@@ -43,6 +43,7 @@ class OrderItemsController < ApplicationController
     end
     redirect_to view_cart_path
   end
+
 
   def destroy
     @order = current_order

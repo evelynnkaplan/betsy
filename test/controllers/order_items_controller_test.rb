@@ -211,7 +211,7 @@ describe OrderItemsController do
       it "updates quantity for item not in cart" do
       end
 
-      it "returns a 404 if the order_item does not exist" do
+      it "redirects back if the order_item does not exist" do
         order_item_id = -1
         expect(OrderItem.find_by(id: order_item_id)).must_be_nil
         patch order_item_path(order_item_id), params: @update_order_item
