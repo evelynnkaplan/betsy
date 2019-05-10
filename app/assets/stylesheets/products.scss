@@ -15,7 +15,7 @@
     height: 100%;
 }
 
-.product-cards {
+.product-cards, .category-cards, .merchant-cards {
     display: flex;
     flex-wrap: wrap;
     vertical-align: top;
@@ -37,15 +37,15 @@
     border: #8ECEB8;
 }
 
-.pages {
-    margin: 0 auto;
-    max-width: 700px;
+.pagination {
+    justify-content: center;
 }
 
 // show for product
-.show {
-    margin-left: 2em;
+.main {
+    padding: 2em;
 }
+
 .show .card {
     background-color: black;
     color: white;
@@ -56,5 +56,9 @@
     max-width: 15%;
     display: inline-block;
     vertical-align: top;
+}
+
+.product-details img {
+    max-width: 175px;
 }
 

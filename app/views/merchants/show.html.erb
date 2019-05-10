@@ -1,5 +1,5 @@
 <main>
-    <header>Welcome to your dashboard, Informant <%= @merchant.name %></header>
+    <header>Welcome to your dashboard, Informant <%= @merchant.name %>.</header>
 
     <section class="Summary">
         <h2>Summary: </h2>
@@ -12,34 +12,40 @@
         </ul>
     </section>
 
-    <section class="merchant-products">
+    <section class="show">
         <h2>Products</h2>
         <p><%= link_to "Add a secret", new_product_path %></p>
         <% if @products.length == 0 %>
             <p>You currently have no secrets.</p>
         <% else %>
             <% @products.each do |product| %> 
-                <section class="card">
+                <section class="card" style="max-width: 600px;">
                     <div class="row no-gutters">
                         <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
                     </div>
                     <div>
-                        <div class="card-body">
-                            <h5 class="card-title"><%= product.name %></h5>
-                            <ul class="card-text">
-                                <li>Price: <%= product.price %>
-                                <li>Description: <%= product.description %></li>
-                                <li>Category: 
-                                    <% product.categories.each do |category| %>
-                                        <%= category.name.titleize %>
-                                    <% end %>  
-                                </li>
-                                <li>Price: <%= product.price %></li>
-                                <li>Stock: <%= product.stock%></li>
-                            </ul>
-                            <ul>
-                                <li>Edit | Hide</li>
-                            </ul>
+                        <% if product.categories.include?(Category.find_by(name: "hidden")) %>
+                            <div class="hidden">
+                        <% else %>
+                            <div class="not-hidden">
+                        <% end %>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= product.name %></h5>
+                                <ul class="card-text">
+                                    <li>Price: <%= product.price %>
+                                    <li>Description: <%= product.description %></li>
+                                    <li>Category: 
+                                        <% product.categories.each do |category| %>
+                                            <%= category.name.titleize %>
+                                        <% end %>  
+                                    </li>
+                                    <li>Price: <%= product.price %></li>
+                                    <li>Stock: <%= product.stock%></li>
+                                </ul>
+                                <ul>
+                                    <li><%= link_to "Edit", edit_product_path(product)%> | Hide FIXE ME</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -47,17 +53,27 @@
         <% end %>
     </section>
 
-    <section class="merchant-products">
+
+    <section class="merchant-orders">
         <h2>Orders</h2>
         <% if @merchant.orders.length == 0 %>
             <p>You currently have no orders.</p>
         <% else %>
-            <% order_hash = @merchant.sold_order_items %>
-            <% @merchant.orders.each do |order| %> 
-                <section >
-                    <div >
-                        <div class="card-body">
-                            <table class='table'>
+
+            <div id="myBtnContainer">
+                <%= link_to "All", dashboard_path, class: "btn btn-show" %>
+                <%= link_to "Pending", dashboard_path(order_filter: "pending"), class: "btn btn-show" %>
+                <%= link_to "Paid", dashboard_path(order_filter: "paid"), class: "btn btn-show" %>
+                <%= link_to "Complete", dashboard_path(order_filter: "complete"), class: "btn btn-show" %>
+                <%= link_to "Cancelled", dashboard_path(order_filter: "cancelled"), class: "btn btn-show" %>
+            </div>
+
+            <div >
+                <% @orders.each do |order| %> 
+
+                    <div>
+                        <div>
+                            <table class='table table-borderless'>
                                 <h4>Order <%= order.id %>
                                 <thead>
                                     <tr>
@@ -67,9 +83,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% order_hash[order.id].each do |item| %>
+                                    <% order.order_items.each do |item| %>
                                         <tr>
-                                            <td><%= item.product.name %> </td>
+                                            <% next if Product.find(item.product_id).merchant_id != @merchant.id %>
+                                            <td style="width:20"><%= item.product.name %> </td>
                                             <td><%= number_to_currency item.product.price %></td>
                                             <td><%= item.quantity %></td>
                                         </tr>
@@ -78,9 +95,8 @@
                             </table>
                         </div>
                     </div>
-                </section>
-            <% end %>
+                <% end %>
+            </div>
         <% end %>
     </section>
 </main>
-

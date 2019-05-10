@@ -26,3 +26,22 @@
     align-content: center;
     border: #8ECEB8;
 }
+
+// merchant show page
+.merchant-products {
+    text-align: left
+}
+
+main {
+    padding: 1em;
+}
+
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+    background-color: black;
+}
+
+thead, td {
+    background-color: black;
+}

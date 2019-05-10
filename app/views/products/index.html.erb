@@ -18,6 +18,7 @@
 
   <div class="product-cards">
     <% @products.each do |product| %>
+      <% next if product.categories.include?(Category.find_by(name: "hidden")) %>
       <div class="card">
         <img src="<%= product.img_url%>" class="card-img-top" alt="<%= product.description%>">
         <div class="card-body">
@@ -29,7 +30,7 @@
         </div>
       </div>
     <% end %>
-    <div class="pages"><%= will_paginate @products %></div>
   </div>
+  <div class="pages"><%= will_paginate @products %></div>
 
 </main>

@@ -13,6 +13,8 @@
 
   <body>
     <nav>
+      
+    
       <ul>
         <li class='secrets-dropdown'>
               <a class="btn btn-secondary dropdown-toggle secrets-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +40,7 @@
         <% if session[:merchant_id] %>
           <li class= 'logout-container', id='login-out'>
             <a class="btn btn-secondary dropdown-toggle log-button" href="#" role="button" id="dropdownMenuLink log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= Merchant.find_by(id: session[:merchant_id]).name%> hello
+              Informant <%= Merchant.find_by(id: session[:merchant_id]).name%>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <%= link_to "View Dashboard", dashboard_path, class: "dropdown-item" %>
@@ -50,6 +52,14 @@
             <%= link_to "Login with Github", github_login_path, class: "btn btn-outline-warning log-button" %>
           </li>
         <% end %>
+        <li class= 'bottle-btn btn'>
+          <%= link_to view_cart_path do %>
+            <%= image_tag(('http://i63.tinypic.com/20a7vpf.png'), class: "bottle-icon")%>
+            <span class="badge badge-info quantity-badge"> 
+              <%= order_item_quantity%>
+            </span>
+          <% end %>
+        </li>
       </ul>
     </nav>
 

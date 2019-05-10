@@ -1,5 +1,5 @@
 <%#  view cart, with editable options %>
-<h1> Yo Burn Book </h1>
+<h1> Your Bottle of Secrets </h1>
 
 <% if @order_items.any? %>
   <table class='table'>
@@ -19,7 +19,7 @@
                 <td> <%= number_to_currency item.product.price %></td>
                 <td> 
                     <%= form_with model: item, url: order_item_path(item), class: "cart-quantity-form", method: :patch do |f|%>
-                      <%= f.text_field :quantity, type: :number, value: item.quantity, placeholder: item.quantity, required: true, min: 1, max: 300 %>
+                      <%= f.text_field :quantity, type: :number, value: item.quantity, placeholder: item.quantity, required: true, min: 1, max: item.product.stock %>
                       <%= f.hidden_field :product_id, value: item.product.id %>
                       <%= f.submit "Update", class: "cart-quantity-button btn", role: "button" %>
                     <% end %>
@@ -30,7 +30,10 @@
           <% end %>
       </tbody>
   </table>
-  <%= link_to "Checkout", checkout_path %>
+  <section class="checkout">
+    <p>Total Price: $<%= @order.calculate_total %>
+    <p><%= link_to "Checkout", checkout_path, class: "checkout-button btn" %></p>
+  </section>
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>

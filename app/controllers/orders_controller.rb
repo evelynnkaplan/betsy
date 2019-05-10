@@ -89,6 +89,7 @@ class OrdersController < ApplicationController
 
   def view_cart
     @order_items = current_order.order_items
+    @order = current_order
   end
 
   private
@@ -99,11 +100,18 @@ class OrdersController < ApplicationController
     return true
   end
 
+<<<<<<< HEAD
   def update_product_inventory(order)
     order.order_items.each do |item|
       product = Product.find_by(id: item.product_id)
       product.stock -= item.quantity
       product.save
+=======
+  def update_product_inventory
+    @order.order_items.each do |item|
+      item.product.stock -= item.quantity
+      item.product.save
+>>>>>>> 371bc814f43e70b145cf7e02d9c288282fab462f
     end
   end
 
