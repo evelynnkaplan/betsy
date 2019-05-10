@@ -30,12 +30,12 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    order = current_order
-    item = @order.order_items.find(params[:id])
-    unless item
-      return head :not_found
-    end
-    if item.update_attributes(item_params)
+    @order = current_order
+    item = @order.order_items.find_by(id: params[:id])
+    if !item
+      flash[:status] = :error
+      flash[:message] = "That item was not found. Please try again."
+    elsif item.update_attributes(item_params)
       flash[:status] = :success
       flash[:message] = "Quantity successfully updated"
     else
