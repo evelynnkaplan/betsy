@@ -1,28 +1,28 @@
 <%= form_for @order, method: :patch do |f| %>
 
   <%= f.label :email %>
-  <%= f.text_field :email%>
+  <%= f.text_field :email, :required => true %>
 
   <%= f.label :address %>
-  <%= f.text_field :address %>
+  <%= f.text_field :address, :required => true %>
 
   <%= f.label :mailing_zip %>
-  <%= f.text_field :mailing_zip %>
+  <%= f.text_field :mailing_zip, :required => true %>
 
   <%= f.label :name_on_card %>
-  <%= f.text_field :name_on_card %>
+  <%= f.text_field :name_on_card, :required => true %>
 
   <%= f.label :credit_card %>
-  <%= f.text_field :credit_card %>
+  <%= f.text_field :credit_card, :required => true, :pattern => '\d{16}', :placeholder => "credit card number" %>
 
   <%= f.label :card_exp %>
-  <%= f.text_field :card_exp %>
+  <%= f.text_field :card_exp, :required => true %>
 
   <%= f.label :cvv %>
-  <%= f.text_field :cvv %>
+  <%= f.text_field :cvv, :required => true %>
 
   <%= f.label :billing_zip %>
-  <%= f.text_field :billing_zip %>
+  <%= f.text_field :billing_zip, :required => true %>
 
   <%= f.submit "Submit Order" %>
 
