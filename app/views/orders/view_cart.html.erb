@@ -1,5 +1,5 @@
 <%#  view cart, with editable options %>
-<h1> Yo Burn Book </h1>
+<h1>Bottle of Secrets</h1>
 
 <% if @order_items.any? %>
   <table class='table'>
@@ -30,7 +30,10 @@
           <% end %>
       </tbody>
   </table>
-  <%= link_to "Checkout", checkout_path %>
+  <section class="checkout">
+    <p>Total Price: $<%= @order.calculate_total %>
+    <p><%= link_to "Checkout", checkout_path, class: "checkout-button btn" %></p>
+  </section>
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>
