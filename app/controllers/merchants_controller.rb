@@ -13,15 +13,15 @@ class MerchantsController < ApplicationController
 
     if @merchant
       @products = Product.where(merchant_id: @merchant.id)
+    
+      if params[:order_filter]
+        @orders = @merchant.orders.select { |o| o.status == params[:order_filter] }
+      else
+        @orders = @merchant.orders
+      end
+  
+      @orders = @orders.sort_by { |order| order.id }
     end
-
-    if params[:order_filter]
-      @orders = @merchant.orders.select { |o| o.status == params[:order_filter] }
-    else
-      @orders = @merchant.orders
-    end
-
-    @orders = @orders.sort_by { |order| order.id }
   end
 
   def edit
