@@ -88,6 +88,42 @@ describe OrderItemsController do
       end
     end
 
+    describe "update" do
+      it "updates an order item's quantity" do
+        make_order
+        order_item = Order.find_by(id: session[:order_id]).order_items[0]
+
+        order_item_params = {
+          order_item: {
+            quantity: 3,
+          },
+        }
+
+        patch order_item_path(order_item.id), params: order_item_params
+
+        order_item.reload
+
+        expect(order_item.quantity).must_equal 3
+        check_flash
+      end
+
+      it "redirects and flashes an error if given a bad order_item id" do
+        make_order
+
+        order_item_params = {
+          order_item: {
+            quantity: 3,
+          },
+        }
+
+        patch order_item_path(-1111111), params: order_item_params
+
+        must_respond_with :redirect
+        must_redirect_to view_cart_path
+        check_flash(:error)
+      end
+    end
+
     describe "destroy" do
       it "removes the order_item from the database" do
         make_order(Product.first)
@@ -188,13 +224,13 @@ describe OrderItemsController do
 
       it "rejects updating product_id" do
         item_quantity = @order_item.quantity
-        product = Product.last 
+        product = Product.last
         update_order_item = {
           order_item: {
-            product_id: product.id
+            product_id: product.id,
           },
         }
-        
+
         patch order_item_path(@order_item), params: update_order_item
 
         must_respond_with :redirect
@@ -202,7 +238,7 @@ describe OrderItemsController do
 
         check_flash(:error)
 
-        @order_item.reload 
+        @order_item.reload
 
         expect(@order_item.product_id).wont_equal (update_order_item[:order_item][:product_id])
         expect(@order_item.quantity).must_equal item_quantity
@@ -217,7 +253,6 @@ describe OrderItemsController do
         patch order_item_path(order_item_id), params: @update_order_item
         must_respond_with :not_found
       end
-
     end
   end
 

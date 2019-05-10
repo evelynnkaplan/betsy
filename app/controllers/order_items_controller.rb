@@ -23,18 +23,18 @@ class OrderItemsController < ApplicationController
     else
       flash[:status] = :error
       flash[:result_text] = "Order cannot be saved:"
-      flash[:message] =  @order.errors.messages
+      flash[:message] = @order.errors.messages
       redirect_back(fallback_location: products_path)
     end
   end
 
   def update
-    order = current_order
-    item = order.order_items.find_by(id: params[:id])
-    unless item
-      return head :not_found
-    end
-    if item.update_attributes(quantity: item_params[:quantity])
+    @order = current_order
+    item = @order.order_items.find_by(id: params[:id])
+    if !item
+      flash[:status] = :error
+      flash[:message] = "That item was not found. Please try again."
+    elsif item.update_attributes(item_params)
       flash[:status] = :success
       flash[:message] = "Quantity successfully updated"
     else

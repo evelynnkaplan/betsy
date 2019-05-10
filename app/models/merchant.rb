@@ -29,14 +29,18 @@ class Merchant < ApplicationRecord
   def sold_order_items
     orders_with_items = {}
     self.orders.each do |order|
+      oi_list = []
       order.order_items.each do |oi|
-        oi_list = []
         if oi.product.merchant == self
           oi_list << oi
         end
-        orders_with_items[oi.id] = oi_list
+        orders_with_items[order.id] = oi_list
       end
     end
     return orders_with_items
+  end
+
+  def total_revenue
+    #code
   end
 end
