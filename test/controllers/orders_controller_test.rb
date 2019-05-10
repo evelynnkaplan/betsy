@@ -73,8 +73,11 @@ describe OrdersController do
         expect(cart.status).must_equal "paid"
       end
 
-      it "sets the order status to 'hidden' if the remainder of a product's stock is bought" do
-        oi = make_big_quantity_order
+      it "the stock of a product hits 0 if the remainder of the stock is bought" do
+        oi = make_order
+        oi.quantity = 100
+        oi.save
+        oi.reload
         cart = oi.order
 
         cart_data = {
@@ -94,6 +97,7 @@ describe OrdersController do
 
         patch order_path(cart.id), params: cart_data
         cart.reload
+        oi.reload
 
         expect(oi.product.stock).must_equal 0
       end
