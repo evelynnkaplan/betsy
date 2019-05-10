@@ -10,7 +10,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= @product.name %></h5>
           <p class="card-text">$ <%= @product.price %></p>
-          <p class="card-text">Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></p>
+          <p class="card-text">Sold by <%= link_to "#{@product.merchant.username}", merchant_products_path(@product.merchant) %></p>
           <p class="card-text">Description: <%= @product.description %></p>
         </div>
       </div>
