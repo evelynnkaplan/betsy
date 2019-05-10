@@ -74,7 +74,7 @@
                     <div>
                         <div>
                             <table class='table table-borderless'>
-                                <h4>Order <%= order.id %>
+                                <h4><%= link_to "Order #{order.id}", order_path(order) %></h4>
                                 <thead>
                                     <tr>
                                         <th>Product</th>
