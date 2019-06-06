@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
   def create
     if session[:merchant_id]
       product = Product.new(product_params)
-      product.img_url = "https://arcmi-wphost.netdna-ssl.com/content/uploads/sites/15/2017/10/Coming-Soon-Light.png"
+      product.img_url = "https://mepca.org/wp-content/uploads/sites/93/2019/05/Image-Coming-Soon-e1558542315584.png"
       product.merchant_id = session[:merchant_id]
 
       successful = product.save
