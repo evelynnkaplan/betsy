@@ -11,6 +11,7 @@ merchants = [
   {uid: 4, provider: "github", name: "Dana Scully", email: "scully@fbi.gov", username: "truthisoutthere"},
   {uid: 5, provider: "github", name: "Perez Hilton", email: "philton@fakeemail.com", username: "philton"},
   {uid: 6, provider: "github", name: "Silvio", email: "silvio@fakeemail.com", username: "silviothecat"},
+  {uid: 46180742, provider: "github", name: "Erica", email: "norrise120@gmail.com", username: "norrise120"},
 ]
 
 merchants.each do |merchant|
@@ -32,10 +33,10 @@ products = [
   {name: "Beyonce's Next Album", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "You already love it, but be the first to find out when the next surprise release is.", img_url: "https://tinyurl.com/y4w2272w"},
   {name: "The Meaning of Zigazig Ha", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "It's been 20 years. It's time you find out.", img_url: "https://tinyurl.com/yy3gth87"},
   {name: "JonBenet Ramsey", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "Find out the truth behind this decades old mystery", img_url: "https://tinyurl.com/y3k2ddn7"},
-  {name: "Who is Becky with the Good Hair", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "The biggest mystery of 2016.", img_url: "https://tinyurl.com/y36k3clg"},
-  {name: "Royal Baby's Name", merchant_id: Merchant.find_by(uid: 5).id, stock: rand(1..50), price: rand(1..10000), description: "Find out what Prince Harry and Princess Meghan named their first boy.", img_url: "https://tinyurl.com/y4gm7xyv"},
+  {name: "Who is Becky with the Good Hair", merchant_id: Merchant.find_by(uid: 46180742).id, stock: rand(1..50), price: rand(1..10000), description: "The biggest mystery of 2016.", img_url: "https://tinyurl.com/y36k3clg"},
+  {name: "Royal Baby's Name", merchant_id: Merchant.find_by(uid: 46180742).id, stock: rand(1..50), price: rand(1..10000), description: "Find out what Prince Harry and Princess Meghan named their first boy.", img_url: "https://tinyurl.com/y4gm7xyv"},
   {name: "Zodiac Killer", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "Astrology and murder.", img_url: "https://tinyurl.com/yxlvx8yk"},
-  {name: "What is your roomba hiding", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "Hint: it isn't just your lint.", img_url: "https://tinyurl.com/yxcxysv9"},
+  {name: "What is your roomba hiding", merchant_id: Merchant.find_by(uid: 46180742).id, stock: rand(1..50), price: rand(1..10000), description: "Hint: it isn't just your lint.", img_url: "https://tinyurl.com/yxcxysv9"},
 ]
 
 products.each do |product|
