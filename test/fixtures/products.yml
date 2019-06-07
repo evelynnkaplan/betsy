@@ -1,5 +1,3 @@
-# product fixtures
-
 product_one:
   name: Queen Elizabeth
   description: What does she store in all 752 rooms at Buckingham palace?
@@ -27,7 +25,6 @@ product_three:
   merchant: merch_two
   categories: celebrities, musicians
   
-
 product_four:
   name: Test
   description: Test

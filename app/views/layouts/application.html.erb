@@ -7,14 +7,10 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
- 
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
   </head>
-
-
   <body>
     <nav>
-      
-    
       <ul>
         <li class='secrets-dropdown'>
               <a class="btn btn-secondary dropdown-toggle secrets-button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +59,7 @@
       </ul>
     </nav>
 
-      <% alert_type = flash[:status] == :error ? :danger : flash[:status] %>
+      <% alert_type = flash[:status] == "error" ? "danger" : flash[:status] %>
       <section class="flash alert alert-<%= alert_type %>">
         <%= flash[:message] %>
       </section>

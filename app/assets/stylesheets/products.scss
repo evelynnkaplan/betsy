@@ -15,6 +15,15 @@
     height: 100%;
 }
 
+.product-cards .card-body {
+    color: black 
+  }
+  
+  .product-cards .card-body:hover {
+    color: #8ECEB8 
+  }
+  
+
 .product-cards, .category-cards, .merchant-cards {
     display: flex;
     flex-wrap: wrap;

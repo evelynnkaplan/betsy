@@ -1,5 +1,5 @@
 require "test_helper"
-require 'pry'
+
 
 describe Merchant do
   before do
@@ -83,7 +83,15 @@ describe Merchant do
 
     describe "sold order items" do 
       it "needs a test" do 
-        # test
+        sold_orders = 0
+        order_id = 0
+        merchy = merchants(:merch_one)
+          merchy.orders.each do |order|
+           sold_orders = order.order_items.count
+           order_id = order.id
+          end
+          
+        expect(merchy.sold_order_items[order_id].count).must_equal sold_orders
       end
     end
 
