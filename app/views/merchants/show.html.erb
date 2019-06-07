@@ -22,31 +22,28 @@
             <% @products.each do |product| %> 
                 <section class="card" style="max-width: 600px;">
                     <div class="row no-gutters">
-                        <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
+                        <% if product.categories.include?(Category.find_by(name: "hidden")) %>
+                            <img src="<%= product.img_url %>" class="card-img hidden" alt="<%= product.description %>">
+                        <% else %>
+                            <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
+                        <% end %>
                     </div>
                     <div>
-                        <% if product.categories.include?(Category.find_by(name: "hidden")) %>
-                            <div class="hidden">
-                        <% else %>
-                            <div class="not-hidden">
-                        <% end %>
-                            <div class="card-body">
-                                <h5 class="card-title"><%= product.name %></h5>
-                                <ul class="card-text">
-                                    <li>Price: <%= product.price %>
-                                    <li>Description: <%= product.description %></li>
-                                    <li>Category: 
-                                        <% product.categories.each do |category| %>
-                                            <%= category.name.titleize %>
-                                        <% end %>  
-                                    </li>
-                                    <li>Price: <%= product.price %></li>
-                                    <li>Stock: <%= product.stock%></li>
-                                </ul>
-                                <ul>
-                                    <li><%= link_to "Edit", edit_product_path(product)%> | Hide </li>
-                                </ul>
-                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <ul class="card-text">
+                                <li>Description: <%= product.description %></li>
+                                <li>Category: 
+                                    <% product.categories.each do |category| %>
+                                        <%= category.name.titleize %>
+                                    <% end %>  
+                                </li>
+                                <li>Price: $<%= product.price %></li>
+                                <li>Stock: <%= product.stock%></li>
+                            </ul>
+                            <ul>
+                                <li><%= link_to "Edit", edit_product_path(product)%> | Hide </li>
+                            </ul>
                         </div>
                     </div>
                 </section>

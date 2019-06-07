@@ -21,6 +21,15 @@
     max-width: 20%;
 }
 
+.hidden {
+    filter: grayscale(95%);
+}
+
+img {
+    max-width: 175px;
+    max-height: 150px;
+}
+
 .card-img-bottom {
     justify-content: center;
     align-content: center;
