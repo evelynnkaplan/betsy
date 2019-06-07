@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :retire_relist]
 
   def index
     @products = Product.paginate(page: params[:page], per_page: 12)
@@ -105,6 +105,23 @@ class ProductsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Successfully edited product #{@product.id}."
       redirect_to product_path(@product.id)
+    end
+  end
+
+  def retire_relist
+    if !@product
+      flash[:status] = :error
+      flash[:message] = "No product with that ID found."
+      redirect_to products_path
+    elsif !session[:merchant_id]
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit product #{@product.id}. Please log in."
+      redirect_to root_path
+    else
+      @product.hide_or_unhide
+      flash[:status] = :success
+      flash[:message] = "Successfully edited product #{@product.id}."
+      redirect_to dashboard_path
     end
   end
 

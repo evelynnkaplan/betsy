@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+  post "/products/:id", to: "products#retire_relist", as: "retire_relist"
+
   get "/view_cart", to: "orders#view_cart", as: "view_cart"
   get "orders/checkout", to: "orders#edit", as: "checkout"
   get "orders/confirmation", to: "orders#confirmation", as: "order_confirmation"

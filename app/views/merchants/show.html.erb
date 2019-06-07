@@ -20,12 +20,15 @@
             <p>You currently have no secrets.</p>
         <% else %>
             <% @products.each do |product| %> 
+                <% hide_unhide = ""%>
                 <section class="card" style="max-width: 600px;">
                     <div class="row no-gutters">
                         <% if product.categories.include?(Category.find_by(name: "hidden")) %>
                             <img src="<%= product.img_url %>" class="card-img hidden" alt="<%= product.description %>">
+                            <% hide_unhide = "Relist"%>
                         <% else %>
                             <img src="<%= product.img_url %>" class="card-img" alt="<%= product.description %>">
+                            <% hide_unhide = "Hide"%>
                         <% end %>
                     </div>
                     <div>
@@ -42,7 +45,7 @@
                                 <li>Stock: <%= product.stock%></li>
                             </ul>
                             <ul>
-                                <li><%= link_to "Edit", edit_product_path(product)%> | Hide </li>
+                                <li><%= link_to "Edit", edit_product_path(product)%> | <%= link_to hide_unhide, retire_relist_path(product), :data => {:confirm => "You sure?", :method => "retire_relist"} %> </li>
                             </ul>
                         </div>
                     </div>

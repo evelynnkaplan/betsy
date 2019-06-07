@@ -28,6 +28,16 @@ class Product < ApplicationRecord
     return related_products
   end
 
+  def hide_or_unhide
+    hidden = Category.find_by(name: "hidden")
+    if self.categories.include?(hidden)
+      self.categories.delete(hidden)
+    else
+      self.categories.push(hidden)
+    end
+    self.save!
+  end
+
   def average_rating
     average = 0
     no_of_reviews = self.reviews.count
