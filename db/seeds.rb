@@ -20,7 +20,7 @@ end
 
 products = [
   {name: "Erica's Github Password", merchant_id: Merchant.find_by(uid: 1).id, stock: rand(1..50), price: 5, description: "Git her!", img_url: "https://tinyurl.com/y4l68bfg"},
-  {name: "Dan's Middle Name", merchant_id: Merchant.find_by(uid: 2).id, stock: rand(1..50), price: rand(1..10000), description: "Ever wonder what Dan's middle name is? Well now, you can know...", img_url: "https://tinyurl.com/y3hhxnsp"},
+  {name: "Dan's Middle Name", merchant_id: Merchant.find_by(uid: 2).id, stock: rand(1..50), price: rand(1..10000), description: "Ever wonder what Dan's middle name is? Well now, you can know...", img_url: "https://arcmi-wphost.netdna-ssl.com/content/uploads/sites/15/2017/10/Coming-Soon-Light.png"},
   {name: "Who is DB Cooper?", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "Everythng you need to know about history's most famous heist.", img_url: "https://tinyurl.com/y66lzalv"},
   {name: "Stupid Watergate", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "Like Watergate, but even stupider.", img_url: "https://i.imgur.com/k4yH7iT.png"},
   {name: "Marilyn Monroe", merchant_id: Merchant.find_by(uid: 3).id, stock: rand(1..50), price: rand(1..10000), description: "You already know about JFK, but that's just the beginning...", img_url: "https://tinyurl.com/yyqw94av"},
