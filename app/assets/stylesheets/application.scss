@@ -70,12 +70,16 @@ nav ul {
   font-size: 1.25em;
 }
 
-.bottle-btn{
+.book-btn{
   border-color: #8ECEB8
 }
 
-.bottle-btn:hover{
-  background-color: white
+.book-btn:hover{
+  background-color: #8ECEB8
+}
+
+.quantity-badge.badge-info.badge {
+  top: -6px;
 }
 
 // logout button

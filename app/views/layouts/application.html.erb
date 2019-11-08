@@ -8,6 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
     <nav>
@@ -48,9 +50,9 @@
             <%= link_to "Login with Github", github_login_path, class: "btn btn-outline-warning log-button" %>
           </li>
         <% end %>
-        <li class= 'bottle-btn btn'>
+        <li class= 'book-btn btn'>
           <%= link_to view_cart_path do %>
-            <%= image_tag(('http://i63.tinypic.com/20a7vpf.png'), class: "bottle-icon")%>
+            <i class="material-icons"> menu_book </i> 
             <span class="badge badge-info quantity-badge"> 
               <%= order_item_quantity%>
             </span>
